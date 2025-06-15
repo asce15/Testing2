@@ -1,6 +1,6 @@
 /* Import Poppins font from Google Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-
+@import "tailwindcss";
 /* Reset default padding and margin, set box-sizing */
 * {
   padding: 0;
