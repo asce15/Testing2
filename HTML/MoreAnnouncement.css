@@ -1,0 +1,289 @@
+@import "tailwindcss";
+header a {
+  text-decoration: none;
+}
+
+header {
+  padding: 0 20px;
+  background: linear-gradient(90deg, #6a7337, #a8c66c);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+#brand {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#brand a {
+  color: white;
+  margin-left: 10px;
+}
+
+#brand img.logo {
+  height: 50px;
+  width: auto;
+}
+
+.brand-text::after {
+  content: "Barangay Market Area Health Information Hub";
+}
+
+header ul {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+header ul a {
+  color: white;
+}
+
+header ul li {
+  padding: 15px;
+  margin-left: 10px;
+  font-family: "Verdana";
+  font-size: 15px;
+}
+
+header ul li:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.nav-list li:hover {
+  background-color: #71873f;
+  color: white;
+}
+
+#hamburger-icon {
+  margin: auto 0;
+  display: none;
+  cursor: pointer;
+}
+
+#hamburger-icon div {
+  width: 35px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.open .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.open .bar2 {
+  opacity: 0;
+}
+
+.open .bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -8px);
+  transform: rotate(45deg) translate(-6px, -8px);
+}
+
+.mobile-menu.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent */
+  padding: 20px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* subtle shadow */
+  z-index: 1000;
+  height: auto;
+}
+
+.mobile-menu li {
+  margin-bottom: 10px;
+}
+
+.mobile-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-menu li:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.mobile-menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.blog-post {
+  transition: all 0.3s ease;
+}
+.blog-post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);g
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  background-color: #feff91;
+}
+.popup-overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: 10000;
+}
+.popup-content {
+  animation: popupFadeIn 0.3s ease-out;
+}
+
+footer {
+  background: linear-gradient(135deg, #6a7337, #a8c66c);
+  color: white;
+  padding: 40px 20px 20px;
+  text-align: center;
+  position: relative;
+  z-index: ;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer-logo-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-image {
+  height: 150px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  text-align: left;
+}
+
+.footer-column h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #feff91;
+  border-bottom: 2px solid white;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #feff91;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #ddd;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media only screen and (max-width: 1360px) {
+  header nav {
+    display: none;
+  }
+
+  #hamburger-icon {
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .footer-container {
+    flex-direction: column !important; /* stack vertically */
+    align-items: center !important; /* center horizontally */
+    justify-content: center !important; /* center the whole container */
+    gap: 20px;
+    max-width: 100%; /* take full width */
+    margin: 0 auto; /* center container */
+    text-align: center;
+  }
+
+  .footer-logo-column,
+  .footer-column {
+    flex: none !important; /* disable flex grow/shrink */
+    max-width: 300px;
+    width: 100%;
+    margin-left: 0 !important; /* override any left margin */
+    text-align: center !important; /* center text */
+  }
+
+  .footer-column.quick-links {
+    margin-left: 0 !important; /* override the special margin */
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #brand {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  #brand a {
+    margin-left: 0;
+    text-align: left;
+  }
+  .brand-text::after {
+    content: "Health Information Hub";
+  }
+
+  #brand img.logo {
+    display: none;
+  }
+}

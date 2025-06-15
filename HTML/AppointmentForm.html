@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Page Title and linked CSS stylesheet -->
+    <title>Barangay Market Area Health Information Hub</title>
+    <link rel="stylesheet" href="AppointmentForm.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="website icon" href="BMA.png" />
+  </head>
+
+  <body>
+    <!-- Header Section: Contains logo, site name, navigation links, and mobile hamburger menu -->
+    <header>
+      <div id="brand">
+        <!-- Logo image and clickable brand/site name -->
+        <img src="BMA.png" alt="" class="logo" />
+        <a href="#top" class="brand-text"></a>
+      </div>
+      <!-- Navigation menu with links for desktop view -->
+      <nav>
+        <ul class="nav-list">
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li><a href="AppointmentHistory.html">Appointment History</a></li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </nav>
+
+      <!-- Hamburger icon and mobile menu (hidden by default, toggled on click) -->
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+        <!-- Mobile menu items shown when hamburger is toggled -->
+        <ul class="mobile-menu">
+          <li><a href="Home.html">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li>
+            <a href="AppointmentHistory.html">Appointment History</a>
+          </li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Main Section: Background image with centered form container -->
+    <section class="background-image">
+
+      <div class="form-container">
+        <h2
+          class="text-3xl sm:text-3xl md:text-4xl lg:text-4xl font-bold text-[#2b3209]"
+        >
+          <i class="fa-solid fa-file-waveform"></i>
+          Appointment Request Form
+        </h2>
+        <p
+          class="text-center text-[#2b3209] mt-2 text-sm md:text-base lg:text-lg"
+        >
+          Complete this form to schedule your health appointment
+        </p>
+        <!-- Appointment form starts -->
+        <form>
+          <!-- Grouped inputs in a row layout -->
+          <div class="row-group">
+            <!-- Appointment type selector with label -->
+            <div class="form-group">
+              <label for="appointment-type">Appointment Type:</label>
+              <select id="appointment-type" name="appointment-type" required>
+                <option value="">-- Select Appointment --</option>
+                <option value="health-checkup">
+                  Health Check up - Every Tuesday
+                </option>
+                <option value="vaccination">Vaccination - Every Friday</option>
+              </select>
+            </div>
+
+            <!-- Notes textarea for optional user input -->
+            <div class="form-group">
+              <label for="purpose"
+                >Health Concerns or Special Notes (Optional):</label
+              >
+              <textarea
+                id="purpose"
+                name="purpose"
+                rows="3"
+                placeholder="Please describe your health concerns or any special requests..."
+                required
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Checkbox for agreeing to terms and conditions -->
+          <div class="checkbox-container">
+            <input type="checkbox" id="agree" name="agree" />
+            <label for="agree">
+              I agree to the
+              <span id="terms-link" style="color: #28a745; cursor: pointer"
+                >Terms and Conditions</span
+              >
+            </label>
+          </div>
+
+          <!-- Terms and Conditions Modal Popup (hidden by default) -->
+          <div id="terms-modal" class="modal">
+            <div class="modal-content">
+              <span class="close-button" id="close-terms">&times;</span>
+              <h3>Data Privacy and Appointment Terms</h3>
+              <p>
+                By submitting this appointment booking form, you acknowledge and
+                consent to the collection, storage, and processing of your
+                personal information in compliance with the Data Privacy Act of
+                2012 (Republic Act No. 10173). Your information will be used
+                exclusively for scheduling, managing, and delivering healthcare
+                services at the Barangay Market Area Health Information Hub.
+              </p>
+
+              <h3>Accuracy of Information</h3>
+              <p>
+                You agree to provide accurate, complete, and truthful
+                information to ensure that your healthcare needs are properly
+                addressed. Providing false or misleading information may result
+                in cancellation or rescheduling of your appointment.
+              </p>
+
+              <h3>Appointment Scheduling and Attendance</h3>
+              <p>
+                Appointment dates and times are subject to availability. You
+                agree to attend your scheduled appointment punctually. If you
+                cannot attend, please notify us at least 24 hours in advance to
+                allow rescheduling. Repeated failure to attend without
+                notification may affect future appointment privileges.
+              </p>
+
+              <h3>Use of Personal Data</h3>
+              <p>
+                Your personal data will be kept confidential and secured against
+                unauthorized access. It will not be shared with third parties
+                except when required by law or for legitimate healthcare
+                purposes within the Barangay.
+              </p>
+
+              <h3>Health and Safety Protocols</h3>
+              <p>
+                By booking an appointment, you agree to comply with all health
+                and safety guidelines implemented by the Barangay Market Area
+                Health Information Hub, including but not limited to wearing
+                masks, social distancing, and health screenings.
+              </p>
+
+              <h3>Limitation of Liability</h3>
+              <p>
+                The Barangay Market Area Health Information Hub will make every
+                effort to provide quality healthcare services. However, we are
+                not liable for any delays, cancellations, or adverse outcomes
+                resulting from circumstances beyond our control.
+              </p>
+
+              <h3>Consent to Communication</h3>
+              <p>
+                You consent to receive communications related to your
+                appointment via phone, email, or text messages. These
+                communications will be used solely for appointment reminders,
+                health updates, or important announcements.
+              </p>
+
+              <p>
+                <i>
+                  By agreeing to these terms, you confirm that you have read,
+                  understood, and accepted the above conditions for booking and
+                  attending your healthcare appointment.</i
+                >
+              </p>
+            </div>
+          </div>
+
+          <!-- Submit button for the form -->
+          <button
+            type="submit"
+            id="submit-appointment"
+            class="mt-4 px-6 py-2 bg-[#2b3209] text-white rounded-lg text-sm sm:text-base font-semibold hover:bg-[#3b4a10] transition duration-200"
+          >
+            <i class="fas fa-calendar-check mr-2"></i>
+            Submit
+          </button>
+        </form>
+
+        <!-- Submission Success Modal (shows confirmation message on successful submit) -->
+        <div id="submissionModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" id="close-submission">&times;</span>
+            <img src="check.png" alt="Success Icon" />
+            <p style="font-size: 20px; text-align: center">
+              Your application request has been submitted.
+            </p>
+          </div>
+        </div>
+
+        <!-- Notification Modal for missing terms agreement -->
+        <div id="notificationModal" class="modal">
+          <div class="modal-content">
+            <span class="close-button" id="close-notification">&times;</span>
+            <img src="close.png" alt="Warning Icon" />
+            <p style="font-size: 20px; text-align: center">
+              Please click and read the Terms and Conditions before checking the
+              box.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- JavaScript Section for modal handling and form validation -->
+    <script>
+      function toggleMobileMenu(menu) {
+        menu.classList.toggle("open"); // toggles hamburger animation
+        document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+      }
+
+      // Get references to key DOM elements
+      const termsLink = document.getElementById("terms-link");
+      const termsModal = document.getElementById("terms-modal");
+      const closeTermsBtn = document.getElementById("close-terms");
+      const checkbox = document.getElementById("agree");
+      const form = document.querySelector("form");
+
+      const successModal = document.getElementById("submissionModal");
+      const closeSuccessBtn = document.getElementById("close-submission");
+
+      const notificationModal = document.getElementById("notificationModal");
+      const closeNotificationBtn =
+        document.getElementById("close-notification");
+
+      let justOpenedTerms = false;
+      // Prevent checkbox checking unless terms are read (marked by data-read attribute)
+      checkbox.addEventListener("click", function (event) {
+        const hasRead = termsLink.getAttribute("data-read") === "true";
+
+        // If terms modal was just opened, don't show the warning
+        if (!hasRead && !justOpenedTerms) {
+          event.preventDefault();
+
+          const modalMessage = notificationModal.querySelector("p");
+          notificationModal.style.display = "block";
+        }
+
+        // Reset the flag after a short delay
+        setTimeout(() => {
+          justOpenedTerms = false;
+        }, 100);
+      });
+
+      // Show Terms and Conditions modal when clicking on terms link
+      termsLink.onclick = function () {
+        justOpenedTerms = true;
+        termsModal.style.display = "block";
+      };
+
+      // Close terms modal and mark terms as read + check the checkbox
+      function closeTermsModal() {
+        termsModal.style.display = "none";
+        termsLink.setAttribute("data-read", "true");
+        checkbox.checked = true;
+      }
+      closeTermsBtn.onclick = closeTermsModal;
+
+      // Close modals when clicking outside modal content
+      window.onclick = function (event) {
+        if (event.target === termsModal) {
+          closeTermsModal();
+        } else if (event.target === successModal) {
+          successModal.style.display = "none";
+        } else if (event.target === notificationModal) {
+          notificationModal.style.display = "none";
+        }
+      };
+
+      // Close success modal when clicking close button
+      closeSuccessBtn.onclick = () => {
+        successModal.style.display = "none";
+      };
+
+      // Close notification modal when clicking close button
+      closeNotificationBtn.onclick = () => {
+        notificationModal.style.display = "none";
+      };
+
+      // Form submission event handler
+      form.addEventListener("submit", function (event) {
+        // Check if terms have been read and checkbox is checked
+        const hasRead = termsLink.getAttribute("data-read") === "true";
+
+        if (!checkbox.checked || !hasRead) {
+          // Prevent form submit and show notification modal if terms not agreed
+          event.preventDefault();
+          notificationModal.style.display = "block";
+
+          const messageParagraph = notificationModal.querySelector("p");
+          messageParagraph.textContent =
+            "Please read the Terms and Conditions before submitting.";
+          return;
+        }
+
+        // Prevent actual form submission (for demo), show success modal instead
+        event.preventDefault();
+        successModal.style.display = "block";
+
+        // Reload page after 2 seconds to reset form and UI
+        setTimeout(() => {
+          location.reload();
+        }, 2000);
+      });
+    </script>
+  </body>
+</html>

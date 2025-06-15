@@ -1,0 +1,464 @@
+/* Import Poppins font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+/* Reset default padding and margin, set box-sizing */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow: hidden;
+}
+
+/* Body styles */
+body {
+  color: black;
+  font-family: "Trebuchet MS", sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Remove underline from links inside header */
+header a {
+  text-decoration: none;
+}
+
+/* Header styles - fixed top bar with red background */
+header {
+  padding: 0 20px;
+  background: linear-gradient(90deg, #6a7337, #a8c66c);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+/* Brand/logo container styles */
+#brand {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* Brand link color */
+#brand a {
+  color: white;
+  margin-left: 10px;
+}
+
+/* Logo image size */
+#brand img.logo {
+  height: 50px;
+  width: auto;
+}
+
+.brand-text::after {
+  content: "Barangay Market Area Health Information Hub";
+}
+
+/* Navigation list styles */
+header ul {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+/* Navigation links color */
+header ul a {
+  color: white;
+}
+
+/* Navigation list items padding and margin */
+header ul li {
+  padding: 15px;
+  margin-left: 10px;
+  font-family: "Verdana";
+  font-size: 15px;
+}
+
+/* Hover effect on nav items: scale up and background color change */
+header ul li:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.nav-list li:hover {
+  background-color: #71873f;
+  color: white;
+}
+
+/* Hamburger menu icon - hidden on desktop */
+#hamburger-icon {
+  margin: auto 0;
+  display: none;
+  cursor: pointer;
+}
+
+/* Hamburger bars styling */
+#hamburger-icon div {
+  width: 35px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+/* Hamburger animation: rotate bars when open */
+.open .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.open .bar2 {
+  opacity: 0;
+}
+
+.open .bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -8px);
+  transform: rotate(45deg) translate(-6px, -8px);
+}
+
+/* Show mobile menu when hamburger is open */
+.open .mobile-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Mobile menu container styles */
+.mobile-menu {
+  display: none; /* hidden by default */
+  position: absolute;
+  top: 60px; /* below header */
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent background */
+  padding: 20px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* subtle shadow */
+  z-index: 1000;
+  height: auto;
+}
+
+/* Mobile menu list items spacing */
+.mobile-menu li {
+  margin-bottom: 10px;
+}
+
+/* Remove margin from last mobile menu item */
+.mobile-menu li:last-child {
+  margin-bottom: 0;
+}
+
+/* Mobile menu links styles */
+.mobile-menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Background image section with overlay */
+.background-image {
+  position: relative;
+  background-color: #4b5320;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25'%3E%3Cdefs%3E%3ClinearGradient id='a' gradientUnits='userSpaceOnUse' x1='0' x2='0' y1='0' y2='100%25' gradientTransform='rotate(215,768,347)'%3E%3Cstop offset='0' stop-color='%234B5320'/%3E%3Cstop offset='1' stop-color='%238A9A5B'/%3E%3C/linearGradient%3E%3Cpattern patternUnits='userSpaceOnUse' id='b' width='300' height='250' x='0' y='0' viewBox='0 0 1080 900'%3E%3Cg fill-opacity='0.07'%3E%3Cpolygon fill='%23444' points='90 150 0 300 180 300'/%3E%3Cpolygon points='90 150 180 0 0 0'/%3E%3Cpolygon fill='%23AAA' points='270 150 360 0 180 0'/%3E%3Cpolygon fill='%23DDD' points='450 150 360 300 540 300'/%3E%3Cpolygon fill='%23999' points='450 150 540 0 360 0'/%3E%3Cpolygon points='630 150 540 300 720 300'/%3E%3Cpolygon fill='%23DDD' points='630 150 720 0 540 0'/%3E%3Cpolygon fill='%23444' points='810 150 720 300 900 300'/%3E%3Cpolygon fill='%23FFF' points='810 150 900 0 720 0'/%3E%3Cpolygon fill='%23DDD' points='990 150 900 300 1080 300'/%3E%3Cpolygon fill='%23444' points='990 150 1080 0 900 0'/%3E%3Cpolygon fill='%23DDD' points='90 450 0 600 180 600'/%3E%3Cpolygon points='90 450 180 300 0 300'/%3E%3Cpolygon fill='%23666' points='270 450 180 600 360 600'/%3E%3Cpolygon fill='%23AAA' points='270 450 360 300 180 300'/%3E%3Cpolygon fill='%23DDD' points='450 450 360 600 540 600'/%3E%3Cpolygon fill='%23999' points='450 450 540 300 360 300'/%3E%3Cpolygon fill='%23999' points='630 450 540 600 720 600'/%3E%3Cpolygon fill='%23FFF' points='630 450 720 300 540 300'/%3E%3Cpolygon points='810 450 720 600 900 600'/%3E%3Cpolygon fill='%23DDD' points='810 450 900 300 720 300'/%3E%3Cpolygon fill='%23AAA' points='990 450 900 600 1080 600'/%3E%3Cpolygon fill='%23444' points='990 450 1080 300 900 300'/%3E%3Cpolygon fill='%23222' points='90 750 0 900 180 900'/%3E%3Cpolygon points='270 750 180 900 360 900'/%3E%3Cpolygon fill='%23DDD' points='270 750 360 600 180 600'/%3E%3Cpolygon points='450 750 540 600 360 600'/%3E%3Cpolygon points='630 750 540 900 720 900'/%3E%3Cpolygon fill='%23444' points='630 750 720 600 540 600'/%3E%3Cpolygon fill='%23AAA' points='810 750 720 900 900 900'/%3E%3Cpolygon fill='%23666' points='810 750 900 600 720 600'/%3E%3Cpolygon fill='%23999' points='990 750 900 900 1080 900'/%3E%3Cpolygon fill='%23999' points='180 0 90 150 270 150'/%3E%3Cpolygon fill='%23444' points='360 0 270 150 450 150'/%3E%3Cpolygon fill='%23FFF' points='540 0 450 150 630 150'/%3E%3Cpolygon points='900 0 810 150 990 150'/%3E%3Cpolygon fill='%23222' points='0 300 -90 450 90 450'/%3E%3Cpolygon fill='%23FFF' points='0 300 90 150 -90 150'/%3E%3Cpolygon fill='%23FFF' points='180 300 90 450 270 450'/%3E%3Cpolygon fill='%23666' points='180 300 270 150 90 150'/%3E%3Cpolygon fill='%23222' points='360 300 270 450 450 450'/%3E%3Cpolygon fill='%23FFF' points='360 300 450 150 270 150'/%3E%3Cpolygon fill='%23444' points='540 300 450 450 630 450'/%3E%3Cpolygon fill='%23222' points='540 300 630 150 450 150'/%3E%3Cpolygon fill='%23AAA' points='720 300 630 450 810 450'/%3E%3Cpolygon fill='%23666' points='720 300 810 150 630 150'/%3E%3Cpolygon fill='%23FFF' points='900 300 810 450 990 450'/%3E%3Cpolygon fill='%23999' points='900 300 990 150 810 150'/%3E%3Cpolygon points='0 600 -90 750 90 750'/%3E%3Cpolygon fill='%23666' points='0 600 90 450 -90 450'/%3E%3Cpolygon fill='%23AAA' points='180 600 90 750 270 750'/%3E%3Cpolygon fill='%23444' points='180 600 270 450 90 450'/%3E%3Cpolygon fill='%23444' points='360 600 270 750 450 750'/%3E%3Cpolygon fill='%23999' points='360 600 450 450 270 450'/%3E%3Cpolygon fill='%23666' points='540 600 630 450 450 450'/%3E%3Cpolygon fill='%23222' points='720 600 630 750 810 750'/%3E%3Cpolygon fill='%23FFF' points='900 600 810 750 990 750'/%3E%3Cpolygon fill='%23222' points='900 600 990 450 810 450'/%3E%3Cpolygon fill='%23DDD' points='0 900 90 750 -90 750'/%3E%3Cpolygon fill='%23444' points='180 900 270 750 90 750'/%3E%3Cpolygon fill='%23FFF' points='360 900 450 750 270 750'/%3E%3Cpolygon fill='%23AAA' points='540 900 630 750 450 750'/%3E%3Cpolygon fill='%23FFF' points='720 900 810 750 630 750'/%3E%3Cpolygon fill='%23222' points='900 900 990 750 810 750'/%3E%3Cpolygon fill='%23222' points='1080 300 990 450 1170 450'/%3E%3Cpolygon fill='%23FFF' points='1080 300 1170 150 990 150'/%3E%3Cpolygon points='1080 600 990 750 1170 750'/%3E%3Cpolygon fill='%23666' points='1080 600 1170 450 990 450'/%3E%3Cpolygon fill='%23DDD' points='1080 900 1170 750 990 750'/%3E%3C/g%3E%3C/pattern%3E%3C/defs%3E%3Crect x='0' y='0' fill='url(%23a)' width='100%25' height='100%25'/%3E%3Crect x='0' y='0' fill='url(%23b)' width='100%25' height='100%25'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  margin-top: 40px;
+  z-index: 1;
+  overflow-y: auto;
+}
+
+/* Form container with semi-transparent white background */
+.form-container {
+  background-color: rgba(255, 255, 255, 0.8);
+  width: 100%;
+  max-width: 550px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #0b1215;
+  box-sizing: border-box;
+  min-height: 500px;
+}
+
+/* Centered form title */
+.form-container h2 {
+  text-align: center;
+  font-family: "Trebuchet MS", sans-serif;
+}
+
+/* Labels styling */
+label {
+  display: block;
+  margin-top: 40px;
+  font-weight: bold;
+}
+
+/* Form inputs, selects, textareas full width and spacing */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 5px;
+  margin-top: 1px;
+  box-sizing: border-box;
+}
+
+/* Appointment type dropdown styling */
+select#appointment-type {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Focus effect on appointment type dropdown */
+select#appointment-type:focus {
+  outline: none;
+  border-color: #4b5320;
+  box-shadow: 0 0 10px #0b1215;
+}
+
+/* Button styling */
+button {
+  margin-top: 15px;
+  width: 100%;
+  padding: 10px;
+  background-color: #6a7337;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+/* Submit button hover effect */
+#submit-appointment {
+  background-color: #28a745;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+#submit-appointment:hover {
+  border: 1px solid black;
+}
+
+/* Form grid layout for inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+/* Form group flex container for label and input */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Full width fields span 2 columns in grid */
+.full-width {
+  grid-column: span 2;
+}
+
+/* On small screens, full-width fields span single column */
+@media (max-width: 600px) {
+  .full-width {
+    grid-column: span 1;
+  }
+}
+
+/* Row group container with gap */
+.row-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Full width for some form groups */
+.full-width {
+  width: 100%;
+}
+
+/* Purpose textarea styling */
+#purpose {
+  height: 150px; /* fixed height */
+  max-width: 500px; /* optional: limits width on large screens */
+  width: 100%;
+  font-size: 1.1rem;
+  resize: none; /* prevents user from resizing */
+  padding: 10px;
+  overflow-y: auto; /* scrolls vertically when content exceeds */
+  box-sizing: border-box;
+}
+
+/* Checkbox container aligned with gap */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  margin-top: 20px;
+  gap: 8px;
+}
+
+.checkbox-container label {
+  margin: 0;
+  padding: 0;
+}
+/* Checkbox input size and pointer cursor */
+.checkbox-container input[type="checkbox"] {
+  margin: 0;
+  padding: 0;
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+.checkbox-container span:hover {
+  text-decoration: underline;
+}
+
+/* Modal content (second style override) */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* slightly darker overlay */
+  padding: 40px 20px; /* spacing around modal */
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px 40px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh; /* limit max height to 80% viewport height */
+  overflow-y: auto;
+  color: #333;
+  line-height: 1.6;
+  position: fixed;
+  top: 55%; /* lowered from 50% */
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Modal image size and margin */
+.modal-content img {
+  width: 80px;
+  margin-bottom: 15px;
+  display: block;
+  margin: 0 auto 15px auto;
+  margin-top: 20px;
+}
+
+/* Modal header */
+.modal-content h3 {
+  margin-top: 20px;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  color: #4b5320; /* dark olive green */
+  border-bottom: 2px solid #a8c66c;
+  padding-bottom: 6px;
+}
+
+/* Modal paragraphs */
+.modal-content p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Close button */
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  color: #6a7337;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-button:hover {
+  color: #a8c66c;
+}
+
+/* Scrollbar style for modal content */
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: #a8c66c;
+  border-radius: 4px;
+}
+
+@media only screen and (max-width: 1360px) {
+  header nav {
+    display: none;
+  }
+
+  #hamburger-icon {
+    display: block;
+  }
+}
+/* Responsive styles for small screens */
+@media only screen and (max-width: 700px) {
+  #brand {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  #brand a {
+    margin-left: 0;
+    text-align: left;
+  }
+  .brand-text::after {
+    content: "Health Information Hub";
+  }
+
+  #brand img.logo {
+    display: none;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .background-image {
+    min-height: 100dvh; /* "dynamic" vh fixes keyboard resize */
+  }
+}

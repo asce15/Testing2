@@ -1,0 +1,704 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+@import "tailwindcss";
+
+body {
+  color: white;
+  font-family: "Trebuchet MS", sans-serif;
+  scroll-behavior: smooth;
+}
+
+header a {
+  text-decoration: none;
+}
+
+header {
+  padding: 0 20px;
+  background: linear-gradient(90deg, #6a7337, #a8c66c);
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+
+#brand {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+#brand a {
+  color: white;
+  margin-left: 10px;
+}
+
+#brand img.logo {
+  height: 50px;
+  width: auto;
+}
+
+.brand-text::after {
+  content: "Barangay Market Area Health Information Hub";
+}
+
+header ul {
+  list-style: none;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+header ul a {
+  color: white;
+}
+
+header ul li {
+  padding: 15px;
+  margin-left: 10px;
+  font-family: "Verdana";
+  font-size: 15px;
+}
+
+header ul li:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.nav-list li:hover {
+  background-color: #71873f;
+  color: white;
+}
+
+#hamburger-icon {
+  margin: auto 0;
+  display: none;
+  cursor: pointer;
+}
+
+#hamburger-icon div {
+  width: 35px;
+  height: 3px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.open .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-6px, 6px);
+  transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.open .bar2 {
+  opacity: 0;
+}
+
+.open .bar3 {
+  -webkit-transform: rotate(45deg) translate(-6px, -8px);
+  transform: rotate(45deg) translate(-6px, -8px);
+}
+
+.mobile-menu.open {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.mobile-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0px;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* semi-transparent */
+  padding: 20px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* subtle shadow */
+  z-index: 1000;
+  height: auto;
+}
+
+.mobile-menu li {
+  margin-bottom: 10px;
+}
+
+.mobile-menu li:last-child {
+  margin-bottom: 0;
+}
+
+.mobile-menu li:hover {
+  transform: scale(1.2);
+  transition: 0.3s;
+}
+
+.mobile-menu li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.bg-section {
+  position: relative;
+  min-height: 50vh; /* Change from height to min-height */
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  padding: 80px 20px 40px; /* Add padding for header clearance and bottom spacing */
+}
+
+.bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.text-container {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+  text-align: center;
+}
+
+.text-container h2 {
+  font-family: "Verdana";
+  margin-bottom: 1rem;
+  font-size: clamp(3rem, 5vw, 6rem);
+}
+
+.desc {
+  padding: 0 200px 0 200px;
+}
+
+.desc p {
+  line-height: 1.6;
+  text-align: center;
+  font-size: clamp(0.5rem, 3vw, 1.125rem);
+}
+
+img[alt="dividerline"] {
+  width: 40%; /* or 30%, or any specific value */
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  z-index: 2;
+}
+
+.logo-row {
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.logo-row img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 100px #4b5320, 0 0 60px #4b5320, 0 0 20px #4b5320;
+  border-radius: 50%;
+}
+
+.logo-row img {
+  width: 100px;
+  height: auto;
+  margin-top: 30px;
+}
+
+/* Divider Box Between Sections */
+.divider-box {
+  background-color: #fffff0;
+  color: #333;
+  padding: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.table-container {
+  display: flex;
+  gap: 20px; /* gap between the tables */
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.single-table {
+  margin-bottom: 20px; /* gap between tables */
+  border: 1px solid #4b5320;
+  border-radius: 8px;
+  overflow: hidden; /* for rounded corners on table */
+}
+
+.single-table:last-child {
+  margin-bottom: 0;
+}
+
+.table-wrapper {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  border: 2px solid #4b5320;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.table-wrapper table {
+  border-collapse: collapse;
+  width: 100%; /* make table fill wrapper */
+}
+
+.info-table {
+  font-size: 16px;
+  background-color: #fff;
+  color: #333;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid black;
+  margin: 0;
+}
+
+.info-table th,
+.info-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid black;
+  text-align: left; /* Prevents line break */
+}
+
+.info-table th {
+  background-color: #6a7337;
+  color: white;
+}
+
+.info-table tr:last-child td {
+  border-bottom: none;
+}
+
+.info-layout {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.blog-section {
+  text-align: center;
+}
+
+.blog-post {
+  display: none;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  background-color: #fff;
+  color: #333;
+  border-left: 6px solid #6a7337;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.blog-post img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 2px solid black;
+}
+
+.blog-text {
+  text-align: left;
+  flex: 1;
+}
+
+.blog-text p {
+  margin: 5px 0;
+}
+
+.blog-post:hover {
+  transform: scale(1.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  background-color: #feff91;
+  cursor: pointer;
+}
+.post-date {
+  font-size: 14px;
+  color: #888;
+}
+
+.button-link {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #6a7337;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-link:hover {
+  background-color: #4b5320;
+  transform: scale(1.02);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.divider-tips {
+  background-color: #fffff0;
+  color: #333;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+/* Health Tips Section */
+.health-tips-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  color: #333;
+}
+
+.tip-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+}
+
+.tip-icon {
+  font-size: 2.5rem;
+  color: #6a7337;
+  margin: 15px 0;
+  text-align: center;
+}
+
+.tip-content {
+  padding: 15px;
+}
+
+.tip-content h3 {
+  color: #6a7337;
+  margin-bottom: 10px;
+}
+
+.tip-content p {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Popup Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+}
+
+/* Popup Content Box */
+.popup-content {
+  background-color: #fff;
+  color: #333;
+  padding: 30px;
+  border-radius: 12px;
+  width: 60%;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+  position: relative;
+  text-align: left;
+}
+
+.popup-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #6a7337; /* optional: change title color */
+}
+.popup-content #popupDate {
+  font-size: 16px;
+  font-weight: 400;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.popup-content p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  line-height: 1.6;
+}
+
+.popup-content img {
+  max-width: 100%;
+  height: auto;
+  margin: 25px auto;
+  display: block;
+  border-radius: 6px;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 20px;
+  font-size: 28px;
+  color: #6a7337;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.3);
+}
+
+.section-divider-line {
+  width: 80%; /* You can adjust the width */
+  height: 3px; /* Makes the line thin */
+  background-color: #6a7337; /* A solid color from your theme */
+  margin: 50px 0 5px 0;
+  display: block;
+  clear: both;
+}
+@media only screen and (max-width: 1360px) {
+  header nav {
+    display: none;
+  }
+
+  #hamburger-icon {
+    display: block;
+  }
+
+  .text-container {
+    margin-bottom: 10px;
+  }
+
+  img[alt="dividerline"] {
+    width: 50%;
+  }
+
+  .logo-row img {
+    width: 50px;
+    height: auto;
+  }
+
+  .health-tips-container {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+
+  .text-container h2 {
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .text-container {
+    margin-bottom: 10px;
+  }
+
+  .footer-container {
+    flex-direction: column !important; /* stack vertically */
+    align-items: center !important; /* center horizontally */
+    justify-content: center !important; /* center the whole container */
+    gap: 20px;
+    max-width: 100%; /* take full width */
+    margin: 0 auto; /* center container */
+    text-align: center;
+  }
+
+  .footer-logo-column,
+  .footer-column {
+    flex: none !important; /* disable flex grow/shrink */
+    max-width: 300px;
+    width: 100%;
+    margin-left: 0 !important; /* override any left margin */
+    text-align: center !important; /* center text */
+  }
+
+  .footer-column.quick-links {
+    margin-left: 0 !important; /* override the special margin */
+  }
+
+  .desc {
+    padding: 0px 100px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  #brand {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  #brand a {
+    margin-left: 0;
+    text-align: left;
+  }
+  .brand-text::after {
+    content: "Health Information Hub";
+  }
+
+  #brand img.logo {
+    display: none;
+  }
+
+  img[alt="dividerline"] {
+    width: 100%;
+  }
+
+  .blog-text p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* number of lines to show */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* allow wrapping */
+  }
+
+  .popup-content {
+    max-width: 90%; /* almost full width */
+    width: 95vw; /* viewport width units for responsiveness */
+    padding: 20px;
+    max-height: 80vh; /* Limit height to 90% of viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
+    box-sizing: border-box; /* Include padding in width/height calculation */
+    margin: 20px auto; /* Add margin to prevent sticking to top/bottom on small screens */
+    transform: translateY(0);
+  }
+  .popup-content h3 {
+    font-size: 20px;
+  }
+
+  .popup-content p {
+    font-size: 14px;
+  }
+
+  .popup-content img {
+    margin: 30px auto;
+  }
+}
+
+@media (max-width: 400px) {
+  .text-container h2 {
+    font-size: 40px;
+  }
+
+  .desc {
+    padding: 0 20px;
+  }
+}
+
+@media only screen and (max-width: 330px) {
+  .blog-post img {
+    display: none;
+  }
+
+  .blog-post {
+    flex-direction: column;
+  }
+}
+
+footer {
+  background: linear-gradient(135deg, #6a7337, #a8c66c);
+  color: white;
+  padding: 40px 20px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.footer-logo-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-image {
+  height: 150px;
+  width: auto;
+  margin-bottom: 10px;
+}
+
+.footer-column {
+  flex: 1 1 250px;
+  text-align: left;
+}
+
+.footer-column h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #feff91;
+  border-bottom: 2px solid white;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+  color: #feff91;
+}
+
+.footer-bottom {
+  margin-top: 30px;
+  font-size: 14px;
+  color: #ddd;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}

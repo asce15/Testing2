@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barangay Market Area Health Information Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="AppointmentHistory.css" />
+    <link rel="website icon" href="BMA.png" />
+  </head>
+  <body class="bg-gray-50 font-sans antialiased">
+    <header>
+      <div id="brand">
+        <img src="BMA.png" alt="" class="logo" /><a
+          href="#top"
+          class="brand-text"
+        ></a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li><a href="AppointmentHistory.html">Appointment History</a></li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <ul class="mobile-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#">Available Medicine</a></li>
+        <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+        <li><a href="AppointmentHistory.html">Appointment History</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 pt-[70px] max-w-6xl">
+      <!-- Header Card -->
+      <div class="bg-white rounded-xl card p-6 mb-6 fade-in">
+        <div
+          class="flex flex-col md:flex-row md:justify-between md:items-center gap-4"
+        >
+          <div class="text-center md:text-left">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+              <i class="fas fa-calendar-check text-[#6A7337] mr-2"></i>
+              Your Health Appointments
+            </h1>
+            <p class="text-gray-600 mt-1">
+              Track and manage your medical visits in one place
+            </p>
+          </div>
+
+          <!-- Filter Actions -->
+          <div class="flex flex-col sm:flex-row gap-3">
+            <!-- Date Filters -->
+            <div class="relative">
+              <button
+                id="sort-toggle"
+                class="flex items-center justify-center w-full md:w-auto px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-lg transition"
+              >
+                <i class="fas fa-sort mr-2"></i>
+                <span id="sort-label">Sort: Newest First</span>
+              </button>
+            </div>
+
+            <!-- Filter Dropdown -->
+            <div class="relative">
+              <button
+                id="filter-button"
+                class="flex items-center justify-center w-full md:w-auto px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-lg transition"
+              >
+                <i class="fas fa-filter text-[#6A7337] mr-2"></i>
+                <span>Filter</span>
+                <i class="fas fa-chevron-down ml-2 text-xs"></i>
+              </button>
+
+              <div
+                id="filter-dropdown"
+                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-10 border border-gray-200"
+              >
+                <div class="py-1">
+                  <a
+                    href="#"
+                    class="filter-option block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 items-center"
+                    data-filter="all"
+                  >
+                    <i class="fas fa-layer-group mr-2 text-gray-500"></i>
+                    All Appointments
+                  </a>
+                  <a
+                    href="#"
+                    class="filter-option block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 items-center"
+                    data-filter="pending"
+                  >
+                    <i class="fas fa-clock mr-2 text-yellow-500"></i>
+                    Pending
+                  </a>
+                  <a
+                    href="#"
+                    class="filter-option block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 items-center"
+                    data-filter="completed"
+                  >
+                    <i class="fas fa-check-circle mr-2 text-green-500"></i>
+                    Completed
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Date Range Filter -->
+        <div
+          class="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3"
+        >
+          <div
+            class="flex-1 flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4"
+          >
+            <div class="w-full sm:w-auto">
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >From:</label
+              >
+              <div class="relative">
+                <input
+                  type="date"
+                  id="from-date"
+                  class="block w-full sm:w-40 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2 border bg-white"
+                />
+              </div>
+            </div>
+
+            <div class="w-full sm:w-auto">
+              <label class="block text-sm font-medium text-gray-700 mb-1"
+                >To:</label
+              >
+              <div class="relative">
+                <input
+                  type="date"
+                  id="to-date"
+                  class="block w-full sm:w-40 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 px-3 py-2 border bg-white"
+                />
+              </div>
+            </div>
+          </div>
+
+          <button
+            id="date-filter-button"
+            class="w-full sm:w-auto px-4 py-2 text-white rounded-lg font-medium transition-all shadow-sm hover:shadow-md"
+            style="background-color: #6a7337"
+          >
+            Apply Filter
+          </button>
+
+          <button
+            id="clear-filters"
+            class="hidden w-full sm:w-auto px-4 py-2 rounded-lg font-medium transition shadow-xl hover:shadow-2xl border border-black bg-white"
+          >
+            Clear Filters
+          </button>
+        </div>
+      </div>
+
+      <!-- Appointment Table Card -->
+      <div class="bg-white rounded-xl card overflow-hidden fade-in">
+        <div class="overflow-x-auto">
+          <!-- Mobile Responsive Cards -->
+          <div class="md:hidden space-y-3 p-4" id="mobile-appointments">
+            <!-- Mobile cards will be inserted here -->
+          </div>
+
+          <!-- Desktop Table -->
+          <table class="min-w-full divide-y divide-gray-200 md:table">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Date & Time
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Purpose
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody
+              class="bg-white divide-y divide-gray-200"
+              id="appointment-table-body"
+            >
+              <!-- Desktop table data will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Empty State -->
+        <div
+          id="empty-state"
+          class="hidden flex-col items-center justify-center py-16 px-4"
+        >
+          <div class="bg-blue-50 p-6 rounded-full mb-4">
+            <i class="fas fa-calendar-times text-4xl text-[#6A7337]"></i>
+          </div>
+          <h3 class="text-lg font-semibold text-gray-800 mb-2 text-center">
+            No appointments found
+          </h3>
+          <p class="text-gray-500 text-center max-w-md mb-6">
+            You don't have any appointments matching your current filters.
+            Schedule a new appointment by clicking the button below.
+          </p>
+          <a href="AppointmentForm.html">
+            <button
+              class="btn-primary px-6 py-2 text-white rounded-lg font-medium transition-all shadow-sm hover:shadow-md"
+            >
+              <i class="fas fa-plus mr-2"></i> Schedule New Appointment
+            </button>
+          </a>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between mt-6 gap-4"
+      >
+        <div class="text-sm text-gray-600">
+          Showing <span id="range-start">1</span> to
+          <span id="range-end">5</span> of
+          <span id="total-appointments">10</span> appointments
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button
+            id="first-page"
+            class="flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition"
+            disabled
+          >
+            <i class="fas fa-chevron-left mr-2"></i>
+            First
+          </button>
+
+          <div class="flex gap-1" id="pagination-numbers">
+            <!-- Pagination numbers will be inserted here -->
+          </div>
+
+          <button
+            id="last-page"
+            class="flex items-center px-4 py-2 border border-gray-300 rounded-lg shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 disabled:opacity-50 transition"
+          >
+            Last
+            <i class="fas fa-chevron-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Appointment Detail Modal -->
+    <div
+      id="appointment-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center modal"
+    >
+      <div class="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm"></div>
+
+      <div
+        class="relative bg-white rounded-xl shadow-xl w-full max-w-lg mx-4 max-h-[90vh] overflow-y-auto"
+      >
+        <!-- Close Button -->
+        <button
+          id="close-modal"
+          class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition"
+        >
+          <i class="fas fa-times text-gray-500"></i>
+        </button>
+
+        <!-- Modal Content -->
+        <div class="p-6">
+          <div
+            class="flex flex-col sm:flex-row items-center sm:items-start gap-4 text-center"
+          >
+            <div
+              class="w-16 h-16 flex items-center justify-center border border-gray-300 rounded-lg sm:px-5 sm:py-3 sm:w-auto sm:h-auto"
+            >
+              <i class="fas fa-calendar-check text-[#6A7337] text-xl"></i>
+            </div>
+
+            <div class="flex-1">
+              <h3
+                class="text-xl font-semibold text-gray-800 sm:text-left"
+                id="modal-title"
+              >
+                Appointment Details
+              </h3>
+
+              <div class="mt-6 space-y-4">
+                <!-- Date & Time -->
+                <div class="flex gap-4">
+                  <div class="w-24">
+                    <p
+                      class="text-sm font-medium text-gray-500 flex items-center"
+                    >
+                      <i class="fas fa-clock mr-2"></i>
+                      When:
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-sm text-gray-800 font-medium text-left"
+                      id="modal-date"
+                    >
+                      Loading...
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Purpose -->
+                <div class="flex gap-4">
+                  <div class="w-24">
+                    <p
+                      class="text-sm font-medium text-gray-500 flex items-center"
+                    >
+                      <i class="fas fa-clipboard-list mr-2"></i>
+                      Purpose:
+                    </p>
+                  </div>
+                  <div>
+                    <p
+                      class="text-sm text-gray-800 font-medium text-left"
+                      id="modal-purpose"
+                    >
+                      Loading...
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Status -->
+                <div class="flex gap-4">
+                  <div class="w-24">
+                    <p
+                      class="text-sm font-medium text-gray-500 flex items-center"
+                    >
+                      <i class="fas fa-info-circle mr-2"></i>
+                      Status:
+                    </p>
+                  </div>
+                  <div>
+                    <p class="text-sm font-mediu text-left" id="modal-status">
+                      Loading...
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleMobileMenu(menu) {
+        menu.classList.toggle("open"); // toggles hamburger animation
+        document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+      }
+      // Sample appointment data
+      const appointments = [
+        {
+          id: 1,
+          date: "2023-06-15 10:00",
+          formattedDate: "June 15, 2023",
+          purpose: "Annual Physical Checkup",
+          status: "completed",
+        },
+        {
+          id: 2,
+          date: "2023-07-22 14:30",
+          formattedDate: "July 22, 2023 - 02:30 PM",
+          purpose: "Dermatology Consultation",
+          status: "completed",
+        },
+        {
+          id: 3,
+          date: "2023-08-05 11:15",
+          formattedDate: "August 5, 2023 - 11:15 AM",
+          purpose: "Vaccination (Flu Shot)",
+          status: "completed",
+        },
+        {
+          id: 4,
+          date: "2023-09-18 09:00",
+          formattedDate: "September 18, 2023 - 09:00 AM",
+          purpose: "Cardiology Follow-up",
+          status: "pending",
+        },
+        {
+          id: 5,
+          date: "2023-10-10 13:45",
+          formattedDate: "October 10, 2023 - 01:45 PM",
+          purpose: "Dental Cleaning",
+          status: "pending",
+        },
+        {
+          id: 6,
+          date: "2023-05-12 08:30",
+          formattedDate: "May 12, 2023 - 08:30 AM",
+          purpose: "Orthopedic Consultation",
+          status: "pending",
+        },
+        {
+          id: 7,
+          date: "2023-11-20 15:00",
+          formattedDate: "November 20, 2023 - 03:00 PM",
+          purpose: "Eye Examination",
+          status: "pending",
+        },
+        {
+          id: 8,
+          date: "2023-04-08 16:15",
+          formattedDate: "April 8, 2023 - 04:15 PM",
+          purpose: "Physical Therapy",
+          status: "completed",
+        },
+        {
+          id: 9,
+          date: "2023-08-30 10:30",
+          formattedDate: "August 30, 2023 - 10:30 AM",
+          purpose: "Nutrition Counseling",
+          status: "completed",
+        },
+        {
+          id: 10,
+          date: "2023-12-15 11:00",
+          formattedDate: "December 15, 2023 - 11:00 AM",
+          purpose: "Annual Physical Checkup",
+          status: "pending",
+        },
+        {
+          id: 11,
+          date: "2023-06-15 10:00",
+          formattedDate: "June 15, 2023 - 10:00 AM",
+          purpose: "Annual Physical Checkup",
+          status: "completed",
+        },
+        {
+          id: 12,
+          date: "2023-07-22 14:30",
+          formattedDate: "July 22, 2023 - 02:30 PM",
+          purpose: "Dermatology Consultation",
+          status: "completed",
+        },
+        {
+          id: 13,
+          date: "2023-08-05 11:15",
+          formattedDate: "August 5, 2023 - 11:15 AM",
+          purpose: "Vaccination (Flu Shot)",
+          status: "completed",
+        },
+        {
+          id: 14,
+          date: "2023-09-18 09:00",
+          formattedDate: "September 18, 2023 - 09:00 AM",
+          purpose: "Cardiology Follow-up",
+          status: "pending",
+        },
+        {
+          id: 15,
+          date: "2023-10-10 13:45",
+          formattedDate: "October 10, 2023 - 01:45 PM",
+          purpose: "Dental Cleaning",
+          status: "pending",
+        },
+        {
+          id: 16,
+          date: "2023-05-12 08:30",
+          formattedDate: "May 12, 2023 - 08:30 AM",
+          purpose: "Orthopedic Consultation",
+          status: "pending",
+        },
+        {
+          id: 17,
+          date: "2023-11-20 15:00",
+          formattedDate: "November 20, 2023 - 03:00 PM",
+          purpose: "Eye Examination",
+          status: "pending",
+        },
+        {
+          id: 18,
+          date: "2023-04-08 16:15",
+          formattedDate: "April 8, 2023 - 04:15 PM",
+          purpose: "Physical Therapy",
+          status: "completed",
+        },
+        {
+          id: 19,
+          date: "2023-08-30 10:30",
+          formattedDate: "August 30, 2023 - 10:30 AM",
+          purpose: "Nutrition Counseling",
+          status: "completed",
+        },
+        {
+          id: 20,
+          date: "2023-12-15 11:00",
+          formattedDate: "December 15, 2023 - 11:00 AM",
+          purpose: "Annual Physical Checkup",
+          status: "pending",
+        },
+      ];
+
+      appointments.sort((a, b) => new Date(b.date) - new Date(a.date));
+      // DOM elements
+      const tableBody = document.getElementById("appointment-table-body");
+      const filterButton = document.getElementById("filter-button");
+      const filterDropdown = document.getElementById("filter-dropdown");
+      const filterOptions = document.querySelectorAll(".filter-option");
+      const emptyState = document.getElementById("empty-state");
+      const firstPageBtn = document.getElementById("first-page");
+      const lastPageBtn = document.getElementById("last-page");
+      const paginationNumbers = document.getElementById("pagination-numbers");
+      const modal = document.getElementById("appointment-modal");
+      const closeModalBtn = document.getElementById("close-modal");
+      // State variables
+      let currentFilter = "all";
+      let currentPage = 1;
+      const appointmentsPerPage = 5;
+      let filteredAppointments = [...appointments];
+      let sortOrder = "desc";
+      let fromDate = null;
+      let toDate = null;
+
+      // Initialize the page
+      document.addEventListener("DOMContentLoaded", () => {
+        filterAndRender();
+        setupEventListeners();
+      });
+
+      function setupEventListeners() {
+        // Filter dropdown toggle
+        filterButton.addEventListener("click", (e) => {
+          e.stopPropagation();
+          filterDropdown.classList.toggle("hidden");
+        });
+
+        // Close filter dropdown when clicking outside
+        document.addEventListener("click", () => {
+          filterDropdown.classList.add("hidden");
+        });
+
+        // Filter options
+        filterOptions.forEach((option) => {
+          option.addEventListener("click", (e) => {
+            e.preventDefault();
+            currentFilter = e.target.dataset.filter;
+            filterButton.querySelector("span").textContent =
+              e.target.textContent;
+            filterDropdown.classList.add("hidden");
+            currentPage = 1;
+            document.getElementById("clear-filters").classList.remove("hidden"); // Show clear button
+            filterAndRender();
+          });
+        });
+
+        // Pagination
+
+        firstPageBtn.addEventListener("click", () => {
+          currentPage = 1;
+          renderTable();
+        });
+
+        lastPageBtn.addEventListener("click", () => {
+          const totalPages = Math.ceil(
+            filteredAppointments.length / appointmentsPerPage
+          );
+          currentPage = totalPages;
+          renderTable();
+        });
+
+        // Modal controls
+        closeModalBtn.addEventListener("click", () => {
+          modal.classList.add("hidden");
+        });
+      }
+
+      function filterAndRender() {
+        // Filter appointments
+        filteredAppointments = appointments.filter((appt) => {
+          const apptDate = new Date(appt.date);
+          const statusMatch =
+            currentFilter === "all" || appt.status === currentFilter;
+          const fromMatch = !fromDate || apptDate >= fromDate;
+          const toMatch = !toDate || apptDate <= toDate;
+          return statusMatch && fromMatch && toMatch;
+        });
+
+        // Sort by date (newest first)
+        filteredAppointments.sort((a, b) => {
+          const dateA = new Date(a.date);
+          const dateB = new Date(b.date);
+          return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+        });
+
+        // Reset to page 1 and render
+        currentPage = 1;
+        renderTable();
+      }
+
+      const sortLabel = document.getElementById("sort-label");
+
+      document.getElementById("sort-toggle").addEventListener("click", () => {
+        // Toggle sort order
+        sortOrder = sortOrder === "asc" ? "desc" : "asc";
+
+        // Update only the label text
+        sortLabel.textContent =
+          sortOrder === "asc" ? "Sort: Oldest First" : "Sort: Newest First";
+
+        // Re-render the list
+        filterAndRender();
+      });
+
+      document
+        .getElementById("date-filter-button")
+        .addEventListener("click", () => {
+          const fromInput = document.getElementById("from-date").value;
+          const toInput = document.getElementById("to-date").value;
+
+          fromDate = fromInput ? new Date(fromInput) : null;
+          toDate = toInput ? new Date(toInput) : null;
+
+          document.getElementById("clear-filters").classList.remove("hidden"); // Show clear button
+          filterAndRender();
+        });
+
+      function renderTable() {
+        // Clear table
+        tableBody.innerHTML = "";
+
+        // Calculate pagination
+        const startIndex = (currentPage - 1) * appointmentsPerPage;
+        const endIndex = startIndex + appointmentsPerPage;
+        const paginatedAppointments = filteredAppointments.slice(
+          startIndex,
+          endIndex
+        );
+        const totalPages = Math.ceil(
+          filteredAppointments.length / appointmentsPerPage
+        );
+
+        // Show empty state if no appointments
+        if (filteredAppointments.length === 0) {
+          tableBody.innerHTML = "";
+          emptyState.classList.remove("hidden");
+          emptyState.classList.add("flex");
+          document.getElementById("pagination-numbers").innerHTML = "";
+          return;
+        } else {
+          emptyState.classList.add("hidden");
+        }
+
+        // Render appointments
+        paginatedAppointments.forEach((appointment) => {
+          const row = document.createElement("tr");
+          row.className = `appointment-row ${appointment.status}`;
+          row.dataset.id = appointment.id;
+
+          // Status badge
+          let statusBadgeClass, statusText;
+          switch (appointment.status) {
+            case "pending":
+              statusBadgeClass = "status-pending";
+              statusText = "Pending";
+              break;
+            case "completed":
+              statusBadgeClass = "status-completed";
+              statusText = "Completed";
+              break;
+          }
+
+          const [datePart, timePart] = appointment.formattedDate.split(" - ");
+
+          row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900 font-medium">${datePart}</div>  
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="text-sm text-gray-900 font-medium">${appointment.purpose}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${statusBadgeClass}">
+                            ${statusText}
+                        </span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
+                        <button class="view-btn text-[#4B5320] hover:text-blue-900" data-id="${appointment.id}">View</button>
+                    </td>
+                `;
+
+          tableBody.appendChild(row);
+        });
+
+        // Setup row click handlers
+        document.querySelectorAll(".appointment-row").forEach((row) => {
+          row.addEventListener("click", (e) => {
+            // Ignore if click was on a button (those have their own handlers)
+            if (e.target.tagName === "BUTTON") return;
+
+            const appointmentId = parseInt(row.dataset.id);
+            showAppointmentDetails(appointmentId);
+          });
+        });
+
+        // Setup view button handlers
+        document.querySelectorAll(".view-btn").forEach((btn) => {
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const appointmentId = parseInt(btn.dataset.id);
+            showAppointmentDetails(appointmentId);
+          });
+        });
+
+        // Update pagination controls
+        updatePagination(totalPages);
+
+        const rangeStart =
+          filteredAppointments.length === 0 ? 0 : startIndex + 1;
+        const rangeEnd = Math.min(endIndex, filteredAppointments.length);
+        document.getElementById("range-start").textContent = rangeStart;
+        document.getElementById("range-end").textContent = rangeEnd;
+        document.getElementById("total-appointments").textContent =
+          filteredAppointments.length;
+      }
+
+      function updatePagination(totalPages) {
+        firstPageBtn.disabled = currentPage === 1;
+        lastPageBtn.disabled = currentPage === totalPages;
+
+        let startPage = Math.max(currentPage - 1, 1);
+        let endPage = startPage + 2;
+
+        if (endPage > totalPages) {
+          endPage = totalPages;
+          startPage = Math.max(endPage - 2, 1);
+        }
+
+        let pageNumbersHTML = "";
+        for (let i = startPage; i <= endPage; i++) {
+          pageNumbersHTML += `
+      <button class="${
+        currentPage === i
+          ? "bg-[#6A7337] text-white"
+          : "bg-white text-gray-700 hover:bg-gray-50"
+      } px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium" data-page="${i}">
+        ${i}
+      </button>
+    `;
+        }
+        paginationNumbers.innerHTML = pageNumbersHTML;
+
+        // Add event listeners
+        document
+          .querySelectorAll("#pagination-numbers button")
+          .forEach((btn) => {
+            btn.addEventListener("click", () => {
+              currentPage = parseInt(btn.dataset.page);
+              renderTable();
+            });
+          });
+      }
+
+      function showAppointmentDetails(appointmentId) {
+        const appointment = appointments.find((a) => a.id === appointmentId);
+        if (!appointment) return;
+
+        // Update modal content
+        document.getElementById("modal-title").textContent =
+          appointment.purpose;
+        document.getElementById("modal-date").textContent =
+          appointment.formattedDate.split(" - ")[0];
+        document.getElementById("modal-purpose").textContent =
+          appointment.purpose;
+
+        // Update status
+        let statusClass, statusText;
+        switch (appointment.status) {
+          case "pending":
+            statusClass = "status-pending";
+            statusText = "Pending";
+            break;
+          case "completed":
+            statusClass = "status-completed";
+            statusText = "Completed";
+            break;
+        }
+        const statusElement = document.getElementById("modal-status");
+        statusElement.textContent = statusText;
+        statusElement.className = `mt-1 text-sm font-medium ${statusClass} px-2 inline-flex text-xs leading-5 font-semibold rounded-full`;
+
+        // Store appointment ID in modal
+        modal.dataset.appointmentId = appointmentId;
+
+        // Show modal
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      document.getElementById("clear-filters").addEventListener("click", () => {
+        // Reset filters
+        currentFilter = "all";
+        fromDate = null;
+        toDate = null;
+
+        // Reset dropdown and inputs
+        document
+          .getElementById("filter-button")
+          .querySelector("span").textContent = "All Appointments";
+        document.getElementById("from-date").value = "";
+        document.getElementById("to-date").value = "";
+
+        // Hide the clear button again
+        document.getElementById("clear-filters").classList.add("hidden");
+
+        // Reset pagination and render
+        currentPage = 1;
+        filterAndRender();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./Hometailwind.css" />
+    <link rel="website icon" href="BMA.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <title>Barangay Market Area Health Information Hub</title>
+  </head>
+  <body>
+    <header>
+      <div id="brand">
+        <img src="BMA.png" alt="" class="logo" /><a
+          href="#top"
+          class="brand-text"
+        ></a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li><a href="AppointmentHistory.html">Appointment History</a></li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <ul class="mobile-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#">Available Medicine</a></li>
+        <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+        <li><a href="AppointmentHistory.html">Appointment History</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </header>
+
+    <section class="bg-section">
+      <img class="bg-img" src="bg1.jpg" alt="Background 1" />
+      <div class="text-container">
+        <h2><b> BARANGAY MARKET AREA</b></h2>
+        <div class="desc">
+          <p>
+            Welcome to Health Information Hub. This website is designed for
+            Barangay Market Area citizens to manage health-related services,
+            medicines, and appointments efficiently.
+          </p>
+        </div>
+      </div>
+
+      <img src="dividerline.png" alt="dividerline" />
+      <div class="logo-row mx-[30px] gap-4 sm:gap-6 md:gap-10 lg:gap-14">
+        <img
+          src="BMA.png"
+          alt="Barangay Logo"
+          style="width: clamp(60px, 10vw, 100px); height: auto"
+        />
+        <img
+          src="SR.png"
+          alt="Barangay Logo"
+          style="width: clamp(60px, 10vw, 100px); height: auto"
+        />
+        <img
+          src="PUP.png"
+          alt="Barangay Logo"
+          style="width: clamp(60px, 10vw, 100px); height: auto"
+        />
+      </div>
+    </section>
+
+    <!-- Divider / Separator -->
+    <div class="divider-box">
+      <h1 style="font-size: 30px">
+        <b>Health Center Information and Services</b>
+      </h1>
+
+      <div class="info-layout">
+        <!-- Left: Tables -->
+        <div class="table-container">
+          <div class="table-wrapper">
+            <div class="single-table">
+              <table class="info-table">
+                <thead>
+                  <tr>
+                    <th>Service</th>
+                    <th>Availability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Medical Checkup</td>
+                    <td>Mon-Fri</td>
+                  </tr>
+                  <tr>
+                    <td>Vaccination</td>
+                    <td>Wed Only</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="single-table">
+              <table class="info-table">
+                <thead>
+                  <tr>
+                    <th>Health Center Information</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      Clinic Hours: 8:00 AM - 5:00 PM
+                      <br /><br />
+                      Location: View on Map
+                      <br /><br />
+                      Contact: (123) 456-7890
+                      <br /><br />
+                      Staff: Doctor, Nurse, Midwife
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Blog Section -->
+        <div class="blog-section">
+          <h2 style="font-size: 30px"><b>📣 Announcements</b></h2>
+          <div
+            class="blog-post"
+            data-title="Stay Hydrated"
+            data-content="This is the extended content for blog post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            data-img="dog.jpg"
+            data-date="May 20, 2025"
+          >
+            <img src="blogimg.jpg" alt="Stay Hydrated" />
+            <div class="blog-text">
+              <p class="post-date">Posted: May 20, 2025</p>
+              <p>
+                Stay hydrated throughout the day to maintain energy and focus.
+              </p>
+            </div>
+          </div>
+          <div class="blog-post">
+            <img src="blogimg.jpg" alt="Free Health Check" />
+            <div class="blog-text">
+              <p class="post-date">Posted: May 17, 2025</p>
+              <p>Free health check-up every Friday at the barangay hall.</p>
+            </div>
+          </div>
+          <div class="blog-post">
+            <img src="blogimg.jpg" alt="Wear Masks" />
+            <div class="blog-text">
+              <p class="post-date">Posted: May 10, 2025</p>
+              <p>Remember to wear masks in crowded places.</p>
+            </div>
+          </div>
+          <div class="blog-post">
+            <img src="blogimg.jpg" alt="Exercise" />
+            <div class="blog-text">
+              <p class="post-date">Posted: May 5, 2025</p>
+              <p>Exercise at least 30 minutes daily for better health.</p>
+            </div>
+          </div>
+          <div class="blog-post">
+            <img src="blogimg.jpg" alt="Exercise" />
+            <div class="blog-text">
+              <p class="post-date">Posted: May 5, 2025</p>
+              <p>Exercise at least 30 minutes daily for better health.</p>
+            </div>
+          </div>
+          <a href="MoreAnnouncement.html" id="loadMoreBtn" class="button-link"
+            >Load More</a
+          >
+        </div>
+        <div class="section-divider-line"></div>
+        <div class="divider-tips">
+          <h2 id="tips" class="text-3xl font-bold text-gray-800">
+            Health Tips
+          </h2>
+          <p class="text-gray-600">
+            Practical advice for staying healthy in our community
+          </p>
+        </div>
+        <section class="health-tips-container py-5">
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-hands-wash"></i>
+            </div>
+            <div class="tip-content">
+              <h3>Proper Handwashing</h3>
+              <p>
+                Wash hands regularly with soap and clean water for at least 20
+                seconds, especially before eating and after using the toilet.
+                This is one of the most effective ways to prevent diseases.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-broom"></i>
+            </div>
+            <div class="tip-content">
+              <h3>Clean Environment</h3>
+              <p>
+                Practice proper waste disposal and eliminate stagnant water in
+                your surroundings. Clean homes and streets help prevent dengue,
+                diarrhea, and other diseases.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <div class="tip-content">
+              <h3>Healthy Diet</h3>
+              <p>
+                Eat a balanced diet with vegetables, fruits, and adequate
+                protein. Avoid processed foods high in salt, sugar, and
+                unhealthy fats to prevent lifestyle diseases.
+              </p>
+            </div>
+          </div>
+
+          <div class="tip-card">
+            <div class="tip-icon">
+              <i class="fas fa-walking"></i>
+            </div>
+            <div class="tip-content">
+              <h3>Regular Exercise</h3>
+              <p>
+                Engage in at least 30 minutes of moderate physical activity
+                daily. Simple activities like walking, dancing, or household
+                chores can improve your health.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div id="popupBox" class="popup-overlay">
+        <div class="popup-content">
+          <span id="closePopup" class="close-btn">&times;</span>
+          <img id="popupImg" src="" alt="popup image" />
+          <h3 id="popupTitle"></h3>
+          <p id="popupDate"></p>
+          <p id="popupText"></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Section with Background 2 -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column footer-logo-column">
+          <img src="BMA.png" alt="Barangay Logo" class="footer-image" />
+        </div>
+        <div class="footer-column quick-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#top">Home</a></li>
+            <li><a href="#">Available Medicine</a></li>
+            <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+            <li><a href="france.html">Appointment History</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column emergency">
+          <h4>Emergency Hotlines</h4>
+          <ul>
+            <li>Barangay Hotline: 0921 123 4567</li>
+            <li>Health Center: (02) 845 6789</li>
+            <li>Police Station: (02) 823 4567</li>
+            <li>Fire Station: (02) 811 2222</li>
+          </ul>
+        </div>
+
+        <div class="footer-column contact">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>📍 Brgy. Market Area, Sta. Rosa, Laguna</li>
+            <li>☎️ (123) 456-7890</li>
+            <li>📧 barangayhealth@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 BarangayMarketAreaxPUP. All rights reserved.
+      </div>
+    </footer>
+    <script>
+      function toggleMobileMenu(menu) {
+        menu.classList.toggle("open"); // toggles hamburger animation
+        document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+      }
+      const posts = document.querySelectorAll(".blog-post");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+      const maxVisible = 4;
+
+      // Hide all posts beyond maxVisible
+      posts.forEach((post, index) => {
+        if (index >= maxVisible) {
+          post.style.display = "none";
+        } else {
+          post.style.display = "flex"; // or 'block' depending on your layout
+        }
+      });
+
+      // Show the Load More button only if more than maxVisible posts exist
+      if (posts.length > maxVisible) {
+        loadMoreBtn.style.display = "inline-block"; // or 'block' depending on your style
+      } else {
+        loadMoreBtn.style.display = "none";
+      }
+
+      document.querySelectorAll('a[href="#top"]').forEach((link) => {
+        link.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+
+          // Only handle links with an actual destination
+          if (href && href !== "#") {
+            e.preventDefault(); // stop default navigation
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Then navigate after a slight delay (wait for scroll animation)
+            setTimeout(() => {
+              window.location.href = href;
+            }, 600); // adjust this delay to match scroll speed
+          }
+        });
+      });
+
+      const popup = document.getElementById("popupBox");
+      const closeBtn = document.getElementById("closePopup");
+      const blogPosts = document.querySelectorAll(".blog-post");
+      const popupTitle = document.getElementById("popupTitle");
+      const popupText = document.getElementById("popupText");
+      const popupImg = document.getElementById("popupImg");
+      const popupDate = document.getElementById("popupDate");
+
+      blogPosts.forEach((post) => {
+        post.addEventListener("click", () => {
+          const title = post.getAttribute("data-title");
+          const content = post.getAttribute("data-content");
+          const imgSrc = post.getAttribute("data-img");
+          const date = post.getAttribute("data-date");
+
+          popupTitle.textContent = title;
+          popupText.textContent = content;
+          popupImg.src = imgSrc;
+          popupDate.textContent = "Posted: " + date;
+          popup.style.display = "flex";
+        });
+      });
+
+      closeBtn.addEventListener("click", () => {
+        popup.style.display = "none";
+      });
+
+      popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+          popup.style.display = "none";
+        }
+      });
+    </script>
+  </body>
+</html>

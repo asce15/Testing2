@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./AvailMedtailwind.css" />
+    <link rel="website icon" href="BMA.png" />
+    <title>Barangay Market Area Health Information Hub</title>
+  </head>
+
+  <body class="bg-gray-50 min-h-screen">
+    <header>
+      <div id="brand">
+        <img src="BMA.png" alt="" class="logo" /><a
+          href="#top"
+          class="brand-text"
+        ></a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li><a href="AppointmentHistory.html">Appointment History</a></li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <ul class="mobile-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#">Available Medicine</a></li>
+        <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+        <li><a href="AppointmentHistory.html">Appointment History</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </header>
+
+    <div class="container mx-auto px-4 lg:px-[200px] py-8">
+      <!-- Header -->
+      <div class="mb-10 text-center">
+        <h1 class="text-3xl md:text-4xl font-bold text-[#6A7337] mb-5 pt-16">
+          Medicine Availability Portal
+        </h1>
+        <div class="flex justify-center items-center gap-4">
+          <div
+            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium"
+          >
+            <i class="fas fa-sync-alt mr-1"></i> Live Updates
+          </div>
+        </div>
+      </div>
+
+      <!-- Search and Filter Section -->
+      <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+        <div
+          class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+        >
+          <div class="relative flex-grow max-w-2xl search-box">
+            <div
+              class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+            >
+              <i class="fas fa-search text-gray-400"></i>
+            </div>
+            <input
+              type="text"
+              id="searchInput"
+              class="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Search medicine names"
+            />
+            <button
+              id="clearSearch"
+              class="absolute inset-y-0 right-0 pr-3 flex items-center"
+            >
+              <i class="fas fa-times text-gray-400 hover:text-gray-600"></i>
+            </button>
+          </div>
+
+          <div class="flex gap-2">
+            <button
+              id="filterAll"
+              class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition text-[clamp(0.75rem,2.5vw,1rem)]"
+            >
+              All Medicines
+            </button>
+            <button
+              id="filterAvailable"
+              class="px-4 py-2 border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition text-[clamp(0.75rem,2.5vw,1rem)]"
+            >
+              In Stock
+            </button>
+            <button
+              id="filterLow"
+              class="px-4 py-2 border border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-50 transition text-[clamp(0.75rem,2.5vw,1rem)]"
+            >
+              Low Stock
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Important Notice -->
+      <div
+        class="mt-12 mb-12 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md"
+      >
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <i class="fas fa-exclamation-circle text-yellow-400"></i>
+          </div>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-yellow-800">
+              Important Information
+            </h3>
+            <div class="mt-2 text-sm text-yellow-700">
+              <p>
+                All medicine information might vary depending on the last
+                updated data. Quantities can change as prescriptions are filled.
+                For emergency medicines, please contact our pharmacy directly at
+                (555) 123-4567.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Update Time and Stats -->
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 px-2"
+      >
+        <p class="text-sm text-gray-500 mb-2 sm:mb-0">
+          Last updated:
+          <span id="updateTime" class="font-medium">Loading...</span>
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-2 sm:gap-4 text-sm custom-status-layout"
+        >
+          <span class="flex items-center">
+            <span class="w-3 h-3 rounded-full bg-green-500 mr-1"></span>
+            <span id="inStockCount">0</span>&nbsp; Available
+          </span>
+          <span class="flex items-center">
+            <span class="w-3 h-3 rounded-full bg-yellow-600 mr-1"></span>
+            <span id="lowStockCount">0</span>&nbsp; Low Stock
+          </span>
+          <span class="flex items-center">
+            <span class="w-3 h-3 rounded-full bg-gray-500 mr-1"></span>
+            <span id="outOfStockCount">0</span>&nbsp; Out of Stock
+          </span>
+        </div>
+      </div>
+
+      <!-- Medicine Table -->
+      <div
+        class="bg-white rounded-lg shadow-2xl ring-2 ring-[#6A7337]/60 overflow-hidden mb-8"
+      >
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Medicine
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Manufacturer
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Quantity
+                </th>
+              </tr>
+            </thead>
+            <tbody id="medicineList" class="bg-white divide-y divide-gray-200">
+              <!-- Medicine rows will be inserted here -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between px-4 py-3 border-t border-gray-200"
+      >
+        <div class="mb-4 sm:mb-0">
+          <p class="text-sm text-gray-700">
+            Showing <span id="currentPageStart">0</span> to
+            <span id="currentPageEnd">0</span> of
+            <span id="totalItems">0</span> medicines
+          </p>
+        </div>
+        <div class="flex gap-2">
+          <button
+            id="prevPage"
+            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
+          >
+            Previous
+          </button>
+          <div id="pageNumbers" class="flex gap-1">
+            <!-- Page numbers will be dynamically inserted here -->
+          </div>
+          <button
+            id="nextPage"
+            class="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function toggleMobileMenu(menu) {
+        menu.classList.toggle("open"); // toggles hamburger animation
+        document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+      }
+      // Sample medicine data - in a real application, this would come from an API
+      const medicines = [
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+        {
+          id: 1,
+          name: "Paracetamol",
+          type: "Pain Relief (500mg)",
+          manufacturer: "Generic",
+          quantity: 245,
+          lastUpdated: "2023-06-15 08:30",
+          prescription: false,
+        },
+        {
+          id: 2,
+          name: "Amoxicillin",
+          type: "Antibiotic (250mg)",
+          manufacturer: "PharmaCorp",
+          quantity: 12,
+          lastUpdated: "2023-06-15 09:15",
+          prescription: true,
+        },
+        {
+          id: 3,
+          name: "Ibuprofen",
+          type: "Pain Relief (200mg)",
+          manufacturer: "HealthPlus",
+          quantity: 89,
+          lastUpdated: "2023-06-15 10:05",
+          prescription: false,
+        },
+        {
+          id: 4,
+          name: "Loratadine",
+          type: "Antihistamine (10mg)",
+          manufacturer: "AllerFree",
+          quantity: 0,
+          lastUpdated: "2023-06-15 07:45",
+          prescription: false,
+        },
+        {
+          id: 5,
+          name: "Omeprazole",
+          type: "Antacid (20mg)",
+          manufacturer: "Generic",
+          quantity: 5,
+          lastUpdated: "2023-06-15 11:20",
+          prescription: false,
+        },
+      ];
+
+      // Current state
+      let currentPage = 1;
+      const itemsPerPage = 10;
+      let currentFilter = "all";
+      let currentSearchTerm = "";
+
+      // DOM elements
+      const medicineList = document.getElementById("medicineList");
+      const updateTime = document.getElementById("updateTime");
+      const searchInput = document.getElementById("searchInput");
+      const clearSearch = document.getElementById("clearSearch");
+      const filterAll = document.getElementById("filterAll");
+      const filterAvailable = document.getElementById("filterAvailable");
+      const filterLow = document.getElementById("filterLow");
+      const prevPage = document.getElementById("prevPage");
+      const nextPage = document.getElementById("nextPage");
+      const pageNumbers = document.getElementById("pageNumbers");
+      const currentPageStart = document.getElementById("currentPageStart");
+      const currentPageEnd = document.getElementById("currentPageEnd");
+      const totalItems = document.getElementById("totalItems");
+      const inStockCount = document.getElementById("inStockCount");
+      const lowStockCount = document.getElementById("lowStockCount");
+      const outOfStockCount = document.getElementById("outOfStockCount");
+
+      // Initialize
+      function init() {
+        updateTimeDisplay();
+        renderMedicineList();
+        setupEventListeners();
+        updateStats();
+        handleMedicineUpdate();
+      }
+
+      // Update the last updated time display
+      function updateTimeDisplay() {
+        const now = new Date();
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+        };
+        updateTime.textContent = now.toLocaleDateString("en-US", options);
+      }
+
+      // Render medicine list based on current filter, search, and pagination
+      function renderMedicineList() {
+        let filteredMedicines = filterMedicines(medicines);
+
+        // Apply search filter
+        if (currentSearchTerm) {
+          const searchTermLower = currentSearchTerm.toLowerCase();
+          filteredMedicines = filteredMedicines.filter((medicine) =>
+            medicine.name.toLowerCase().startsWith(searchTermLower)
+          );
+        }
+
+        // Update total items count
+        totalItems.textContent = filteredMedicines.length;
+
+        // Calculate pagination
+        const totalPages = Math.ceil(filteredMedicines.length / itemsPerPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = Math.min(
+          startIndex + itemsPerPage,
+          filteredMedicines.length
+        );
+
+        // Update pagination info
+        currentPageStart.textContent = startIndex + 1;
+        currentPageEnd.textContent = endIndex;
+
+        // Enable/disable pagination buttons
+        prevPage.disabled = currentPage === 1;
+        nextPage.disabled = currentPage === totalPages || totalPages === 0;
+
+        // Clear existing medicine cards
+        medicineList.innerHTML = "";
+
+        // Render paginated medicines
+        const paginatedMedicines = filteredMedicines.slice(
+          startIndex,
+          endIndex
+        );
+
+        if (paginatedMedicines.length === 0) {
+          medicineList.innerHTML = `
+                    <div class="col-span-full text-center py-10">
+                        <i class="fas fa-exclamation-circle text-gray-400 text-4xl mb-3"></i>
+                        <h3 class="text-lg font-medium text-gray-700">No medicines found</h3>
+                        <p class="text-gray-500 mt-1">Try adjusting your search or filter criteria</p>
+                    </div>
+                `;
+          return;
+        }
+
+        paginatedMedicines.forEach((medicine) => {
+          const stockStatus = getStockStatus(medicine.quantity);
+
+          const row = document.createElement("tr");
+          row.className = `hover:bg-gray-50 ${stockStatus.rowClass}`;
+          row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm font-medium text-gray-900">${medicine.name}</div>
+                        <div class="text-xs text-gray-500">${medicine.type}</div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${medicine.manufacturer}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${stockStatus.badgeClass}">
+                            ${medicine.quantity}
+                        </span>
+                    </td>
+                `;
+          medicineList.appendChild(row);
+        });
+
+        // Render page numbers
+        renderPageNumbers(totalPages);
+      }
+
+      // Helper function to determine stock status
+      function getStockStatus(quantity) {
+        if (quantity === 0) {
+          return {
+            text: "Out of Stock",
+            rowClass: "bg-gray-50",
+            badgeClass: "bg-gray-100 text-gray-600",
+          };
+        } else if (quantity <= 10) {
+          return {
+            text: "Low Stock",
+            rowClass: "",
+            badgeClass: "bg-yellow-100 text-yellow-800",
+          };
+        } else {
+          return {
+            text: "In Stock",
+            rowClass: "",
+            badgeClass: "bg-green-100 text-green-800",
+          };
+        }
+      }
+
+      // Filter medicines based on current filter
+      function filterMedicines(medicines) {
+        switch (currentFilter) {
+          case "available":
+            return medicines.filter((m) => m.quantity > 10);
+          case "low":
+            return medicines.filter((m) => m.quantity > 0 && m.quantity <= 10);
+          case "all":
+          default:
+            return [...medicines];
+        }
+      }
+
+      // Render page numbers for pagination
+      function renderPageNumbers(totalPages) {
+        pageNumbers.innerHTML = "";
+
+        if (totalPages === 0) return;
+
+        // Sliding window of 3 pages
+        let startPage = Math.max(1, currentPage - 1);
+        let endPage = Math.min(totalPages, startPage + 2);
+
+        // Ensure we always show 3 pages if possible
+        if (endPage - startPage < 2) {
+          startPage = Math.max(1, endPage - 2);
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+          const pageNum = createPageNumber(i);
+          pageNumbers.appendChild(pageNum);
+        }
+      }
+
+      // Create a page number button
+      function createPageNumber(page) {
+        const pageNum = document.createElement("button");
+        pageNum.className = `px-4 py-2 rounded-md text-sm font-medium ${
+          currentPage === page
+            ? "bg-[#6A7337] text-white"
+            : "border border-gray-300 text-gray-700 hover:bg-gray-50"
+        }`;
+        pageNum.textContent = page;
+        pageNum.addEventListener("click", () => {
+          currentPage = page;
+          renderMedicineList();
+        });
+        return pageNum;
+      }
+
+      // Format relative time
+      function formatRelativeTime(isoDate) {
+        const now = new Date();
+        const date = new Date(isoDate);
+        const diffSec = Math.floor((now - date) / 1000);
+
+        if (diffSec < 60) return "just now";
+        if (diffSec < 3600) return `${Math.floor(diffSec / 60)} minutes ago`;
+        if (diffSec < 86400) return `${Math.floor(diffSec / 3600)} hours ago`;
+        return `${Math.floor(diffSec / 86400)} days ago`;
+      }
+
+      // Update statistics counters
+      function updateStats() {
+        const allCount = medicines.length;
+        const inStock = medicines.filter((m) => m.quantity > 10).length;
+        const lowStock = medicines.filter(
+          (m) => m.quantity > 0 && m.quantity <= 10
+        ).length;
+        const outOfStock = medicines.filter((m) => m.quantity === 0).length;
+
+        inStockCount.textContent = inStock;
+        lowStockCount.textContent = lowStock;
+        outOfStockCount.textContent = outOfStock;
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Search functionality
+        searchInput.addEventListener("input", (e) => {
+          currentSearchTerm = e.target.value.trim().toLowerCase();
+          currentPage = 1;
+          renderMedicineList();
+        });
+
+        // Clear search
+        clearSearch.addEventListener("click", () => {
+          searchInput.value = "";
+          currentSearchTerm = "";
+          renderMedicineList();
+        });
+
+        // Filter buttons
+        filterAll.addEventListener("click", () => {
+          currentFilter = "all";
+          currentPage = 1;
+          updateActiveFilterButton();
+          renderMedicineList();
+        });
+
+        filterAvailable.addEventListener("click", () => {
+          currentFilter = "available";
+          currentPage = 1;
+          updateActiveFilterButton();
+          renderMedicineList();
+        });
+
+        filterLow.addEventListener("click", () => {
+          currentFilter = "low";
+          currentPage = 1;
+          updateActiveFilterButton();
+          renderMedicineList();
+        });
+
+        // Pagination
+        prevPage.addEventListener("click", () => {
+          if (currentPage > 1) {
+            currentPage--;
+            renderMedicineList();
+          }
+        });
+
+        nextPage.addEventListener("click", () => {
+          const filteredMedicines = filterMedicines(medicines);
+          const totalPages = Math.ceil(filteredMedicines.length / itemsPerPage);
+
+          if (currentPage < totalPages) {
+            currentPage++;
+            renderMedicineList();
+          }
+        });
+      }
+
+      // Update active filter button styles
+      function updateActiveFilterButton() {
+        filterAll.className =
+          "px-4 py-2 border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+        filterAvailable.className =
+          "px-4 py-2 border border-blue-500 text-blue-600 rounded-lg hover:bg-blue-50 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+        filterLow.className =
+          "px-4 py-2 border border-yellow-500 text-yellow-600 rounded-lg hover:bg-yellow-50 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+
+        if (currentFilter === "all") {
+          filterAll.className =
+            "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 active:bg-blue-800 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+        } else if (currentFilter === "available") {
+          filterAvailable.className =
+            "px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 active:bg-green-800 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+        } else if (currentFilter === "low") {
+          filterLow.className =
+            "px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 active:bg-yellow-800 transition text-[clamp(0.75rem,2.5vw,1rem)]";
+        }
+      }
+
+      // Simulate live updates by randomly adjusting stock quantities
+      function handleMedicineUpdate() {
+        // Set last updated time for all medicines
+        const now = new Date();
+        const hour = now.getHours().toString().padStart(2, "0");
+        const minute = now.getMinutes().toString().padStart(2, "0");
+        const day = now.getDate().toString().padStart(2, "0");
+        const month = (now.getMonth() + 1).toString().padStart(2, "0");
+
+        medicines.forEach((medicine) => {
+          medicine.lastUpdated = `${now.getFullYear()}-${month}-${day} ${hour}:${minute}`;
+        });
+
+        // Refresh UI
+        updateTimeDisplay();
+        renderMedicineList();
+        updateStats();
+        showUpdateNotification();
+      }
+
+      // Show update notification
+      function showUpdateNotification() {
+        const notification = document.createElement("div");
+        notification.className =
+          "fixed bottom-4 right-4 bg-[#6A7337] text-white px-4 py-2 rounded-lg shadow-lg flex items-center animate-bounce";
+        notification.innerHTML = `
+                <i class="fas fa-sync-alt mr-2"></i>
+                <span>Medicine list updated</span>
+            `;
+
+        document.body.appendChild(notification);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+          notification.classList.add(
+            "opacity-0",
+            "transition-opacity",
+            "duration-300"
+          );
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      // Initialize the application
+      init();
+    </script>
+  </body>
+</html>

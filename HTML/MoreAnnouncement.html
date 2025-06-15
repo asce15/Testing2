@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="MoreAnnouncement.css" />
+    <link rel="website icon" href="BMA.png" />
+    <title>Barangay Market Area Health Information Hub</title>
+  </head>
+
+  <body class="bg-gray-100 font-sans">
+    <!-- Header -->
+    <header>
+      <div id="brand">
+        <img src="BMA.png" alt="" class="logo" /><a
+          href="#top"
+          class="brand-text"
+        ></a>
+      </div>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#top">Home</a></li>
+          <li><a href="#">Available Medicine</a></li>
+          <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+          <li><a href="AppointmentHistory.html">Appointment History</a></li>
+          <li><a href="index.html">Log Out</a></li>
+        </ul>
+      </nav>
+      <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+      <ul class="mobile-menu">
+        <li><a href="#top">Home</a></li>
+        <li><a href="#">Available Medicine</a></li>
+        <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+        <li><a href="AppointmentHistory.html">Appointment History</a></li>
+        <li><a href="index.html">Logout</a></li>
+      </ul>
+    </header>
+
+    <!-- Main Content -->
+    <div class="pt-20 pb-10 min-h-screen">
+      <div class="container mx-auto px-4">
+        <!-- Back Button and Title -->
+        <div class="flex items-center mb-8">
+          <a
+            href="Home.html"
+            class="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-white hover:bg-[#f3f4ef] text-[#6A7337] hover:text-[#5c652f] mr-4 rounded-full transition-all duration-300 ease-in-out shadow-md hover:shadow-lg border border-[#dfe3d0] hover:border-[#cfd5bb] transform hover:-translate-x-1"
+          >
+            <i class="fa-solid fa-chevron-left text-lg sm:text-xl"></i>
+          </a>
+          <h1 class="text-[clamp(1.25rem,4vw,2.5rem)] font-bold text-gray-800">
+            <i class="fa-solid fa-bullhorn text-[#6A7337]"></i>
+            Announcements
+          </h1>
+        </div>
+
+        <!-- Announcements Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Announcement 1 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Stay Hydrated"
+            data-content="This is the extended content for blog post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            data-img="blogimg.jpg"
+            data-date="May 20, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Stay Hydrated"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 20, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Stay Hydrated
+              </h3>
+              <p class="text-gray-700">
+                Stay hydrated throughout the day to maintain energy and focus.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 2 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Free Health Check"
+            data-content="The barangay health center is offering free health check-ups every Friday from 8:00 AM to 4:00 PM. Services include blood pressure monitoring, blood sugar testing, and basic consultations with our healthcare professionals. This initiative aims to promote preventive healthcare in our community. No appointment is necessary, but we encourage senior citizens and individuals with chronic conditions to come early."
+            data-img="blogimg.jpg"
+            data-date="May 17, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Free Health Check"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 17, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Free Health Check
+              </h3>
+              <p class="text-gray-700">
+                Free health check-up every Friday at the barangay hall.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 3 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Wear Masks"
+            data-content="Due to recent reports of increased respiratory infections in our area, we strongly recommend wearing masks in crowded places such as markets, public transportation, and during community events. Proper mask usage includes covering both nose and mouth, and replacing disposable masks after each use. Let's work together to protect our vulnerable community members."
+            data-img="blogimg.jpg"
+            data-date="May 10, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Wear Masks"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 10, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Wear Masks
+              </h3>
+              <p class="text-gray-700">
+                Remember to wear masks in crowded places.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 4 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Exercise Daily"
+            data-content="Regular physical activity is essential for maintaining good health. We recommend at least 30 minutes of moderate exercise daily. The barangay has designated walking paths in the park and offers free Zumba classes every Tuesday and Thursday evening at 6:00 PM. Remember to start slowly if you're new to exercise and consult with our health workers if you have any medical concerns."
+            data-img="blogimg.jpg"
+            data-date="May 5, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Exercise"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 5, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Exercise Daily
+              </h3>
+              <p class="text-gray-700">
+                Exercise at least 30 minutes daily for better health.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 5 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Vaccination Drive"
+            data-content="Our barangay will be conducting a vaccination drive for influenza and pneumonia vaccines from June 1-5, 2025. Priority will be given to senior citizens, individuals with chronic illnesses, and healthcare workers. Please bring your barangay ID and vaccination card if available. The schedule is as follows: June 1-2: Senior Citizens, June 3: Persons with Disabilities, June 4-5: General Public."
+            data-img="blogimg.jpg"
+            data-date="April 28, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Vaccination Drive"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: April 28, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Vaccination Drive
+              </h3>
+              <p class="text-gray-700">
+                Upcoming vaccination drive scheduled for June 1-5.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 6 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Healthy Eating Workshop"
+            data-content="Join our free healthy eating workshop on May 25, 2025 at the barangay multipurpose hall. Learn how to prepare nutritious meals on a budget, understand food labels, and make healthier choices for your family. The workshop includes a cooking demonstration and free recipe booklets. Registration is required as seats are limited. Please visit the barangay health center to sign up."
+            data-img="blogimg.jpg"
+            data-date="April 22, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Healthy Eating Workshop"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: April 22, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Healthy Eating Workshop
+              </h3>
+              <p class="text-gray-700">
+                Learn to prepare nutritious meals at our free workshop.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 1 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Stay Hydrated"
+            data-content="This is the extended content for blog post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            data-img="blogimg.jpg"
+            data-date="May 20, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Stay Hydrated"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 20, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Stay Hydrated
+              </h3>
+              <p class="text-gray-700">
+                Stay hydrated throughout the day to maintain energy and focus.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 2 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Free Health Check"
+            data-content="The barangay health center is offering free health check-ups every Friday from 8:00 AM to 4:00 PM. Services include blood pressure monitoring, blood sugar testing, and basic consultations with our healthcare professionals. This initiative aims to promote preventive healthcare in our community. No appointment is necessary, but we encourage senior citizens and individuals with chronic conditions to come early."
+            data-img="blogimg.jpg"
+            data-date="May 17, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Free Health Check"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 17, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Free Health Check
+              </h3>
+              <p class="text-gray-700">
+                Free health check-up every Friday at the barangay hall.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 3 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Wear Masks"
+            data-content="Due to recent reports of increased respiratory infections in our area, we strongly recommend wearing masks in crowded places such as markets, public transportation, and during community events. Proper mask usage includes covering both nose and mouth, and replacing disposable masks after each use. Let's work together to protect our vulnerable community members."
+            data-img="blogimg.jpg"
+            data-date="May 10, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Wear Masks"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 10, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Wear Masks
+              </h3>
+              <p class="text-gray-700">
+                Remember to wear masks in crowded places.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 4 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Exercise Daily"
+            data-content="Regular physical activity is essential for maintaining good health. We recommend at least 30 minutes of moderate exercise daily. The barangay has designated walking paths in the park and offers free Zumba classes every Tuesday and Thursday evening at 6:00 PM. Remember to start slowly if you're new to exercise and consult with our health workers if you have any medical concerns."
+            data-img="blogimg.jpg"
+            data-date="May 5, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Exercise"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 5, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Exercise Daily
+              </h3>
+              <p class="text-gray-700">
+                Exercise at least 30 minutes daily for better health.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 5 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Vaccination Drive"
+            data-content="Our barangay will be conducting a vaccination drive for influenza and pneumonia vaccines from June 1-5, 2025. Priority will be given to senior citizens, individuals with chronic illnesses, and healthcare workers. Please bring your barangay ID and vaccination card if available. The schedule is as follows: June 1-2: Senior Citizens, June 3: Persons with Disabilities, June 4-5: General Public."
+            data-img="blogimg.jpg"
+            data-date="April 28, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Vaccination Drive"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: April 28, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Vaccination Drive
+              </h3>
+              <p class="text-gray-700">
+                Upcoming vaccination drive scheduled for June 1-5.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 6 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Healthy Eating Workshop"
+            data-content="Join our free healthy eating workshop on May 25, 2025 at the barangay multipurpose hall. Learn how to prepare nutritious meals on a budget, understand food labels, and make healthier choices for your family. The workshop includes a cooking demonstration and free recipe booklets. Registration is required as seats are limited. Please visit the barangay health center to sign up."
+            data-img="blogimg.jpg"
+            data-date="April 22, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Healthy Eating Workshop"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: April 22, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Healthy Eating Workshop
+              </h3>
+              <p class="text-gray-700">
+                Learn to prepare nutritious meals at our free workshop.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Stay Hydrated"
+            data-content="This is the extended content for blog post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            data-img="blogimg.jpg"
+            data-date="May 20, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Stay Hydrated"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 20, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Stay Hydrated
+              </h3>
+              <p class="text-gray-700">
+                Stay hydrated throughout the day to maintain energy and focus.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 2 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Free Health Check"
+            data-content="The barangay health center is offering free health check-ups every Friday from 8:00 AM to 4:00 PM. Services include blood pressure monitoring, blood sugar testing, and basic consultations with our healthcare professionals. This initiative aims to promote preventive healthcare in our community. No appointment is necessary, but we encourage senior citizens and individuals with chronic conditions to come early."
+            data-img="blogimg.jpg"
+            data-date="May 17, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Free Health Check"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 17, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Free Health Check
+              </h3>
+              <p class="text-gray-700">
+                Free health check-up every Friday at the barangay hall.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Announcement 3 -->
+          <div
+            class="blog-post bg-white rounded-lg overflow-hidden shadow-md cursor-pointer"
+            data-title="Wear Masks"
+            data-content="Due to recent reports of increased respiratory infections in our area, we strongly recommend wearing masks in crowded places such as markets, public transportation, and during community events. Proper mask usage includes covering both nose and mouth, and replacing disposable masks after each use. Let's work together to protect our vulnerable community members."
+            data-img="blogimg.jpg"
+            data-date="May 10, 2025"
+          >
+            <img
+              src="blogimg.jpg"
+              alt="Wear Masks"
+              class="w-full h-48 object-cover border-2 border-[#6A7337]"
+            />
+            <div class="p-5">
+              <p class="text-gray-500 text-sm mb-2">Posted: May 10, 2025</p>
+              <h3 class="text-xl font-semibold mb-2 text-[#6A7337]">
+                Wear Masks
+              </h3>
+              <p class="text-gray-700">
+                Remember to wear masks in crowded places.
+              </p>
+              <div class="mt-4 flex items-center text-[#6A7337]">
+                <span class="text-sm mr-2">Read more</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="mt-10 flex justify-center">
+          <nav class="flex items-center space-x-2" id="pagination">
+            <button
+              id="firstPage"
+              class="px-4 py-2 border rounded-md text-[#6A7337] border-[#6A7337] hover:bg-[#f3f4ef] disabled:opacity-50"
+            >
+              <i class="fas fa-chevron-left mr-2"></i> First
+            </button>
+            <div class="flex space-x-2" id="pageNumbers">
+              <!-- Page numbers will be injected here -->
+            </div>
+            <button
+              id="lastPage"
+              class="px-4 py-2 border rounded-md text-[#6A7337] border-[#6A7337] hover:bg-[#f3f4ef] disabled:opacity-50"
+            >
+              Last <i class="fas fa-chevron-right ml-2"></i>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <!-- Popup for full post -->
+    <div
+      id="popupBox"
+      class="popup-overlay fixed inset-0 items-center justify-center hidden"
+    >
+      <div
+        class="popup-content bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto"
+      >
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-4">
+            <h3 id="popupTitle" class="text-3xl font-bold text-[#6A7337]"></h3>
+            <span
+              id="closePopup"
+              class="close-btn text-gray-500 hover:text-gray-700 text-2xl cursor-pointer"
+              >&times;</span
+            >
+          </div>
+          <p id="popupDate" class="text-gray-500 text-sm mb-4"></p>
+          <img
+            id="popupImg"
+            src=""
+            alt="popup image"
+            class="w-full h-64 object-cover rounded-lg mb-6 border-2 border-[#6A7337]"
+          />
+          <p id="popupText" class="text-gray-700 mb-6"></p>
+          <div class="flex justify-end">
+            <button
+              onclick="closePopup()"
+              class="px-4 py-2 bg-[#6A7337] text-white rounded-md hover:bg-[#4B5320] transition"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-column footer-logo-column">
+          <img src="BMA.png" alt="Barangay Logo" class="footer-image" />
+        </div>
+        <div class="footer-column quick-links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#top">Home</a></li>
+            <li><a href="#">Available Medicine</a></li>
+            <li><a href="AppointmentForm.html">Appointment Booking</a></li>
+            <li><a href="france.html">Appointment History</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column emergency">
+          <h4>Emergency Hotlines</h4>
+          <ul>
+            <li>Barangay Hotline: 0921 123 4567</li>
+            <li>Health Center: (02) 845 6789</li>
+            <li>Police Station: (02) 823 4567</li>
+            <li>Fire Station: (02) 811 2222</li>
+          </ul>
+        </div>
+
+        <div class="footer-column contact">
+          <h4>Contact Us</h4>
+          <ul>
+            <li>📍 Brgy. Market Area, Sta. Rosa, Laguna</li>
+            <li>☎️ (123) 456-7890</li>
+            <li>📧 barangayhealth@gmail.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2025 BarangayMarketAreaxPUP. All rights reserved.
+      </div>
+    </footer>
+    <script>
+      // Mobile menu toggle
+      function toggleMobileMenu(menu) {
+        menu.classList.toggle("open");
+        document.querySelector(".mobile-menu").classList.toggle("open");
+      }
+
+      // Popup logic
+      const popup = document.getElementById("popupBox");
+      const closeBtn = document.getElementById("closePopup");
+      const blogPosts = document.querySelectorAll(".blog-post");
+      const popupTitle = document.getElementById("popupTitle");
+      const popupText = document.getElementById("popupText");
+      const popupImg = document.getElementById("popupImg");
+      const popupDate = document.getElementById("popupDate");
+
+      // Show popup with announcement details
+      function showPopup(title, content, imgSrc, date) {
+        popupTitle.textContent = title;
+        popupText.textContent = content;
+        popupImg.src = imgSrc;
+        popupDate.textContent = "Posted: " + date;
+        popup.classList.remove("hidden");
+        popup.classList.add("flex"); // ensure flex is applied for centering
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close popup
+      function closePopup() {
+        popup.classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Add click event to each announcement
+      blogPosts.forEach((post) => {
+        post.addEventListener("click", () => {
+          const title = post.getAttribute("data-title");
+          const content = post.getAttribute("data-content");
+          const imgSrc = post.getAttribute("data-img");
+          const date = post.getAttribute("data-date");
+          showPopup(title, content, imgSrc, date);
+        });
+      });
+
+      // Close popup when clicking X or outside
+      closeBtn.addEventListener("click", closePopup);
+      popup.addEventListener("click", (e) => {
+        if (e.target === popup) {
+          closePopup();
+        }
+      });
+
+      // Close popup with Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && !popup.classList.contains("hidden")) {
+          closePopup();
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const postsPerPage = 6;
+        const blogPosts = Array.from(document.querySelectorAll(".blog-post"));
+        const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+        const maxVisiblePages = 3;
+        let currentPage = 1;
+
+        const firstBtn = document.getElementById("firstPage");
+        const lastBtn = document.getElementById("lastPage");
+        const pageContainer = document.getElementById("pageNumbers");
+
+        function updateDisabledButtons() {
+          firstBtn.disabled = currentPage === 1;
+          lastBtn.disabled = currentPage === totalPages;
+        }
+        function showPage(page) {
+          const start = (page - 1) * postsPerPage;
+          const end = start + postsPerPage;
+
+          blogPosts.forEach((post, index) => {
+            post.style.display =
+              index >= start && index < end ? "block" : "none";
+          });
+
+          updateDisabledButtons();
+        }
+
+        function renderPagination() {
+          pageContainer.innerHTML = "";
+
+          let start = Math.max(1, currentPage - 1);
+          let end = Math.min(totalPages, start + maxVisiblePages - 1);
+
+          if (end - start < maxVisiblePages - 1) {
+            start = Math.max(1, end - maxVisiblePages + 1);
+          }
+
+          for (let i = start; i <= end; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.className =
+              "px-4 py-2 border rounded-md transition " +
+              (i === currentPage
+                ? "bg-[#6A7337] text-white"
+                : "text-[#6A7337] border-[#6A7337]");
+            btn.addEventListener("click", () => {
+              currentPage = i;
+              renderPagination();
+              showPage(currentPage);
+            });
+            pageContainer.appendChild(btn);
+          }
+        }
+
+        firstBtn.addEventListener("click", () => {
+          currentPage = 1;
+          renderPagination();
+          showPage(currentPage);
+        });
+
+        lastBtn.addEventListener("click", () => {
+          currentPage = totalPages;
+          renderPagination();
+          showPage(currentPage);
+        });
+
+        // Initial render
+        renderPagination();
+        showPage(currentPage);
+      });
+    </script>
+  </body>
+</html>
