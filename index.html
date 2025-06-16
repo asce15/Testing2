@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome Page</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="website icon" href="BMA.png" />
+    <style>
+      body {
+        margin: auto;
+        overflow: auto;
+        background: linear-gradient(
+          315deg,
+          #4b5320 0%,
+          /* Deep olive */ #6a7337 30%,
+          /* Army green */ #8a9a5b 65%,
+          /* Soft earthy green */ #afc67d 100%
+        );
+        animation: gradient 15s ease infinite;
+        background-size: 400% 400%;
+        background-attachment: fixed;
+      }
+
+      @keyframes gradient {
+        0% {
+          background-position: 0% 0%;
+        }
+        50% {
+          background-position: 100% 100%;
+        }
+        100% {
+          background-position: 0% 0%;
+        }
+      }
+
+      .wave {
+        background: rgb(255 255 255 / 25%);
+        border-radius: 1000% 1000% 0 0;
+        position: fixed;
+        width: 200%;
+        height: 12em;
+        animation: wave 10s -3s linear infinite;
+        transform: translate3d(0, 0, 0);
+        opacity: 0.8;
+        bottom: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      .wave:nth-of-type(2) {
+        bottom: -1.25em;
+        animation: wave 18s linear reverse infinite;
+        opacity: 0.8;
+      }
+
+      .wave:nth-of-type(3) {
+        bottom: -2.5em;
+        animation: wave 20s -1s reverse infinite;
+        opacity: 0.9;
+      }
+
+      @keyframes wave {
+        2% {
+          transform: translateX(1);
+        }
+
+        25% {
+          transform: translateX(-25%);
+        }
+
+        50% {
+          transform: translateX(-50%);
+        }
+
+        75% {
+          transform: translateX(-25%);
+        }
+
+        100% {
+          transform: translateX(1);
+        }
+      }
+
+      .modal {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        transform: scale(0.9);
+        opacity: 0;
+      }
+      .modal.active {
+        transform: scale(1);
+        opacity: 1;
+      }
+      .overlay {
+        transition: opacity 0.3s ease;
+      }
+      .overlay.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div
+      class="max-w-xl w-full bg-white rounded-xl shadow-[0_10px_25px_rgba(0,0,0,0.35)] overflow-hidden transition-all duration-300 transform hover:scale-[1.02]"
+    >
+      <div
+        class="bg-gradient-to-r from-[#6a7337] to-[#a8c66c] py-6 px-8 text-white flex flex-col items-center text-center"
+      >
+        <img src="BMA.png" alt="Logo" class="h-20 w-20 mb-4 object-contain" />
+        <h1 class="text-3xl font-bold text-center">Barangay Market Area</h1>
+        <p class="text-center text-white mt-2">
+          Welcome to our community health portal. Please select your role to
+          continue.
+        </p>
+      </div>
+
+      <div class="p-8">
+        <div class="flex flex-col space-y-4 mb-8">
+          <button
+            onclick="selectRole('citizen')"
+            class="role-btn bg-white border-2 border-[#c1d682] hover:border-[#6A7337] text-[#8A9A5B] hover:text-[#4B5320] font-semibold py-4 px-6 rounded-lg flex items-center justify-start transition-all duration-200 hover:shadow-md hover:bg-gray-50"
+          >
+            <div
+              class="bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center mr-4"
+            >
+              <i class="fas fa-user text-[#6A7337] text-xl"></i>
+            </div>
+            <div class="text-left">
+              <h3 class="font-bold text-lg">Citizen</h3>
+              <p class="text-gray-500 text-xs sm:text-sm line-clamp-2">
+                Access community services and information
+              </p>
+            </div>
+            <i class="fas fa-chevron-right ml-auto text-[#6A7337]"></i>
+          </button>
+
+          <button
+            onclick="selectRole('admin')"
+            class="role-btn bg-white border-2 border-[#c1d682] hover:border-[#6A7337] text-[#8A9A5B] hover:text-[#4B5320] font-semibold py-4 px-6 rounded-lg flex items-center justify-start transition-all duration-200 hover:shadow-md hover:bg-gray-50"
+          >
+            <div
+              class="bg-gray-200 w-12 h-12 rounded-full flex items-center justify-center mr-4"
+            >
+              <i class="fas fa-lock text-[#6A7337] text-xl"></i>
+            </div>
+            <div class="text-left">
+              <h3 class="font-bold text-lg">
+                <span class="sm:hidden">Admin</span>
+                <span class="hidden sm:inline">Administrator</span>
+              </h3>
+              <p class="text-gray-500 text-xs sm:text-sm line-clamp-2">
+                Manage system settings and user accounts
+              </p>
+            </div>
+            <i class="fas fa-chevron-right ml-auto text-[#6A7337]"></i>
+          </button>
+        </div>
+        <div class="mb-6">
+          <label class="flex items-start">
+            <div class="flex items-center h-5">
+              <input
+                id="terms"
+                type="checkbox"
+                class="focus:ring-[#6A7337] h-4 w-4 text-[#6A7337] border-gray-300 rounded"
+              />
+            </div>
+            <div class="ml-3 text-sm">
+              <span>I agree to the </span>
+              <button
+                onclick="showTerms()"
+                class="text-[#6A7337] font-medium hover:underline focus:outline-none"
+              >
+                Terms and Conditions
+              </button>
+              <p class="text-gray-500 mt-1 italic">
+                By checking this box, you acknowledge that you have read and
+                accept our terms of service.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <button
+          id="continueBtn"
+          onclick="redirectToLogin()"
+          disabled
+          class="w-full bg-gray-300 text-gray-500 font-bold py-3 px-4 rounded-lg transition-all duration-200 cursor-not-allowed"
+        >
+          Continue
+          <i class="fas fa-arrow-right ml-2"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Terms and Conditions Modal -->
+    <div
+      id="termsModal"
+      class="modal fixed inset-0 z-50 flex items-center justify-center p-4 hidden"
+    >
+      <div
+        class="overlay fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none"
+      ></div>
+
+      <div
+        class="bg-white rounded-xl shadow-xl z-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="sticky top-0 bg-white p-4 border-b flex justify-between items-center"
+        >
+          <h3 class="text-xl font-bold text-[#6A7337]">Terms and Conditions</h3>
+          <button
+            onclick="hideTerms()"
+            class="text-gray-500 hover:text-gray-700"
+          >
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+
+        <div class="p-6">
+          <h4 class="font-bold text-lg mb-2">1. Acceptance of Terms</h4>
+          <p class="mb-4 text-gray-700">
+            By accessing and using this Community Portal, you accept and agree
+            to be bound by the terms and provisions of this agreement. In
+            addition, when using these particular services, you shall be subject
+            to any posted guidelines or rules applicable to such services.
+          </p>
+
+          <h4 class="font-bold text-lg mb-2">2. Privacy Policy</h4>
+          <p class="mb-4 text-gray-700">
+            Your privacy is very important to us. We designed our Privacy Policy
+            to make important disclosures about how you can use our services to
+            share with others and how we collect and can use your content and
+            information.
+          </p>
+
+          <h4 class="font-bold text-lg mb-2">3. User Responsibilities</h4>
+          <p class="mb-4 text-gray-700">
+            As a user of the portal, you agree to provide accurate information
+            when registering and to keep this information updated. You are
+            responsible for maintaining the confidentiality of your account and
+            password.
+          </p>
+
+          <h4 class="font-bold text-lg mb-2">4. Prohibited Activities</h4>
+          <p class="mb-4 text-gray-700">
+            You may not access or use the portal for any purpose other than that
+            for which we make the portal available. Prohibited activities
+            include harassing, abusing, or harming another person.
+          </p>
+
+          <h4 class="font-bold text-lg mb-2">5. Changes to Terms</h4>
+          <p class="mb-4 text-gray-700">
+            We reserve the right to make changes to these terms at any time.
+            Your continued use of the portal following the posting of changes
+            will mean that you accept and agree to the changes.
+          </p>
+        </div>
+
+        <div class="sticky bottom-0 bg-white p-4 border-t flex justify-end">
+          <button
+            onclick="hideTerms()"
+            class="bg-[#8A9A5B] text-white px-6 py-2 rounded-lg hover:bg-[#6A7337] transition-colors"
+          >
+            I Understand
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let selectedRole = null;
+      const termsCheckbox = document.getElementById("terms");
+      const continueBtn = document.getElementById("continueBtn");
+
+      function selectRole(role) {
+        selectedRole = role;
+
+        // Update UI to show selected role
+        document.querySelectorAll(".role-btn").forEach((btn) => {
+          btn.classList.remove(
+            "border-[#6A7337]",
+            "bg-[#DDE5B6]",
+            "text-[#4B5320]",
+            "hover:bg-[#DDE5B6]"
+          );
+          btn.classList.add("border-[#c1d682]");
+        });
+
+        event.currentTarget.classList.remove("border-[#c1d682]");
+        event.currentTarget.classList.add(
+          "border-[#6A7337]",
+          "bg-[#DDE5B6]",
+          "text-[#4B5320]",
+          "hover:bg-[#DDE5B6]"
+        );
+
+        // Enable continue button if terms are checked
+        updateContinueButton();
+      }
+
+      function updateContinueButton() {
+        if (selectedRole && termsCheckbox.checked) {
+          continueBtn.disabled = false;
+          continueBtn.classList.remove(
+            "bg-gray-300",
+            "text-gray-500",
+            "cursor-not-allowed"
+          );
+          continueBtn.classList.add(
+            "bg-[#6A7337]",
+            "text-white",
+            "hover:bg-[#4B5320]",
+            "cursor-pointer"
+          );
+        } else {
+          continueBtn.disabled = true;
+          continueBtn.classList.add(
+            "bg-gray-300",
+            "text-gray-500",
+            "cursor-not-allowed"
+          );
+          continueBtn.classList.remove(
+            "bg-[#6A7337]",
+            "text-white",
+            "hover:bg-[#4B5320]",
+            "cursor-pointer"
+          );
+        }
+      }
+
+      termsCheckbox.addEventListener("change", updateContinueButton);
+
+      function redirectToLogin() {
+        if (!selectedRole || !termsCheckbox.checked) return;
+
+        // Show loading state
+        continueBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
+        continueBtn.disabled = true;
+
+        // Simulate API call/redirect
+        setTimeout(() => {
+          // In a real app, you would redirect to the appropriate login page
+          alert(`Redirecting to ${selectedRole} login page...`);
+          // window.location.href = `${selectedRole}-login.html`;
+        }, 1000);
+      }
+
+      function showTerms() {
+        const modal = document.getElementById("termsModal");
+        modal.classList.remove("hidden");
+        setTimeout(() => {
+          modal.classList.add("active");
+          document.querySelector(".overlay").classList.add("active");
+        }, 10);
+      }
+
+      function hideTerms() {
+        const modal = document.getElementById("termsModal");
+        modal.classList.remove("active");
+        document.querySelector(".overlay").classList.remove("active");
+        setTimeout(() => {
+          modal.classList.add("hidden");
+        }, 300);
+      }
+
+      // Close modal when clicking outside
+      document.querySelector(".overlay").addEventListener("click", hideTerms);
+
+      document.addEventListener("click", function (e) {
+        const isRoleBtn = e.target.closest(".role-btn");
+
+        // If click is NOT inside a role button, deselect all
+        if (!isRoleBtn) {
+          selectedRole = null;
+
+          document.querySelectorAll(".role-btn").forEach((btn) => {
+            btn.classList.remove(
+              "border-[#6A7337]",
+              "bg-[#DDE5B6]",
+              "text-[#4B5320]",
+              "hover:bg-[#DDE5B6]"
+            );
+            btn.classList.add("border-[#c1d682]");
+          });
+
+          // Also disable the Continue button again
+          updateContinueButton();
+        }
+      });
+    </script>
+  </body>
+</html>
