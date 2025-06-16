@@ -125,7 +125,7 @@
       <div class="p-8">
         <div class="flex flex-col space-y-4 mb-8">
           <button
-            onclick="selectRole('citizen')"
+            onclick="selectRole(event, 'citizen')"
             class="role-btn bg-white border-2 border-[#c1d682] hover:border-[#6A7337] text-[#8A9A5B] hover:text-[#4B5320] font-semibold py-4 px-6 rounded-lg flex items-center justify-start transition-all duration-200 hover:shadow-md hover:bg-gray-50"
           >
             <div
@@ -143,7 +143,7 @@
           </button>
 
           <button
-            onclick="selectRole('admin')"
+            onclick="selectRole(event, 'admin')"
             class="role-btn bg-white border-2 border-[#c1d682] hover:border-[#6A7337] text-[#8A9A5B] hover:text-[#4B5320] font-semibold py-4 px-6 rounded-lg flex items-center justify-start transition-all duration-200 hover:shadow-md hover:bg-gray-50"
           >
             <div
@@ -280,7 +280,7 @@
       const termsCheckbox = document.getElementById("terms");
       const continueBtn = document.getElementById("continueBtn");
 
-      function selectRole(role) {
+      function selectRole(event, role) {
         selectedRole = role;
 
         // Update UI to show selected role
@@ -302,7 +302,6 @@
           "hover:bg-[#DDE5B6]"
         );
 
-        // Enable continue button if terms are checked
         updateContinueButton();
       }
 
@@ -346,12 +345,75 @@
           '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
         continueBtn.disabled = true;
 
-        // Simulate API call/redirect
+        // Define the target pages
+        const targetPages = {
+          citizen: "CitizenLogin.html",
+          admin: "AdminLogin.html",
+        };
+
+        const targetPage = targetPages[selectedRole];
+
+        // Check if the target page exists before redirecting
         setTimeout(() => {
-          // In a real app, you would redirect to the appropriate login page
-          alert(`Redirecting to ${selectedRole} login page...`);
-          // window.location.href = `${selectedRole}-login.html`;
+          try {
+            // First attempt: try to redirect directly
+            window.location.href = targetPage;
+          } catch (error) {
+            // If direct redirect fails, show an error or fallback
+            console.error("Redirect failed:", error);
+            alert(
+              `Unable to redirect to ${targetPage}. Please ensure the file exists in the same directory.`
+            );
+
+            // Reset button state
+            continueBtn.innerHTML =
+              'Continue <i class="fas fa-arrow-right ml-2"></i>';
+            continueBtn.disabled = false;
+          }
         }, 1000);
+      }
+
+      // Alternative redirect function that checks if file exists first
+      function redirectToLoginWithCheck() {
+        if (!selectedRole || !termsCheckbox.checked) return;
+
+        // Show loading state
+        continueBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
+        continueBtn.disabled = true;
+
+        const targetPages = {
+          citizen: "CitizenLogin.html",
+          admin: "AdminLogin.html",
+        };
+
+        const targetPage = targetPages[selectedRole];
+
+        // Check if file exists using fetch
+        fetch(targetPage, { method: "HEAD" })
+          .then((response) => {
+            if (response.ok) {
+              // File exists, redirect
+              window.location.href = targetPage;
+            } else {
+              throw new Error(`File ${targetPage} not found`);
+            }
+          })
+          .catch((error) => {
+            console.error("File check failed:", error);
+
+            // Show user-friendly message
+            const roleText =
+              selectedRole === "citizen" ? "Citizen" : "Administrator";
+            alert(
+              `${roleText} login page (${targetPage}) not found. Please create the login page or update the file path.`
+            );
+
+            // Reset button state
+            continueBtn.innerHTML =
+              'Continue <i class="fas fa-arrow-right ml-2"></i>';
+            updateContinueButton();
+          });
       }
 
       function showTerms() {
@@ -377,6 +439,11 @@
 
       document.addEventListener("click", function (e) {
         const isRoleBtn = e.target.closest(".role-btn");
+        const isTermsCheckbox = e.target.closest("#terms");
+        const isTermsLabel = e.target.closest("label");
+
+        // Ignore clicks on terms checkbox or label
+        if (isTermsCheckbox || isTermsLabel) return;
 
         // If click is NOT inside a role button, deselect all
         if (!isRoleBtn) {
@@ -392,7 +459,6 @@
             btn.classList.add("border-[#c1d682]");
           });
 
-          // Also disable the Continue button again
           updateContinueButton();
         }
       });
