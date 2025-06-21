@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "index": "npx @tailwindcss/cli -i ./index.css -o ./index.css --watch",
+    "index": "npx @tailwindcss/cli -i ./index.css -o ./indextailwind.css --watch",
     "citizenlogin": "npx @tailwindcss/cli -i ./CitizenLogin.css -o ./CitizenLogintailwind.css --watch",
     "home": "npx @tailwindcss/cli -i ./Home.css -o ./Hometailwind.css --watch",
     "availmed": "npx @tailwindcss/cli -i ./AvailableMedicine.css -o ./AvailMedtailwind.css --watch",
