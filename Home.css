@@ -431,6 +431,17 @@ img[alt="dividerline"] {
   text-align: left;
 }
 
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* Close Button */
 .close-btn {
   top: 12px;
