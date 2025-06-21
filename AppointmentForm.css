@@ -2,11 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
 @import "tailwindcss";
 /* Reset default padding and margin, set box-sizing */
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-}
 
 html,
 body {
@@ -305,14 +300,17 @@ button {
 
 /* Purpose textarea styling */
 #purpose {
-  height: 150px; /* fixed height */
-  max-width: 500px; /* optional: limits width on large screens */
+  height: 150px;
+  max-width: 500px;
   width: 100%;
   font-size: 1.1rem;
-  resize: none; /* prevents user from resizing */
+  resize: none;
   padding: 10px;
-  overflow-y: auto; /* scrolls vertically when content exceeds */
+  overflow-y: auto;
   box-sizing: border-box;
+  border: 1px solid #333; /* Ensure visible border */
+  color: #333; /* Text color */
+  border-radius: 6px;
 }
 
 /* Checkbox container aligned with gap */

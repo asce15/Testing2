@@ -3,12 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="stylesheet" href="MoreAnnouncement.css" />
+    <link rel="stylesheet" href="./MoreAnnouncementtailwind.css" />
     <link rel="website icon" href="BMA.png" />
     <title>Barangay Market Area Health Information Hub</title>
   </head>
@@ -56,7 +55,10 @@
           >
             <i class="fa-solid fa-chevron-left text-lg sm:text-xl"></i>
           </a>
-          <h1 class="text-[clamp(1.25rem,4vw,2.5rem)] font-bold text-gray-800">
+          <h1
+            class="text-[clamp(1.25rem,4vw,2.5rem)] font-bold text-gray-800"
+            style="font-family: Verdana"
+          >
             <i class="fa-solid fa-bullhorn text-[#6A7337]"></i>
             Announcements
           </h1>
@@ -518,11 +520,7 @@
         <div class="p-6">
           <div class="flex justify-between items-start mb-4">
             <h3 id="popupTitle" class="text-3xl font-bold text-[#6A7337]"></h3>
-            <span
-              id="closePopup"
-              class="close-btn text-gray-500 hover:text-gray-700 text-2xl cursor-pointer"
-              >&times;</span
-            >
+            <span id="closePopup" class="close-btn">&times;</span>
           </div>
           <p id="popupDate" class="text-gray-500 text-sm mb-4"></p>
           <img

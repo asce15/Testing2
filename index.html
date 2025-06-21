@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome Page</title>
+    <link rel="stylesheet" href="./indextailwind.css" />
     <link
       rel="stylesheet"
-      href="./indextailwind.css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
     <link rel="website icon" href="BMA.png" />
   </head>
@@ -117,64 +118,97 @@
       ></div>
 
       <div
-        class="bg-white rounded-xl shadow-xl z-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto"
+        class="bg-white rounded-xl shadow-xl z-10 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
       >
+        <!-- Body -->
         <div
-          class="sticky top-0 bg-white p-4 border-b flex justify-between items-center"
+          class="overflow-y-auto px-8 py-6 flex-1 text-gray-700 text-[1rem] leading-relaxed space-y-6"
         >
-          <h3 class="text-xl font-bold text-[#6A7337]">Terms and Conditions</h3>
-          <button
-            onclick="hideTerms()"
-            class="text-gray-500 hover:text-gray-700"
-          >
-            <i class="fas fa-times"></i>
-          </button>
+          <!-- Main Title -->
+          <h3 class="text-3xl font-extrabold text-[#6A7337] mb-7">
+            Terms and Conditions
+          </h3>
+
+          <!-- Section -->
+          <div>
+            <h4
+              class="text-xl font-semibold text-[#6A7337] border-b-2 border-[#8A9A5B] pb-1 mb-3"
+            >
+              1. Acceptance of Terms
+            </h4>
+            <p>
+              By accessing and using this Community Portal, you accept and agree
+              to be bound by the terms and provisions of this agreement. In
+              addition, when using these particular services, you shall be
+              subject to any posted guidelines or rules applicable to such
+              services.
+            </p>
+          </div>
+
+          <!-- Section -->
+          <div>
+            <h4
+              class="text-xl font-semibold text-[#6A7337] border-b-2 border-[#8A9A5B] pb-1 mb-3"
+            >
+              2. Privacy Policy
+            </h4>
+            <p>
+              Your privacy is very important to us. We designed our Privacy
+              Policy to make important disclosures about how you can use our
+              services to share with others and how we collect and can use your
+              content and information.
+            </p>
+          </div>
+
+          <!-- Section -->
+          <div>
+            <h4
+              class="text-xl font-semibold text-[#6A7337] border-b-2 border-[#8A9A5B] pb-1 mb-3"
+            >
+              3. User Responsibilities
+            </h4>
+            <p>
+              As a user of the portal, you agree to provide accurate information
+              when registering and to keep this information updated. You are
+              responsible for maintaining the confidentiality of your account
+              and password.
+            </p>
+          </div>
+
+          <!-- Section -->
+          <div>
+            <h4
+              class="text-xl font-semibold text-[#6A7337] border-b-2 border-[#8A9A5B] pb-1 mb-3"
+            >
+              4. Prohibited Activities
+            </h4>
+            <p>
+              You may not access or use the portal for any purpose other than
+              that for which we make the portal available. Prohibited activities
+              include harassing, abusing, or harming another person.
+            </p>
+          </div>
+
+          <!-- Section -->
+          <div>
+            <h4
+              class="text-xl font-semibold text-[#6A7337] border-b-2 border-[#8A9A5B] pb-1 mb-3"
+            >
+              5. Changes to Terms
+            </h4>
+            <p>
+              We reserve the right to make changes to these terms at any time.
+              Your continued use of the portal following the posting of changes
+              will mean that you accept and agree to the changes.
+            </p>
+          </div>
         </div>
 
-        <div class="p-6">
-          <h4 class="font-bold text-lg mb-2">1. Acceptance of Terms</h4>
-          <p class="mb-4 text-gray-700">
-            By accessing and using this Community Portal, you accept and agree
-            to be bound by the terms and provisions of this agreement. In
-            addition, when using these particular services, you shall be subject
-            to any posted guidelines or rules applicable to such services.
-          </p>
-
-          <h4 class="font-bold text-lg mb-2">2. Privacy Policy</h4>
-          <p class="mb-4 text-gray-700">
-            Your privacy is very important to us. We designed our Privacy Policy
-            to make important disclosures about how you can use our services to
-            share with others and how we collect and can use your content and
-            information.
-          </p>
-
-          <h4 class="font-bold text-lg mb-2">3. User Responsibilities</h4>
-          <p class="mb-4 text-gray-700">
-            As a user of the portal, you agree to provide accurate information
-            when registering and to keep this information updated. You are
-            responsible for maintaining the confidentiality of your account and
-            password.
-          </p>
-
-          <h4 class="font-bold text-lg mb-2">4. Prohibited Activities</h4>
-          <p class="mb-4 text-gray-700">
-            You may not access or use the portal for any purpose other than that
-            for which we make the portal available. Prohibited activities
-            include harassing, abusing, or harming another person.
-          </p>
-
-          <h4 class="font-bold text-lg mb-2">5. Changes to Terms</h4>
-          <p class="mb-4 text-gray-700">
-            We reserve the right to make changes to these terms at any time.
-            Your continued use of the portal following the posting of changes
-            will mean that you accept and agree to the changes.
-          </p>
-        </div>
-
-        <div class="sticky bottom-0 bg-white p-4 border-t flex justify-end">
+        <!-- Footer Button Outside Scroll -->
+        <div class="bg-white p-6 border-t border-gray-200 flex justify-end">
           <button
             onclick="hideTerms()"
-            class="bg-[#8A9A5B] text-white px-6 py-2 rounded-lg hover:bg-[#6A7337] transition-colors"
+            class="bg-[#8A9A5B] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#6A7337] transition duration-200"
           >
             I Understand
           </button>
@@ -192,22 +226,12 @@
 
         // Update UI to show selected role
         document.querySelectorAll(".role-btn").forEach((btn) => {
-          btn.classList.remove(
-            "border-[#6A7337]",
-            "bg-[#DDE5B6]",
-            "text-[#4B5320]",
-            "hover:bg-[#DDE5B6]"
-          );
+          btn.classList.remove("selected-role");
           btn.classList.add("border-[#c1d682]");
         });
 
         event.currentTarget.classList.remove("border-[#c1d682]");
-        event.currentTarget.classList.add(
-          "border-[#6A7337]",
-          "bg-[#DDE5B6]",
-          "text-[#4B5320]",
-          "hover:bg-[#DDE5B6]"
-        );
+        event.currentTarget.classList.add("selected-role");
 
         updateContinueButton();
       }
@@ -246,11 +270,6 @@
 
       function redirectToLogin() {
         if (!selectedRole || !termsCheckbox.checked) return;
-
-        // Show loading state
-        continueBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
-        continueBtn.disabled = true;
 
         // Define the target pages
         const targetPages = {

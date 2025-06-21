@@ -13,6 +13,7 @@ body {
   animation: gradient 15s ease infinite;
   background-size: 400% 400%;
   background-attachment: fixed;
+  font-family: "Trebuchet MS", Verdana, sans-serif;
 }
 
 @keyframes gradient {
@@ -85,9 +86,16 @@ body {
   opacity: 1;
 }
 .overlay {
+  background-color: rgba(0, 0, 0, 0.5); /* lower alpha for lighter black */
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 0.3s ease;
 }
 .overlay.active {
   opacity: 1;
   pointer-events: auto;
+}
+
+.selected-role {
+  @apply border-[#6A7337] bg-[#DDE5B6] text-[#4B5320] hover:bg-[#DDE5B6];
 }

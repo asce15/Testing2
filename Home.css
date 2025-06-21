@@ -349,6 +349,10 @@ img[alt="dividerline"] {
   color: #888;
 }
 
+.post-text {
+  font-size: 14px;
+  color: #888;
+}
 .button-link {
   display: inline-block;
   padding: 10px 20px;
@@ -417,62 +421,18 @@ img[alt="dividerline"] {
   line-height: 1.5;
 }
 
-/* Popup Overlay */
 .popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 10000;
 }
-
-/* Popup Content Box */
 .popup-content {
-  background-color: #fff;
-  color: #333;
-  padding: 30px;
-  border-radius: 12px;
-  width: 60%;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-  position: relative;
+  animation: popupFadeIn 0.3s ease-out;
   text-align: left;
-}
-
-.popup-content h3 {
-  font-size: 24px;
-  font-weight: 700;
-  color: #6a7337; /* optional: change title color */
-}
-.popup-content #popupDate {
-  font-size: 16px;
-  font-weight: 400;
-  color: gray;
-  margin-bottom: 10px;
-}
-
-.popup-content p {
-  font-size: 16px;
-  font-weight: 400;
-  color: #333;
-  line-height: 1.6;
-}
-
-.popup-content img {
-  max-width: 100%;
-  height: auto;
-  margin: 25px auto;
-  display: block;
-  border-radius: 6px;
 }
 
 /* Close Button */
 .close-btn {
-  position: absolute;
   top: 12px;
   right: 20px;
   font-size: 28px;
@@ -587,28 +547,6 @@ img[alt="dividerline"] {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal; /* allow wrapping */
-  }
-
-  .popup-content {
-    max-width: 90%; /* almost full width */
-    width: 95vw; /* viewport width units for responsiveness */
-    padding: 20px;
-    max-height: 80vh; /* Limit height to 90% of viewport height */
-    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
-    box-sizing: border-box; /* Include padding in width/height calculation */
-    margin: 20px auto; /* Add margin to prevent sticking to top/bottom on small screens */
-    transform: translateY(0);
-  }
-  .popup-content h3 {
-    font-size: 20px;
-  }
-
-  .popup-content p {
-    font-size: 14px;
-  }
-
-  .popup-content img {
-    margin: 30px auto;
   }
 }
 

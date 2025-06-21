@@ -1,4 +1,8 @@
 @import "tailwindcss";
+
+body {
+  font-family: "Trebuchet MS", Verdana, sans-serif;
+}
 header a {
   text-decoration: none;
 }
