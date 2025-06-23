@@ -228,6 +228,28 @@ select#appointment-type {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
+select#opd-day {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select#doctor-day {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 /* Focus effect on appointment type dropdown */
 select#appointment-type:focus {
   outline: none;
@@ -266,6 +288,11 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 /* Form group flex container for label and input */

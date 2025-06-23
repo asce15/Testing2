@@ -88,6 +88,48 @@
               </select>
             </div>
 
+            <div class="form-group hidden" id="opd-day-group">
+              <label for="opd-day"
+                >Choose Day for OPD Check-up (9:00 AM - 3:00 PM):</label
+              >
+              <select id="opd-day" name="opd-day">
+                <option value="">-- Select Day --</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+              </select>
+            </div>
+
+            <div class="form-group hidden" id="doctor-day-group">
+              <div
+                class="mt-6 mb-3 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-md"
+              >
+                <div class="flex">
+                  <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-circle text-yellow-400"></i>
+                  </div>
+                  <div class="ml-3">
+                    <h3 class="text-sm font-medium text-yellow-800">
+                      Important Notice
+                    </h3>
+                    <div class="mt-2 text-sm text-yellow-700">
+                      <p>
+                        Medical Checkups with Doctor are limited for 20 patients
+                        only.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <label for="doctor-day"
+                >Choose Day for Doctor Check-up (- AM - - PM):</label
+              >
+              <select id="doctor-day" name="doctor-day">
+                <option value="">-- Select Day --</option>
+                <option value="monday">Wednesday</option>
+                <option value="tuesday">Thursday</option>
+              </select>
+            </div>
+
             <!-- Notes textarea for optional user input -->
             <div class="form-group">
               <label for="purpose"
@@ -98,7 +140,6 @@
                 name="purpose"
                 rows="3"
                 placeholder="Please describe your health concerns or any special requests..."
-                required
               ></textarea>
             </div>
           </div>
@@ -225,9 +266,10 @@
 
     <!-- JavaScript Section for modal handling and form validation -->
     <script>
+      // Fixed JavaScript for select day functionality
       function toggleMobileMenu(menu) {
-        menu.classList.toggle("open"); // toggles hamburger animation
-        document.querySelector(".mobile-menu").classList.toggle("open"); // toggles mobile menu display
+        menu.classList.toggle("open");
+        document.querySelector(".mobile-menu").classList.toggle("open");
       }
 
       // Get references to key DOM elements
@@ -244,32 +286,69 @@
       const closeNotificationBtn =
         document.getElementById("close-notification");
 
+      // FIXED: Appointment type and day selector logic
+      const appointmentTypeSelect = document.getElementById("appointment-type");
+      const opdDayGroup = document.getElementById("opd-day-group");
+      const opdDaySelect = document.getElementById("opd-day");
+      const doctorDayGroup = document.getElementById("doctor-day-group");
+      const doctorDaySelect = document.getElementById("doctor-day");
+
       let justOpenedTerms = false;
-      // Prevent checkbox checking unless terms are read (marked by data-read attribute)
+
+      // FIXED: Appointment type change handler
+      appointmentTypeSelect.addEventListener("change", function () {
+        const selectedValue = this.value;
+
+        // Show the day selector ONLY if "health-checkup-opd" is selected
+        if (selectedValue === "health-checkup-opd") {
+          opdDayGroup.classList.remove("hidden");
+          opdDaySelect.required = true; // Make day selection required
+        } else {
+          // Hide the day selector for ALL other options (including empty selection)
+          opdDayGroup.classList.add("hidden");
+          opdDaySelect.required = false; // Remove required attribute
+          opdDaySelect.value = ""; // Clear the selection
+        }
+
+        if (selectedValue === "health-checkup-doctor") {
+          doctorDayGroup.classList.remove("hidden");
+          doctorDaySelect.required = true;
+        } else {
+          doctorDayGroup.classList.add("hidden");
+          doctorDaySelect.required = false;
+          doctorDaySelect.value = "";
+        }
+      });
+
+      // Initialize the form state on page load
+      document.addEventListener("DOMContentLoaded", function () {
+        // Ensure the day selector is hidden initially
+        opdDayGroup.classList.add("hidden");
+        opdDaySelect.required = false;
+        opdDaySelect.value = "";
+      });
+
+      // Prevent checkbox checking unless terms are read
       checkbox.addEventListener("click", function (event) {
         const hasRead = termsLink.getAttribute("data-read") === "true";
 
-        // If terms modal was just opened, don't show the warning
         if (!hasRead && !justOpenedTerms) {
           event.preventDefault();
-
-          const modalMessage = notificationModal.querySelector("p");
           notificationModal.style.display = "block";
         }
 
-        // Reset the flag after a short delay
         setTimeout(() => {
           justOpenedTerms = false;
         }, 100);
       });
 
-      // Show Terms and Conditions modal when clicking on terms link
+      // Show Terms and Conditions modal
       termsLink.onclick = function () {
         justOpenedTerms = true;
         termsModal.style.display = "block";
       };
 
-      // Close terms modal and mark terms as read + check the checkbox
+      // Close terms modal and mark as read
       function closeTermsModal() {
         termsModal.style.display = "none";
         termsLink.setAttribute("data-read", "true");
@@ -277,7 +356,7 @@
       }
       closeTermsBtn.onclick = closeTermsModal;
 
-      // Close modals when clicking outside modal content
+      // Close modals when clicking outside
       window.onclick = function (event) {
         if (event.target === termsModal) {
           closeTermsModal();
@@ -288,37 +367,56 @@
         }
       };
 
-      // Close success modal when clicking close button
+      // Close modal handlers
       closeSuccessBtn.onclick = () => {
         successModal.style.display = "none";
       };
 
-      // Close notification modal when clicking close button
       closeNotificationBtn.onclick = () => {
         notificationModal.style.display = "none";
       };
 
-      // Form submission event handler
+      // ENHANCED: Form submission with day validation
       form.addEventListener("submit", function (event) {
-        // Check if terms have been read and checkbox is checked
+        event.preventDefault(); // Prevent default submission
+
         const hasRead = termsLink.getAttribute("data-read") === "true";
+        const appointmentType = appointmentTypeSelect.value;
+        const selectedDay = opdDaySelect.value;
 
+        // Check terms agreement
         if (!checkbox.checked || !hasRead) {
-          // Prevent form submit and show notification modal if terms not agreed
-          event.preventDefault();
           notificationModal.style.display = "block";
-
           const messageParagraph = notificationModal.querySelector("p");
           messageParagraph.textContent =
             "Please read the Terms and Conditions before submitting.";
           return;
         }
 
-        // Prevent actual form submission (for demo), show success modal instead
-        event.preventDefault();
+        // Check if OPD appointment type is selected but no day is chosen
+        if (appointmentType === "health-checkup-opd" && !selectedDay) {
+          notificationModal.style.display = "block";
+          const messageParagraph = notificationModal.querySelector("p");
+          messageParagraph.textContent =
+            "Please select a day for your OPD check-up appointment.";
+          return;
+        }
+
+        if (
+          appointmentType === "health-checkup-doctor" &&
+          !doctorDaySelect.value
+        ) {
+          notificationModal.style.display = "block";
+          const messageParagraph = notificationModal.querySelector("p");
+          messageParagraph.textContent =
+            "Please select a day for your Doctor check-up appointment.";
+          return;
+        }
+
+        // If all validations pass, show success modal
         successModal.style.display = "block";
 
-        // Reload page after 2 seconds to reset form and UI
+        // Reload page after 2 seconds
         setTimeout(() => {
           location.reload();
         }, 2000);
