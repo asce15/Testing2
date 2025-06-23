@@ -83,45 +83,141 @@
 
       <div class="info-layout">
         <!-- Left: Tables -->
-        <div class="table-container">
-          <div class="table-wrapper">
-            <div class="single-table">
-              <table class="info-table">
+        <div class="flex flex-col lg:flex-row gap-5 justify-center w-full px-4">
+          <!-- Single Table 1 -->
+          <div
+            class="w-full lg:w-1/2 bg-white p-5 lg:p-6 rounded-xl border-2 border-[#4b5320] shadow-lg"
+          >
+            <div class="overflow-x-auto">
+              <table
+                class="min-w-[600px] w-full table-auto border-collapse border border-black text-sm lg:text-base text-left text-gray-800"
+              >
                 <thead>
-                  <tr>
-                    <th>Service</th>
-                    <th>Availability</th>
+                  <tr class="bg-[#6a7337] text-white">
+                    <th class="p-3 lg:p-4 border-b border-black">Service</th>
+                    <th class="p-3 lg:p-4 border-b border-black">
+                      Availability
+                    </th>
+                    <th class="p-3 lg:p-4 border-b border-black">Time</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Medical Checkup</td>
-                    <td>Mon-Fri</td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Medical Checkup (OPD - Clinic set up)
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Monday – Tuesday
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      9:00 AM – 3:00 PM
+                    </td>
                   </tr>
                   <tr>
-                    <td>Vaccination</td>
-                    <td>Wed Only</td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Medical Checkup (Doctor)
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Wednesday – Thursday (20 patients max)
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      9:00 AM – 1:00 PM
+                    </td>
+                  </tr>
+                  <tr class="bg-gray-50">
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Baby Vaccination
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Wednesday Only
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      9:00 AM – 3:00 PM
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Pregnant Check-Up
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Thursday Only
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      9:00 AM – 3:00 PM
+                    </td>
+                  </tr>
+                  <tr>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Events
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      Friday
+                    </td>
+                    <td
+                      class="p-3 lg:p-4 border-b border-black whitespace-nowrap"
+                    >
+                      9:00 AM – 3:00 PM
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="single-table">
-              <table class="info-table">
+          </div>
+
+          <!-- Single Table 2 -->
+          <div
+            class="w-full lg:w-1/2 bg-white p-5 lg:p-6 rounded-xl border-2 border-[#4b5320] shadow-lg"
+          >
+            <div class="overflow-x-auto">
+              <table
+                class="min-w-[600px] w-full table-auto border-collapse border border-black text-sm lg:text-base text-left text-gray-800"
+              >
                 <thead>
-                  <tr>
-                    <th>Health Center Information</th>
+                  <tr class="bg-[#6a7337] text-white">
+                    <th class="p-3 lg:p-4 border-b border-black">
+                      Health Center Information
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>
-                      Clinic Hours: 8:00 AM - 5:00 PM
-                      <br /><br />
-                      Location: View on Map
-                      <br /><br />
-                      Contact: (123) 456-7890
-                      <br /><br />
-                      Staff: Doctor, Nurse, Midwife
+                    <td class="p-3 lg:p-4">
+                      Clinic Hours: 9:00 AM – 5:00 PM (Monday – Friday)<br /><br />
+                      Location: View on Map<br /><br />
+                      Contact: (123) 456-7890<br /><br />
+                      Staff: Doctor, Nurse, Midwife<br /><br />
+                      <i class="fa-solid fa-map-pin text-red-500 mr-2"></i
+                      >Midwife/Nurses available Monday – Tuesday<br />
+                      <i class="fa-solid fa-map-pin text-red-500 mr-2"></i
+                      >Doctors available Wednesday – Thursday
                     </td>
                   </tr>
                 </tbody>

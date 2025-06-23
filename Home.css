@@ -232,66 +232,6 @@ img[alt="dividerline"] {
   font-weight: bold;
 }
 
-.table-container {
-  display: flex;
-  gap: 20px; /* gap between the tables */
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.single-table {
-  margin-bottom: 20px; /* gap between tables */
-  border: 1px solid #4b5320;
-  border-radius: 8px;
-  overflow: hidden; /* for rounded corners on table */
-}
-
-.single-table:last-child {
-  margin-bottom: 0;
-}
-
-.table-wrapper {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  border: 2px solid #4b5320;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  box-sizing: border-box;
-  margin: 0;
-}
-
-.table-wrapper table {
-  border-collapse: collapse;
-  width: 100%; /* make table fill wrapper */
-}
-
-.info-table {
-  font-size: 16px;
-  background-color: #fff;
-  color: #333;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid black;
-  margin: 0;
-}
-
-.info-table th,
-.info-table td {
-  padding: 12px 15px;
-  border-bottom: 1px solid black;
-  text-align: left; /* Prevents line break */
-}
-
-.info-table th {
-  background-color: #6a7337;
-  color: white;
-}
-
-.info-table tr:last-child td {
-  border-bottom: none;
-}
-
 .info-layout {
   display: flex;
   gap: 30px;
