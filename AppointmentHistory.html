@@ -187,6 +187,12 @@
                   scope="col"
                   class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
+                  ID
+                </th>
+                <th
+                  scope="col"
+                  class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
                   Date & Time
                 </th>
                 <th
@@ -389,140 +395,140 @@
       // Sample appointment data
       const appointments = [
         {
-          id: 1,
+          id: "O-001",
           date: "2023-06-15",
           formattedDate: "June 15, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "completed",
         },
         {
-          id: 2,
+          id: "D-001",
           date: "2023-07-22",
           formattedDate: "July 22, 2023",
           purpose: " Medical Check-up (Doctor)",
           status: "completed",
         },
         {
-          id: 3,
+          id: "D-002",
           date: "2023-08-05",
           formattedDate: "August 5, 2023",
           purpose: "Medical Check-up (Doctor)",
           status: "completed",
         },
         {
-          id: 4,
+          id: "P-001",
           date: "2023-09-18",
           formattedDate: "September 18, 2023",
           purpose: "Pregnant Check up - Every Wednesday",
           status: "pending",
         },
         {
-          id: 5,
+          id: "D-003",
           date: "2023-10-10",
           formattedDate: "October 10, 2023",
           purpose: " Medical Check-up (Doctor)",
           status: "pending",
         },
         {
-          id: 6,
+          id: "P-002",
           date: "2023-05-12",
           formattedDate: "May 12, 2023",
           purpose: "Pregnant Check up - Every Wednesday",
           status: "pending",
         },
         {
-          id: 7,
+          id: "O-002",
           date: "2023-11-20",
           formattedDate: "November 20, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "pending",
         },
         {
-          id: 8,
+          id: "P-003",
           date: "2023-04-08",
           formattedDate: "April 8, 2023",
           purpose: "Pregnant Check up - Every Wednesday",
           status: "completed",
         },
         {
-          id: 9,
+          id: "O-003",
           date: "2023-08-30",
           formattedDate: "August 30, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "completed",
         },
         {
-          id: 10,
+          id: "V-001",
           date: "2023-12-15",
           formattedDate: "December 15, 2023",
           purpose: "Baby Vaccination - Every Thursday",
           status: "pending",
         },
         {
-          id: 11,
+          id: "O-004",
           date: "2023-06-15",
           formattedDate: "June 15, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "completed",
         },
         {
-          id: 12,
+          id: "P-004",
           date: "2023-07-22",
           formattedDate: "July 22, 2023",
           purpose: "Pregnant Check up - Every Wednesday",
           status: "completed",
         },
         {
-          id: 13,
+          id: "O-005",
           date: "2023-08-05",
           formattedDate: "August 5, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "completed",
         },
         {
-          id: 14,
+          id: "V-002",
           date: "2023-09-18",
           formattedDate: "September 18, 2023",
           purpose: "Baby Vaccination - Every Thursday",
           status: "pending",
         },
         {
-          id: 15,
+          id: "V-003",
           date: "2023-10-10",
           formattedDate: "October 10, 2023",
           purpose: "Baby Vaccination - Every Thursday",
           status: "pending",
         },
         {
-          id: 16,
+          id: "O-006",
           date: "2023-05-12",
           formattedDate: "May 12, 2023",
-          purpose: "Orthopedic Consultation",
+          purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "pending",
         },
         {
-          id: 17,
+          id: "V-004",
           date: "2023-11-20",
           formattedDate: "November 20, 2023",
           purpose: "Baby Vaccination - Every Thursday",
           status: "pending",
         },
         {
-          id: 18,
+          id: "O-007",
           date: "2023-04-08",
           formattedDate: "April 8, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
           status: "completed",
         },
         {
-          id: 19,
+          id: "V-005",
           date: "2023-08-30",
           formattedDate: "August 30, 2023",
           purpose: "Baby Vaccination - Every Thursday",
           status: "completed",
         },
         {
-          id: 20,
+          id: "O-008",
           date: "2023-12-15",
           formattedDate: "December 15, 2023",
           purpose: "Medical Check-up (OPD - Clinic Set up)",
@@ -701,7 +707,9 @@
 
           const [datePart, timePart] = appointment.formattedDate.split(" - ");
 
-          row.innerHTML = `
+          row.innerHTML = `    <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm text-gray-900 font-medium">${appointment.id}</div>
+    </td>
                           <td class="px-6 py-4 whitespace-nowrap">
                               <div class="text-sm text-gray-900 font-medium">${datePart}</div>
                           </td>
@@ -727,7 +735,7 @@
             // Ignore if click was on a button (those have their own handlers)
             if (e.target.tagName === "BUTTON") return;
 
-            const appointmentId = parseInt(row.dataset.id);
+            const appointmentId = row.dataset.id;
             showAppointmentDetails(appointmentId);
           });
         });
@@ -736,7 +744,7 @@
         document.querySelectorAll(".view-btn").forEach((btn) => {
           btn.addEventListener("click", (e) => {
             e.stopPropagation();
-            const appointmentId = parseInt(btn.dataset.id);
+            const appointmentId = row.dataset.id;
             showAppointmentDetails(appointmentId);
           });
         });
