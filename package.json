@@ -10,7 +10,8 @@
     "availmed": "npx @tailwindcss/cli -i ./AvailableMedicine.css -o ./AvailMedtailwind.css --watch",
     "appointform": "npx @tailwindcss/cli -i ./AppointmentForm.css -o ./AppointFormtailwind.css --watch",
     "appointhistory": "npx @tailwindcss/cli -i ./AppointmentHistory.css -o ./AppointHistorytaildwind.css --watch",
-    "moreannouncement": "npx @tailwindcss/cli -i ./MoreAnnouncement.css -o ./MoreAnnouncementtailwind.css --watch"
+    "moreannouncement": "npx @tailwindcss/cli -i ./MoreAnnouncement.css -o ./MoreAnnouncementtailwind.css --watch",
+    "adminlogin": "npx @tailwindcss/cli -i ./AdminLogin.css -o ./AdminLogintailwind.css --watch"
   },
   "author": "",
   "license": "ISC",

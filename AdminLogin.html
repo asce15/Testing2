@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./AdminLogintailwind.css" />
+    <link rel="website icon" href="BMA.png" />
+    <title>Barangay Market Area Health Information Hub</title>
+  </head>
+  <body>
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <div class="logo-container" id="branding">
+      <img src="BMA.png" alt="Barangay Market Logo" class="logo" />
+      <p class="logo-text">Barangay Market Area Health Information Hub</p>
+    </div>
+
+    <div class="login-box block mx-[25px] max-w-[400px]">
+      <!-- LOGIN FORM -->
+      <form id="login-form">
+        <h2 class="login-h2"><b>Admin Login</b></h2>
+        <input
+          type="text"
+          placeholder="Username"
+          id="login-username"
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          id="login-password"
+          required
+        />
+        <button type="submit" id="login-submit">Login</button>
+        <div class="signup-link">
+          Don't have an account? <a href="#" id="link-to-signup">Sign up</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="flex items-center justify-center">
+      <div
+        class="signup-box hidden mx-[25px] my-8 w-full max-w-[90%] md:max-w-[800px] xl:max-w-[1000px] max-h-[90vh] overflow-y-auto"
+      >
+        <h2 class="signup-h2"><b>Sign Up</b></h2>
+        <div class="stepper">
+          <div class="circle active" id="step-1-circle">1</div>
+          <div class="circle" id="step-2-circle">2</div>
+        </div>
+
+        <form id="step-1-form">
+          <div class="grid grid-cols-2 gap-4 grid-xs-1">
+            <div class="form-group">
+              <label for="name" class="required">Full Name</label>
+              <input type="text" id="name" placeholder="Full Name" required />
+            </div>
+
+            <div class="form-group">
+              <label for="username" class="required">Username</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password" class="required">Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="confirm-password" class="required"
+                >Confirm Password</label
+              >
+              <input
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm Password"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email" class="required">Email</label>
+              <input type="email" id="email" placeholder="Email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="contact" class="required">Contact Number</label>
+              <input
+                type="tel"
+                id="contact"
+                placeholder="11-digit Contact Number"
+                required
+                pattern="[0-9]{11}"
+              />
+            </div>
+          </div>
+
+          <div class="button-group right-button">
+            <button type="button" id="next-1">Next</button>
+          </div>
+        </form>
+
+        <form id="step-2-form" class="p-6">
+          <div class="flex justify-center">
+            <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+              <div class="form-group">
+                <label for="admin-code" class="required"
+                  >Admin Key/ Access Code</label
+                >
+                <input
+                  type="password"
+                  id="admin-code"
+                  placeholder="Admin Code"
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div class="button-group mt-4 flex justify-between">
+            <button type="button" id="back-2" class="back-button">Back</button>
+            <button type="button" id="submit">Submit</button>
+          </div>
+        </form>
+
+        <div class="signup-link" style="margin-top: 20px">
+          Already have an account? <a href="#" id="link-to-login">Login</a>
+        </div>
+      </div>
+    </div>
+
+    <div id="signupSuccessModal" class="modal">
+      <div class="modal-content">
+        <span class="close-btn" id="closeSuccess">&times;</span>
+        <div class="modal-text">
+          <img src="check.png" alt="Success Check" class="success-check" />
+          <h3 style="text-align: center">Signup Successful!</h3>
+          <p style="text-align: center">
+            Your account has been created. You can now log in.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const loginBox = document.querySelector(".login-box");
+      const signupContainer = document.querySelector(".signup-box");
+      const loginForm = document.getElementById("login-form");
+
+      const step1Form = document.getElementById("step-1-form");
+      const step2Form = document.getElementById("step-2-form");
+
+      const step1Circle = document.getElementById("step-1-circle");
+      const step2Circle = document.getElementById("step-2-circle");
+
+      const next1Btn = document.getElementById("next-1");
+      const back2Btn = document.getElementById("back-2");
+      const submitBtn = document.getElementById("submit");
+
+      const signupLink = document.getElementById("link-to-signup");
+      const backToLoginLink = document.getElementById("link-to-login");
+
+      // Toggle login/signup
+      signupLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginBox.classList.add("hidden");
+        loginBox.classList.remove("block");
+
+        signupContainer.classList.remove("hidden");
+        signupContainer.classList.add("block");
+        document.getElementById("branding").style.display = "none";
+        showStep(1);
+      });
+
+      backToLoginLink.addEventListener("click", (e) => {
+        e.preventDefault();
+        loginBox.classList.remove("hidden");
+        loginBox.classList.add("block");
+
+        signupContainer.classList.add("hidden");
+        signupContainer.classList.remove("block");
+        document.getElementById("branding").style.display = "block";
+      });
+
+      const stepperEl = document.querySelector(".stepper");
+
+      function showStep(step) {
+        step1Form.style.display = step === 1 ? "block" : "none";
+        step2Form.style.display = step === 2 ? "block" : "none";
+
+        [step1Circle, step2Circle].forEach((c, i) => {
+          c.classList.toggle("active", i < step);
+        });
+
+        const progress = step === 1 ? 0 : 0.5;
+        stepperEl.style.setProperty("--progress", progress);
+      }
+
+      // Basic field validation
+      function isValidContactNumber() {
+        const contact = document.getElementById("contact").value.trim();
+        const contactRegex = /^[0-9]{11}$/;
+        if (!contactRegex.test(contact)) {
+          alert("Contact number must be exactly 11 digits.");
+          return false;
+        }
+        return true;
+      }
+
+      function isValidUsername() {
+        const username = document.getElementById("username").value.trim();
+        const regex = /^(?=.*[A-Z])(?=.*\d).+$/;
+        if (!regex.test(username)) {
+          alert("Username must include one capital letter and one number.");
+          return false;
+        }
+        return true;
+      }
+
+      function isValidPassword() {
+        const password = document.getElementById("password").value;
+        const regex = /^(?=.*[0-9])(?=.*[\W_]).{8,}$/;
+        if (!regex.test(password)) {
+          alert(
+            "Password must be at least 8 characters and include a number and special character."
+          );
+          return false;
+        }
+        return true;
+      }
+
+      function validateStep1() {
+        const name = document.getElementById("name").value.trim();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+        const confirm = document.getElementById("confirm-password").value;
+        const email = document.getElementById("email").value.trim();
+        const contact = document.getElementById("contact").value.trim();
+
+        if (!name || !username || !password || !confirm || !email || !contact) {
+          alert("Please complete all fields.");
+          return false;
+        }
+
+        if (password !== confirm) {
+          alert("Passwords do not match.");
+          return false;
+        }
+
+        return isValidUsername() && isValidPassword() && isValidContactNumber();
+      }
+
+      next1Btn.addEventListener("click", () => {
+        if (validateStep1()) {
+          showStep(2);
+        }
+      });
+
+      back2Btn.addEventListener("click", () => showStep(1));
+
+      function redirectToLogin() {
+        step1Form.reset();
+        step2Form.reset();
+        showStep(1);
+        signupContainer.classList.add("hidden");
+        loginBox.classList.remove("hidden");
+        document.getElementById("branding").style.display = "block";
+      }
+
+      // Login validation
+      function validateLoginForm() {
+        const username = document.getElementById("login-username").value.trim();
+        const password = document.getElementById("login-password").value.trim();
+
+        const usernameRegex = /^(?=.*[A-Z])(?=.*\d).+$/;
+        const passwordRegex = /^(?=.*[0-9])(?=.*[\W_]).{8,}$/;
+
+        if (!usernameRegex.test(username)) {
+          alert("Username must have a capital letter and a number.");
+          return false;
+        }
+
+        if (!passwordRegex.test(password)) {
+          alert(
+            "Password must be at least 8 characters with a number and special character."
+          );
+          return false;
+        }
+
+        return true;
+      }
+      submitBtn.addEventListener("click", () => {
+        const adminCode = document.getElementById("admin-code").value.trim();
+
+        if (!adminCode) {
+          alert("Please enter the admin access code.");
+          return;
+        }
+
+        if (adminCode !== "HEALTHMARKETAREA") {
+          alert("Invalid Admin Code. Please enter the correct code.");
+          return;
+        }
+
+        // If valid, show modal and redirect
+        const modal = document.getElementById("signupSuccessModal");
+        const closeBtn = document.getElementById("closeSuccess");
+
+        modal.style.display = "block";
+
+        closeBtn.addEventListener("click", () => {
+          modal.style.display = "none";
+          redirectToLogin();
+        });
+
+        setTimeout(() => {
+          modal.style.display = "none";
+          redirectToLogin();
+        }, 2500);
+      });
+
+      loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (validateLoginForm()) {
+          window.location.href = "Home.html"; // Replace with actual page
+        }
+      });
+    </script>
+  </body>
+</html>
