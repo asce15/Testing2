@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Barangay Market Area Health Information Hub</title>
+    <link rel="stylesheet" href="./Residenttailwind.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="website icon" href="BMA.png" />
+  </head>
+
+  <body class="bg-gray-100 text-sm sm:text-base">
+    <div class="flex min-h-screen">
+      <!-- Sidebar with full height -->
+      <div
+        id="sidebar"
+        class="fixed inset-y-0 left-0 w-60 bg-gray-800 text-white flex-shrink-0 flex flex-col transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-40"
+      >
+        <!-- Header -->
+        <div
+          class="flex items-center justify-between p-4 border-b border-gray-700"
+        >
+          <span class="ml-3.5 font-semibold text-xm sm:text-sl leading-tight">
+            Brgy. Market Area<br />Health Information Hub
+          </span>
+
+          <!-- Sidebar close button (for mobile) -->
+          <button
+            id="closeSidebar"
+            class="md:hidden text-white hover:text-gray-300"
+          >
+            <i class="fas fa-times text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Menu -->
+        <div class="px-3 py-6 overflow-y-auto">
+          <h3 class="text-xs uppercase tracking-wider mb-3">Management</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="Dashboard.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-home text-xs"></i
+                ><span class="ml-2 text-sm">Dashboard</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Appointment.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-calendar-alt text-xs"></i
+                ><span class="ml-2 text-sm">Appointments</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Medicine.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-pills text-xs"></i
+                ><span class="ml-2 text-sm">Medicine</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Resident.html"
+                class="flex items-center p-2 font-bold bg-green-600 rounded-lg"
+                ><i class="fas fa-user text-xs"></i
+                ><span class="ml-2 text-sm">Residents</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Announcement.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-bullhorn text-xs"></i
+                ><span class="ml-2 text-sm">Announcements</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Settings.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-cog text-xs"></i
+                ><span class="ml-2 text-sm">Settings</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- End Sidebar -->
+
+      <!-- Main Section -->
+      <div class="flex flex-col h-screen w-full overflow-x-hidden bg-gray-100">
+        <!-- Top Bar - full width of the right side -->
+        <div
+          class="w-full bg-gradient-to-r from-gray-800 to-green-600 shadow p-3 sm:p-4 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Open sidebar button (mobile only) -->
+            <button id="openSidebar" class="md:hidden text-white">
+              <i class="fas fa-bars text-lg"></i>
+            </button>
+
+            <div
+              class="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center"
+            >
+              <img
+                src="BMA.png"
+                alt="Logo"
+                class="w-full h-full object-contain rounded-full"
+              />
+            </div>
+            <h1 class="text-base sm:text-xl font-bold text-white">
+              Residence Information Management
+            </h1>
+          </div>
+          <div class="text-white font-medium text-xs sm:text-base">
+            <span id="realTimeClock"></span>
+          </div>
+        </div>
+        <!-- End Top Bar -->
+
+        <!-- Main Content -->
+        <div class="p-6 lg:p-10 overflow-y-auto flex-1">
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Residents Section -->
+            <div class="lg:col-span-3 space-y-6">
+              <!-- Now full-width -->
+              <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                <!-- Section Header -->
+                <div
+                  class="bg-gradient-to-r from-[#1F2937] to-[#16A34A] px-10 py-4"
+                >
+                  <div class="flex justify-between items-center">
+                    <h2
+                      class="text-xl font-semibold text-white flex items-center"
+                    >
+                      <i class="fa-solid fa-user text-2xl mr-4"></i>
+                      Registered Accounts
+                    </h2>
+                  </div>
+                </div>
+                <!-- End Section Header -->
+
+                <!-- Inner Content -->
+                <div class="p-6 space-y-6">
+                  <!-- Archive Header Row -->
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+                  >
+                    <button
+                      id="showRecordBtn"
+                      onclick="handleRecordButtonClick()"
+                      class="w-full sm:w-auto bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                    >
+                      Show Record
+                    </button>
+                    <div
+                      class="text-sm text-gray-700 font-medium text-center sm:text-right"
+                    >
+                      Total Registered: <span id="registeredCount">0</span>
+                    </div>
+                  </div>
+                  <!-- End Archive Header Row -->
+
+                  <!-- Registered Accounts Archive Section (inside container) -->
+                  <div id="showRecord" class="mt-4 hidden">
+                    <!-- Search Bar -->
+                    <div>
+                      <input
+                        type="text"
+                        id="searchInput"
+                        onkeyup="searchResidents()"
+                        placeholder="Search by Full Name..."
+                        class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+                      />
+                    </div>
+                    <!-- End Search Bar -->
+                    <div class="bg-white rounded-xl shadow-md p-6 space-y-6">
+                      <h3 class="text-lg font-semibold text-gray-700">
+                        Registered Accounts Records
+                      </h3>
+
+                      <!-- Registered Accounts Table -->
+                      <div class="overflow-x-auto">
+                        <table
+                          id="registeredTable"
+                          class="min-w-full border border-gray-200 rounded"
+                        >
+                          <thead class="bg-gray-100">
+                            <tr
+                              class="text-left text-sm font-medium text-gray-600"
+                            >
+                              <th class="py-2 px-4 border-b">Full Name</th>
+                              <th class="py-2 px-4 border-b">Email</th>
+                              <th class="py-2 px-4 border-b">Username</th>
+                            </tr>
+                          </thead>
+                          <tbody id="registeredTableBody">
+                            <!-- Data will be populated by JavaScript -->
+                          </tbody>
+                        </table>
+                      </div>
+                      <!-- End Registered Accounts Table -->
+                    </div>
+                    <!-- End bg-white rounded-xl shadow-md -->
+                    <!-- Pagination Controls -->
+                    <div
+                      id="paginationControls"
+                      class="flex justify-center mt-4 gap-2 text-sm font-medium"
+                    >
+                      <!-- Buttons will be injected here by JavaScript -->
+                    </div>
+                  </div>
+                  <!-- End Section -->
+                </div>
+                <!-- End Inner Content -->
+              </div>
+              <!-- End bg-white rounded-xl shadow-sm -->
+            </div>
+            <!-- End Residents Section -->
+          </div>
+          <!-- End grid -->
+        </div>
+        <!-- End Main Content -->
+
+        <div
+          id="passwordModal"
+          class="fixed inset-0 bg-black/70 items-center justify-center z-50 hidden transition-opacity duration-300 px-4 sm:px-0"
+        >
+          <div
+            class="bg-white w-full max-w-sm sm:max-w-md md:max-w-lg p-6 sm:p-8 rounded-xl shadow-2xl relative"
+          >
+            <!-- Close Button -->
+            <button
+              onclick="closePasswordModal()"
+              class="absolute top-3 right-4 text-gray-400 hover:text-gray-500"
+            >
+              <i class="fas fa-times text-lg"></i>
+            </button>
+
+            <h2
+              class="text-lg font-bold text-gray-800 mb-4 border-b pb-2 flex items-center gap-2"
+            >
+              <i class="fa-solid fa-lock"></i>
+              Admin Verification
+            </h2>
+
+            <p class="text-sm text-gray-600 mb-2">
+              Enter admin password to proceed:
+            </p>
+
+            <input
+              type="password"
+              id="adminPasswordInput"
+              class="w-full border border-gray-300 p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter password"
+            />
+            <p id="passwordError" class="text-red-500 text-xs mt-2 hidden">
+              Incorrect password. Please try again.
+            </p>
+
+            <div class="mt-4 flex flex-col sm:flex-row justify-end gap-2">
+              <button
+                onclick="closePasswordModal()"
+                class="w-full sm:w-auto px-4 py-2 text-sm bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Cancel
+              </button>
+              <button
+                onclick="verifyPassword()"
+                class="w-full sm:w-auto px-4 py-2 text-sm bg-green-600 text-white rounded hover:bg-green-700"
+              >
+                Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          id="residentModal"
+          class="fixed inset-0 bg-black/70 items-center justify-center z-50 hidden transition-opacity duration-300 px-4 sm:px-6"
+        >
+          <div
+            class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-screen overflow-hidden relative animate-fade-in"
+          >
+            <!-- Scrollable Content Wrapper -->
+            <div class="p-6 sm:p-8 overflow-y-auto max-h-[90vh]">
+              <!-- Close Button -->
+              <button
+                onclick="closeModal()"
+                class="absolute top-3 right-3 text-gray-400 hover:text-gray-500 transition-colors z-10"
+                aria-label="Close Modal"
+              >
+                <i class="fas fa-times text-lg"></i>
+              </button>
+
+              <!-- Modal Header -->
+              <h2
+                class="text-xl sm:text-2xl font-bold text-gray-800 mb-4 sm:mb-6 border-b pb-2 flex items-center gap-2"
+              >
+                <i class="fa-solid fa-circle-user"></i>
+                Resident Details
+              </h2>
+
+              <!-- Resident Info Grid -->
+              <div
+                class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 sm:gap-y-4 text-sm sm:text-base text-gray-700"
+              >
+                <p>
+                  <span class="font-medium">Full Name:</span>
+                  <span id="modalFullName"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Age:</span>
+                  <span id="modalAge"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Birthday:</span>
+                  <span id="modalBirthday"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Sex:</span>
+                  <span id="modalSex"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Civil Status:</span>
+                  <span id="modalCivilStatus"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Nationality:</span>
+                  <span id="modalNationality"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Religion:</span>
+                  <span id="modalReligion"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Address:</span>
+                  <span id="modalAddress"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Contact #:</span>
+                  <span id="modalContact"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Email:</span>
+                  <span id="modalEmail"></span>
+                </p>
+                <p>
+                  <span class="font-medium">Username:</span>
+                  <span id="modalUsername"></span>
+                </p>
+                <!-- You can add more fields here as needed -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Modal -->
+      </div>
+      <!-- End Main Section -->
+    </div>
+    <!-- End flex min-h-screen -->
+
+    <script>
+      // Resident data stored in JavaScript
+      const residentsData = [
+        {
+          fullname: "France Justine Evangelista",
+          age: "26",
+          birthday: "1998-04-20",
+          sex: "Male",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Christian",
+          address: "Brgy. Market Area",
+          contact: "09170111222",
+          email: "france.evangelista@example.com",
+          username: "fevangelista",
+        },
+        {
+          fullname: "Ronald Allan Evasco",
+          age: "34",
+          birthday: "1990-09-12",
+          sex: "Male",
+          civilstatus: "Married",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170222333",
+          email: "ronald.evasco@example.com",
+          username: "revasco",
+        },
+        {
+          fullname: "Kert Daryl Macalinao",
+          age: "22",
+          birthday: "2002-06-21",
+          sex: "Male",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170333444",
+          email: "kert.macalinao@example.com",
+          username: "kdmacalinao",
+        },
+        {
+          fullname: "Nash Dave Mendo",
+          age: "25",
+          birthday: "1999-11-05",
+          sex: "Male",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Christian",
+          address: "Brgy. Market Area",
+          contact: "09170444555",
+          email: "nash.mendo@example.com",
+          username: "nmendo",
+        },
+        {
+          fullname: "Matt Clyde Cabral",
+          age: "28",
+          birthday: "1996-02-18",
+          sex: "Male",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170555666",
+          email: "matt.cabral@example.com",
+          username: "mcabral",
+        },
+        {
+          fullname: "John Errold Satsatin",
+          age: "30",
+          birthday: "1994-01-07",
+          sex: "Male",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170666777",
+          email: "john.satsatin@example.com",
+          username: "jsatsatin",
+        },
+        {
+          fullname: "Maria Elena Cruz",
+          age: "29",
+          birthday: "1995-03-15",
+          sex: "Female",
+          civilstatus: "Married",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170777888",
+          email: "maria.cruz@example.com",
+          username: "mcruz",
+        },
+        {
+          fullname: "Ana Rose Santos",
+          age: "24",
+          birthday: "2000-08-12",
+          sex: "Female",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Christian",
+          address: "Brgy. Market Area",
+          contact: "09170888999",
+          email: "ana.santos@example.com",
+          username: "asantos",
+        },
+        {
+          fullname: "Jose Miguel Torres",
+          age: "35",
+          birthday: "1989-12-03",
+          sex: "Male",
+          civilstatus: "Married",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170999000",
+          email: "jose.torres@example.com",
+          username: "jtorres",
+        },
+        {
+          fullname: "Carmen Isabel Reyes",
+          age: "27",
+          birthday: "1997-07-08",
+          sex: "Female",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170000111",
+          email: "carmen.reyes@example.com",
+          username: "creyes",
+        },
+        {
+          fullname: "Carmen Isabel Reyes",
+          age: "27",
+          birthday: "1997-07-08",
+          sex: "Female",
+          civilstatus: "Single",
+          nationality: "Filipino",
+          religion: "Catholic",
+          address: "Brgy. Market Area",
+          contact: "09170000111",
+          email: "carmen.reyes@example.com",
+          username: "creyes",
+        },
+      ];
+
+      let filteredResidents = [...residentsData];
+      let showingRecords = false;
+      let selectedResidentRow = null;
+
+      // Function to populate table with resident data
+      function populateTable() {
+        const tbody = document.getElementById("registeredTableBody");
+        tbody.innerHTML = "";
+
+        filteredResidents.forEach((resident, index) => {
+          const row = document.createElement("tr");
+          row.className = "cursor-pointer hover:bg-gray-100";
+          row.onclick = function () {
+            openModal(resident);
+          };
+
+          row.innerHTML = `
+            <td class="py-2 px-4 ">${resident.fullname}</td>
+            <td class="py-2 px-4 ">${resident.email}</td>
+            <td class="py-2 px-4 ">${resident.username}</td>
+          `;
+
+          tbody.appendChild(row);
+        });
+
+        updateRegisteredCount();
+        paginateTable();
+      }
+
+      // Improved search function that respects letter order, spaces, and special characters
+      function searchResidents() {
+        const searchTerm = document.getElementById("searchInput").value.trim();
+
+        if (searchTerm === "") {
+          filteredResidents = [...residentsData];
+        } else {
+          filteredResidents = residentsData.filter((resident) => {
+            return matchesSearch(resident.fullname, searchTerm);
+          });
+        }
+
+        currentPage = 1; // Reset to first page
+        populateTable();
+      }
+
+      // Advanced search matching function
+      function matchesSearch(fullName, searchTerm) {
+        // Convert both to lowercase for case-insensitive comparison
+        const name = fullName.toLowerCase();
+        const search = searchTerm.toLowerCase();
+
+        // Simple contains check (existing functionality)
+        if (name.includes(search)) {
+          return true;
+        }
+
+        // Check if search term matches the beginning of any word
+        const nameWords = name.split(/\s+/);
+        for (let word of nameWords) {
+          if (word.startsWith(search)) {
+            return true;
+          }
+        }
+
+        // Check for sequential character matching (respecting order)
+        let searchIndex = 0;
+        for (let i = 0; i < name.length && searchIndex < search.length; i++) {
+          if (name[i] === search[searchIndex]) {
+            searchIndex++;
+          }
+        }
+
+        // If we've matched all characters in order, it's a match
+        if (searchIndex === search.length) {
+          return true;
+        }
+
+        // Check for initials matching (e.g., "fje" matches "France Justine Evangelista")
+        const initials = nameWords.map((word) => word[0]).join("");
+        if (initials.includes(search)) {
+          return true;
+        }
+
+        return false;
+      }
+
+      function handleRecordButtonClick() {
+        if (!showingRecords) {
+          // Ask for password only when trying to show
+          openPasswordModal();
+        } else {
+          // Hide without password
+          showingRecords = false;
+          toggleRecord(false);
+        }
+      }
+
+      function openPasswordModal() {
+        document.getElementById("adminPasswordInput").value = "";
+        document.getElementById("passwordError").classList.add("hidden");
+
+        const modal = document.getElementById("passwordModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex"); // Only add flex when showing
+      }
+
+      function openModal(resident) {
+        selectedResidentRow = resident;
+        document.getElementById("adminPasswordInput").value = "";
+        document.getElementById("passwordError").classList.add("hidden");
+        document.getElementById("passwordModal").classList.remove("hidden");
+      }
+      function closePasswordModal() {
+        const modal = document.getElementById("passwordModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex"); // Remove flex when hiding
+
+        selectedResidentRow = null;
+      }
+
+      function verifyPassword() {
+        const password = document
+          .getElementById("adminPasswordInput")
+          .value.trim();
+
+        if (password !== "") {
+          // Proceed even if any password is entered (for now)
+          document.getElementById("passwordModal").classList.add("hidden");
+
+          if (selectedResidentRow) {
+            // If this came from clicking a resident row
+            showResidentModal(selectedResidentRow);
+            selectedResidentRow = null;
+          } else {
+            // If this came from clicking the "Show Record" button
+            showingRecords = true;
+            toggleRecord(true);
+          }
+        } else {
+          document.getElementById("passwordError").classList.remove("hidden");
+        }
+      }
+
+      function showResidentModal(resident) {
+        document.getElementById("modalFullName").textContent =
+          resident.fullname;
+        document.getElementById("modalAge").textContent = resident.age;
+        document.getElementById("modalBirthday").textContent =
+          resident.birthday;
+        document.getElementById("modalSex").textContent = resident.sex;
+        document.getElementById("modalCivilStatus").textContent =
+          resident.civilstatus;
+        document.getElementById("modalNationality").textContent =
+          resident.nationality;
+        document.getElementById("modalReligion").textContent =
+          resident.religion;
+        document.getElementById("modalAddress").textContent = resident.address;
+        document.getElementById("modalContact").textContent = resident.contact;
+        document.getElementById("modalEmail").textContent = resident.email;
+        document.getElementById("modalUsername").textContent =
+          resident.username;
+
+        const modal = document.getElementById("residentModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("residentModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      function toggleRecord(forceShow = false) {
+        const archive = document.getElementById("showRecord");
+        const btn = document.getElementById("showRecordBtn");
+
+        if (forceShow) {
+          archive.classList.remove("hidden");
+          if (btn) btn.textContent = "Hide Record";
+          populateTable(); // Populate table when showing
+        } else {
+          archive.classList.add("hidden");
+          if (btn) btn.textContent = "Show Record";
+        }
+      }
+
+      const rowsPerPage = 10;
+      let currentPage = 1;
+
+      function paginateTable() {
+        const table = document.getElementById("registeredTable");
+        const rows = table.querySelectorAll("tbody tr");
+        const totalRows = rows.length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+
+        rows.forEach((row, index) => {
+          row.style.display =
+            index >= (currentPage - 1) * rowsPerPage &&
+            index < currentPage * rowsPerPage
+              ? ""
+              : "none";
+        });
+
+        renderPaginationButtons(totalPages);
+      }
+
+      function renderPaginationButtons(totalPages) {
+        const pagination = document.getElementById("paginationControls");
+        pagination.innerHTML = "";
+
+        if (totalPages <= 1) return;
+
+        // First button
+        const firstBtn = document.createElement("button");
+        firstBtn.textContent = "First";
+        firstBtn.className = buttonClass();
+        firstBtn.onclick = () => {
+          currentPage = 1;
+          paginateTable();
+        };
+        pagination.appendChild(firstBtn);
+
+        // Numbered page buttons
+        const maxVisible = 3;
+        let start = Math.max(1, currentPage - 1);
+        let end = Math.min(totalPages, start + maxVisible - 1);
+        if (end - start < maxVisible - 1) {
+          start = Math.max(1, end - maxVisible + 1);
+        }
+
+        for (let i = start; i <= end; i++) {
+          const btn = document.createElement("button");
+          btn.textContent = i;
+          btn.className = i === currentPage ? buttonClass(true) : buttonClass();
+          btn.onclick = () => {
+            currentPage = i;
+            paginateTable();
+          };
+          pagination.appendChild(btn);
+        }
+
+        // Last button
+        const lastBtn = document.createElement("button");
+        lastBtn.textContent = "Last";
+        lastBtn.className = buttonClass();
+        lastBtn.onclick = () => {
+          currentPage = totalPages;
+          paginateTable();
+        };
+        pagination.appendChild(lastBtn);
+      }
+
+      function buttonClass(active = false) {
+        return `px-4 py-2 rounded ${
+          active
+            ? "bg-green-600 text-white"
+            : "bg-gray-200 text-gray-700 hover:bg-green-500 hover:text-white"
+        }`;
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        };
+        document.getElementById("realTimeClock").textContent =
+          now.toLocaleTimeString("en-US", options);
+      }
+
+      function updateRegisteredCount() {
+        const count = filteredResidents.length;
+
+        // Update the local display
+        const countDisplay = document.getElementById("registeredCount");
+        if (countDisplay) {
+          countDisplay.textContent = count;
+        }
+
+        // Update the admin dashboard count with total residents (not filtered)
+        const totalCount = residentsData.length;
+        // Note: localStorage is not available in Claude artifacts, but keeping for reference
+        try {
+          if (typeof Storage !== "undefined") {
+            localStorage.setItem("registeredAccountsCount", totalCount);
+            console.log(
+              "Registered accounts updated in localStorage:",
+              totalCount
+            );
+          }
+        } catch (e) {
+          console.log("LocalStorage not available:", e.message);
+        }
+      }
+
+      // Sidebar functionality
+      const sidebar = document.getElementById("sidebar");
+      const openSidebar = document.getElementById("openSidebar");
+      const closeSidebar = document.getElementById("closeSidebar");
+
+      openSidebar?.addEventListener("click", () => {
+        sidebar.classList.remove("-translate-x-full");
+      });
+
+      closeSidebar?.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+      });
+
+      // Initialize on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+        updateRegisteredCount();
+      });
+    </script>
+  </body>
+</html>

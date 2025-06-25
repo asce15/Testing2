@@ -76,26 +76,64 @@ body {
   }
 }
 
-.modal {
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  transform: scale(0.9);
-  opacity: 0;
-}
-.modal.active {
-  transform: scale(1);
-  opacity: 1;
-}
-.overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* lower alpha for lighter black */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.overlay.active {
-  opacity: 1;
-  pointer-events: auto;
+.selected-role {
+  background-color: #dde5b6 !important;
+  border-color: #6a7337 !important;
+  color: #4b5320 !important;
 }
 
-.selected-role {
-  @apply border-[#6A7337] bg-[#DDE5B6] text-[#4B5320] hover:bg-[#DDE5B6];
+.modal-enter {
+  animation: modalEnter 0.3s ease-out forwards;
+}
+
+.modal-exit {
+  animation: modalExit 0.3s ease-in forwards;
+}
+
+.overlay-enter {
+  animation: overlayEnter 0.3s ease-out forwards;
+}
+
+.overlay-exit {
+  animation: overlayExit 0.3s ease-in forwards;
+}
+
+@keyframes modalEnter {
+  from {
+    opacity: 0;
+    transform: scale(0.7) translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes modalExit {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.7) translateY(-50px);
+  }
+}
+
+@keyframes overlayEnter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes overlayExit {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }

@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Barangay Market Area Health Information Hub</title>
+    <link rel="stylesheet" href="./Appointmenttailwind.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="website icon" href="BMA.png" />
+  </head>
+  <body class="bg-gray-100 text-sm sm:text-base">
+    <div class="flex min-h-screen">
+      <!-- Responsive Sidebar -->
+      <!-- Sidebar with full height -->
+      <div
+        id="sidebar"
+        class="fixed inset-y-0 left-0 w-60 bg-gray-800 text-white flex-shrink-0 flex-col transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-40"
+      >
+        <!-- Header -->
+        <div
+          class="flex items-center justify-between p-4 border-b border-gray-700"
+        >
+          <span class="ml-3.5 font-semibold text-xm sm:text-sl leading-tight">
+            Brgy. Market Area<br />Health Information Hub
+          </span>
+
+          <!-- Sidebar close button (for mobile) -->
+          <button
+            id="closeSidebar"
+            class="md:hidden text-white hover:text-gray-300"
+          >
+            <i class="fas fa-times text-lg"></i>
+          </button>
+        </div>
+
+        <!-- Menu -->
+        <div class="px-3 py-6 overflow-y-auto">
+          <h3 class="text-xs uppercase tracking-wider mb-3">Management</h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="Dashboard.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-home text-xs"></i
+                ><span class="ml-2 text-sm">Dashboard</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Appointment.html"
+                class="flex items-center p-2 font-bold bg-green-600 rounded-lg"
+                ><i class="fas fa-calendar-alt text-xs"></i
+                ><span class="ml-2 text-sm">Appointments</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Medicine.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-pills text-xs"></i
+                ><span class="ml-2 text-sm">Medicine</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Resident.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-user text-xs"></i
+                ><span class="ml-2 text-sm">Residents</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Announcement.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-bullhorn text-xs"></i
+                ><span class="ml-2 text-sm">Announcements</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="Settings.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+                ><i class="fas fa-gear text-xs"></i
+                ><span class="ml-2 text-sm">Settings</span></a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex flex-col h-screen w-full overflow-x-hidden">
+        <!-- Top Bar - full width of the right side -->
+        <div
+          class="w-full bg-gradient-to-r from-gray-800 to-green-600 shadow p-3 sm:p-4 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-2 sm:gap-3">
+            <!-- Open sidebar button (mobile only) -->
+            <button id="openSidebar" class="md:hidden text-white">
+              <i class="fas fa-bars text-lg"></i>
+            </button>
+
+            <div
+              class="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center"
+            >
+              <img
+                src="BMA.png"
+                alt="Logo"
+                class="w-full h-full object-contain rounded-full"
+              />
+            </div>
+            <h1 class="text-base sm:text-xl font-bold text-white">
+              Appointments Management
+            </h1>
+          </div>
+          <div class="text-white font-medium text-xs sm:text-base">
+            <span id="realTimeClock"></span>
+          </div>
+        </div>
+        <!-- Main Content-->
+
+        <div class="container mx-auto px-4 py-8 overflow-y-auto flex-1">
+          <!-- Stats Cards -->
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          >
+            <!-- Total Appointments -->
+            <div
+              class="bg-white rounded-xl shadow flex border-l-4 border-blue-500 p-5 items-center justify-between transition duration-300 hover:shadow-lg"
+            >
+              <div>
+                <p class="text-gray-500 text-sm font-medium">
+                  Total Appointments
+                </p>
+                <h2
+                  class="text-2xl font-bold text-gray-800"
+                  id="total-appointments"
+                >
+                  0
+                </h2>
+              </div>
+              <div
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-blue-100"
+              >
+                <i class="fas fa-calendar-check text-blue-500 text-xl"></i>
+              </div>
+            </div>
+
+            <!-- Pending -->
+            <div
+              class="bg-white rounded-xl shadow flex border-l-4 border-yellow-500 p-5 items-center justify-between transition duration-300 hover:shadow-lg"
+            >
+              <div>
+                <p class="text-gray-500 text-sm font-medium">Pending</p>
+                <h2
+                  class="text-2xl font-bold text-gray-800"
+                  id="Pending-appointments"
+                >
+                  0
+                </h2>
+              </div>
+              <div
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-100"
+              >
+                <i class="fas fa-clock text-yellow-500 text-xl"></i>
+              </div>
+            </div>
+
+            <!-- Completed -->
+            <div
+              class="bg-white rounded-xl shadow flex border-l-4 border-green-500 p-5 items-center justify-between transition duration-300 hover:shadow-lg"
+            >
+              <div>
+                <p class="text-gray-500 text-sm font-medium">Completed</p>
+                <h2
+                  class="text-2xl font-bold text-gray-800"
+                  id="Completed-appointments"
+                >
+                  0
+                </h2>
+              </div>
+              <div
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-green-100"
+              >
+                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+              </div>
+            </div>
+
+            <!-- Cancelled -->
+            <div
+              class="bg-white rounded-xl shadow flex border-l-4 border-red-500 p-5 items-center justify-between transition duration-300 hover:shadow-lg"
+            >
+              <div>
+                <p class="text-gray-500 text-sm font-medium">Cancelled</p>
+                <h2
+                  class="text-2xl font-bold text-gray-800"
+                  id="Cancelled-appointments"
+                >
+                  0
+                </h2>
+              </div>
+              <div
+                class="w-12 h-12 flex items-center justify-center rounded-full bg-red-100"
+              >
+                <i class="fas fa-times-circle text-red-500 text-xl"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+            <div
+              class="bg-gradient-to-r from-[#1F2937] to-[#16A34A] px-10 py-4"
+            >
+              <div class="flex justify-between items-center">
+                <h2
+                  class="text-xl font-semibold text-white flex items-center gap-4"
+                >
+                  <i class="fa-solid fa-calendar-check text-3xl"></i>
+                  <span> Appointments - <span id="live-date"></span> </span>
+                </h2>
+              </div>
+            </div>
+
+            <div class="border-b border-gray-200">
+              <nav class="flex flex-col sm:flex-row">
+                <button
+                  class="tab-btn py-4 px-6 text-center border-b-2 font-medium"
+                  data-tab="opd"
+                >
+                  <i class="fas fa-hospital mr-2"></i> Health Checkup - OPD
+                </button>
+                <button
+                  class="tab-btn py-4 px-6 text-center border-b-2 font-medium text-gray-500 hover:text-gray-700 border-transparent hover:border-gray-300"
+                  data-tab="doctors"
+                >
+                  <i class="fas fa-user-md mr-2"></i> Health Checkup (Doctors)
+                </button>
+                <button
+                  class="tab-btn py-4 px-6 text-center border-b-2 font-medium text-gray-500 hover:text-gray-700 border-transparent hover:border-gray-300"
+                  data-tab="pregnant"
+                >
+                  <i class="fas fa-female mr-2"></i> Pregnant Checkup
+                </button>
+                <button
+                  class="tab-btn py-4 px-6 text-center border-b-2 font-medium text-gray-500 hover:text-gray-700 border-transparent hover:border-gray-300"
+                  data-tab="vaccination"
+                >
+                  <i class="fas fa-baby mr-2"></i> Baby Vaccination
+                </button>
+              </nav>
+            </div>
+
+            <div class="mb-6 bg-white p-6 rounded-lg shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h3
+                  class="text-lg font-semibold text-gray-900 flex items-center"
+                >
+                  <i class="fas fa-filter mr-2 text-grey-500"></i> Filters
+                </h3>
+                <button
+                  id="clearFilterBtn"
+                  class="inline-flex items-center px-4 py-2 bg-gray-500 text-white text-sm font-medium rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200"
+                  style="display: none"
+                >
+                  <i class="fas fa-times mr-2 text-white"></i>
+                  Clear Filters
+                </button>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    ><i class="fas fa-search mr-1 text-gray-500"></i>
+                    Search</label
+                  >
+                  <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search names..."
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    ><i class="fas fa-calendar-alt mr-1 text-gray-500"></i> From
+                    Date</label
+                  >
+                  <input
+                    type="date"
+                    id="fromDate"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    ><i class="fas fa-calendar-alt mr-1 text-gray-500"></i> To
+                    Date</label
+                  >
+                  <input
+                    type="date"
+                    id="toDate"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1"
+                    ><i class="fas fa-info-circle mr-1 text-gray-500"></i>
+                    Status</label
+                  >
+                  <select
+                    id="statusFilter"
+                    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">All Appointments</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tab Contents -->
+            <div class="p-6">
+              <!-- OPD Tab Content -->
+              <div id="opd" class="tab-content active overflow">
+                <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-semibold text-gray-800">
+                    Health Check-up - OPD Appointments
+                  </h2>
+                </div>
+                <div class="overflow-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Patient
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-gray-200 overflow-x-auto"
+                      id="opd-appointments"
+                    >
+                      <!-- Data will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  id="opd-pagination"
+                  class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 mt-6 px-4 overflow-x-auto"
+                ></div>
+              </div>
+
+              <!-- Doctors Tab Content -->
+              <div id="doctors" class="tab-content">
+                <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-semibold text-gray-800">
+                    Health Check-up (Doctors) Appointments
+                  </h2>
+                </div>
+                <div class="overflow-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Patient
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-gray-200"
+                      id="doctors-appointments"
+                    >
+                      <!-- Data will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  id="doctors-pagination"
+                  class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 mt-6 px-4 overflow-x-auto"
+                ></div>
+              </div>
+
+              <!-- Pregnant Tab Content -->
+              <div id="pregnant" class="tab-content">
+                <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-semibold text-gray-800">
+                    Pregnant Checkup Appointments
+                  </h2>
+                </div>
+                <div class="overflow-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Patient
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-gray-200"
+                      id="pregnant-appointments"
+                    >
+                      <!-- Data will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  id="pregnant-pagination"
+                  class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 mt-6 px-4 overflow-x-auto"
+                ></div>
+              </div>
+
+              <!-- Vaccination Tab Content -->
+              <div id="vaccination" class="tab-content">
+                <div class="flex justify-between items-center mb-6">
+                  <h2 class="text-xl font-semibold text-gray-800">
+                    Baby Vaccination Appointments
+                  </h2>
+                </div>
+                <div class="overflow-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Patient
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                        <th
+                          class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-gray-200"
+                      id="vaccination-appointments"
+                    >
+                      <!-- Data will be loaded here -->
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  id="vaccination-pagination"
+                  class="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2 sm:gap-4 mt-6 px-4 overflow-x-auto"
+                ></div>
+              </div>
+            </div>
+
+            <!-- Patient Modal -->
+            <div
+              id="patientModal"
+              class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50"
+            >
+              <div
+                class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 p-7 relative border border-gray-200"
+              >
+                <!-- Close Button -->
+                <button
+                  onclick="closePatientModal()"
+                  class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 transition"
+                  aria-label="Close"
+                >
+                  <i class="fas fa-times text-lg"></i>
+                </button>
+
+                <!-- Modal Header -->
+                <div
+                  class="flex flex-col items-center md:flex-row md:items-start space-y-4 md:space-y-0 md:space-x-4"
+                >
+                  <!-- Calendar Icon Outside -->
+                  <div class="border border-black rounded-md px-4 py-3">
+                    <i class="fas fa-calendar-check text-grey-500 text-2xl"></i>
+                  </div>
+
+                  <!-- Title and Modal Body Together -->
+                  <div
+                    class="py-3 flex flex-col items-center sm:items-start text-center sm:text-left"
+                  >
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-9">
+                      Appointment Details
+                    </h2>
+
+                    <!-- Modal Body -->
+                    <div class="space-y-4 text-gray-700 text-sm">
+                      <p class="flex items-center space-x-2">
+                        <i class="fas fa-user text-gray-500 w-5"></i>
+                        <span>
+                          <strong>Patient:</strong>
+                          <span id="modalPatientName" class="ml-3">-</span>
+                        </span>
+                      </p>
+                      <p class="flex items-center space-x-2">
+                        <i class="fas fa-clock text-gray-500 w-5"></i>
+                        <span>
+                          <strong>Date:</strong>
+                          <span id="modalApptDate" class="ml-5">-</span>
+                        </span>
+                      </p>
+                      <p class="flex items-center space-x-2">
+                        <i class="fas fa-info-circle text-gray-500 w-5"></i>
+                        <span>
+                          <strong>Status:</strong>
+                          <span id="modalApptStatus" class="ml-5">-</span>
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Modal Actions -->
+                <div
+                  id="modalActions"
+                  class="flex flex-col sm:flex-row sm:justify-end gap-2 mt-6"
+                >
+                  <!-- Dynamic buttons go here -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Font Awesome CDN (place this in <head> if not already added) -->
+            <link
+              rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+            />
+
+            <!-- Confirmation Modal -->
+            <div
+              id="confirmationModal"
+              class="fixed inset-0 z-50 hidden bg-black/70 justify-center items-center px-4 sm:px-6"
+            >
+              <div
+                class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg w-full max-w-md text-center animate-fade-in"
+              >
+                <!-- Icon and Title -->
+                <div class="text-yellow-500 text-4xl sm:text-5xl mb-4">
+                  <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <h2 class="text-xl sm:text-2xl font-bold mb-2">
+                  Are you sure?
+                </h2>
+                <p
+                  id="confirmationMessage"
+                  class="text-gray-600 mb-6 text-sm sm:text-base"
+                >
+                  Do you really want to perform this action?
+                </p>
+
+                <!-- Buttons -->
+                <div
+                  class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
+                >
+                  <button
+                    onclick="confirmAction()"
+                    class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-md flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
+                  >
+                    <i class="fas fa-check-circle"></i> Continue
+                  </button>
+                  <button
+                    onclick="closeConfirmationDialog()"
+                    class="bg-gray-400 hover:bg-gray-500 text-white px-5 py-2.5 rounded-md flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
+                  >
+                    <i class="fas fa-times-circle"></i> Cancel
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function updateLiveDate() {
+        const dateElement = document.getElementById("live-date");
+        const today = new Date();
+
+        const options = { year: "numeric", month: "long", day: "numeric" };
+        dateElement.textContent = today.toLocaleDateString("en-US", options);
+      }
+
+      updateLiveDate(); // Call it on page load
+      // Global variables for pagination and filtering
+      let currentPage = {
+        opd: 1,
+        doctors: 1,
+        pregnant: 1,
+        vaccination: 1,
+      };
+      let itemsPerPage = 6;
+      let filteredData = {};
+      let currentActiveTab = "opd";
+
+      // Tab functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const tabButtons = document.querySelectorAll(".tab-btn");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons and contents
+            tabButtons.forEach((btn) => {
+              btn.classList.remove("border-[#16A34A]", "text-[#16A34A]");
+              btn.classList.add(
+                "border-transparent",
+                "text-gray-500",
+                "hover:text-gray-700",
+                "hover:border-gray-300"
+              );
+            });
+
+            // Add active class to clicked button
+            this.classList.remove(
+              "border-transparent",
+              "text-gray-500",
+              "hover:text-gray-700",
+              "hover:border-gray-300"
+            );
+            this.classList.add("border-[#16A34A]", "text-[#16A34A]");
+
+            // Hide all tab contents
+            document.querySelectorAll(".tab-content").forEach((content) => {
+              content.classList.remove("active");
+            });
+
+            // Show selected tab content
+            const tabId = this.getAttribute("data-tab");
+            document.getElementById(tabId).classList.add("active");
+
+            // Update current active tab
+            currentActiveTab = tabId;
+
+            // Apply filters and pagination for the new tab
+            applyFilters();
+          });
+        });
+
+        // Set first tab as active by default
+        if (tabButtons.length > 0) {
+          tabButtons[0].classList.remove(
+            "border-transparent",
+            "text-gray-500",
+            "hover:text-gray-700",
+            "hover:border-gray-300"
+          );
+          tabButtons[0].classList.add("border-[#16A34A]", "text-[#16A34A]");
+        }
+
+        // Load appointment data
+        loadAppointmentData();
+
+        // Setup filter event listeners
+        setupFilterListeners();
+      });
+
+      // Enhanced sample data for appointments
+      const appointmentData = {
+        stats: {},
+        opd: [
+          {
+            id: "OPD-001",
+            patient: "John Doe",
+            date: "June 15, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-002",
+            patient: "Jane Smith",
+            date: "June 15, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-003",
+            patient: "Robert Johnson",
+            date: "June 16, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-004",
+            patient: "Emily Davis",
+            date: "June 16, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-005",
+            patient: "Michael Wilson",
+            date: "June 17, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "OPD-006",
+            patient: "Sarah Miller",
+            date: "June 17, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-007",
+            patient: "David Brown",
+            date: "June 18, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-008",
+            patient: "Lisa Anderson",
+            date: "June 19, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-009",
+            patient: "Mark Thompson",
+            date: "June 20, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-010",
+            patient: "Anna Garcia",
+            date: "June 21, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "OPD-001",
+            patient: "John Doe",
+            date: "June 15, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-002",
+            patient: "Jane Smith",
+            date: "June 15, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-003",
+            patient: "Robert Johnson",
+            date: "June 16, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-004",
+            patient: "Emily Davis",
+            date: "June 16, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-005",
+            patient: "Michael Wilson",
+            date: "June 17, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "OPD-006",
+            patient: "Sarah Miller",
+            date: "June 17, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-007",
+            patient: "David Brown",
+            date: "June 18, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-008",
+            patient: "Lisa Anderson",
+            date: "June 19, 2023",
+            status: "Pending",
+          },
+          {
+            id: "OPD-009",
+            patient: "Mark Thompson",
+            date: "June 20, 2023",
+            status: "Completed",
+          },
+          {
+            id: "OPD-010",
+            patient: "Anna Garcia",
+            date: "June 21, 2023",
+            status: "Cancelled",
+          },
+        ],
+        doctors: [
+          {
+            id: "DOC-001",
+            patient: "Alice Johnson",
+            doctor: "Dr. Smith",
+            date: "June 15, 2023",
+            status: "Completed",
+          },
+          {
+            id: "DOC-002",
+            patient: "Bob Wilson",
+            doctor: "Dr. Brown",
+            date: "June 16, 2023",
+            status: "Pending",
+          },
+          {
+            id: "DOC-003",
+            patient: "Carol Davis",
+            doctor: "Dr. Jones",
+            date: "June 17, 2023",
+            status: "Pending",
+          },
+          {
+            id: "DOC-004",
+            patient: "Daniel Miller",
+            doctor: "Dr. Smith",
+            date: "June 18, 2023",
+            status: "Completed",
+          },
+          {
+            id: "DOC-005",
+            patient: "Eva Martinez",
+            doctor: "Dr. Brown",
+            date: "June 19, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "DOC-006",
+            patient: "Frank Taylor",
+            doctor: "Dr. Jones",
+            date: "June 20, 2023",
+            status: "Pending",
+          },
+          {
+            id: "DOC-007",
+            patient: "Grace Lee",
+            doctor: "Dr. Smith",
+            date: "June 21, 2023",
+            status: "Completed",
+          },
+        ],
+        pregnant: [
+          {
+            id: "PREG-001",
+            patient: "Maria Rodriguez",
+            date: "June 15, 2023",
+            status: "Completed",
+          },
+          {
+            id: "PREG-002",
+            patient: "Jennifer White",
+            date: "June 16, 2023",
+            status: "Pending",
+          },
+          {
+            id: "PREG-003",
+            patient: "Amanda Clark",
+            date: "June 17, 2023",
+            status: "Pending",
+          },
+          {
+            id: "PREG-004",
+            patient: "Nicole Turner",
+            date: "June 18, 2023",
+            status: "Completed",
+          },
+          {
+            id: "PREG-005",
+            patient: "Rebecca Hall",
+            date: "June 19, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "PREG-006",
+            patient: "Laura Adams",
+            date: "June 20, 2023",
+            status: "Pending",
+          },
+          {
+            id: "PREG-007",
+            patient: "Michelle Scott",
+            date: "June 21, 2023",
+            status: "Completed",
+          },
+        ],
+        vaccination: [
+          {
+            id: "VAC-001",
+            patient: "Emma Johnson",
+            date: "June 15, 2023",
+            status: "Completed",
+          },
+          {
+            id: "VAC-002",
+            patient: "Lucas Smith",
+            date: "June 16, 2023",
+            status: "Pending",
+          },
+          {
+            id: "VAC-003",
+            patient: "Olivia Williams",
+            date: "June 17, 2023",
+            status: "Pending",
+          },
+          {
+            id: "VAC-004",
+            patient: "Liam Brown",
+            date: "June 18, 2023",
+            status: "Completed",
+          },
+          {
+            id: "VAC-005",
+            patient: "Ava Davis",
+            date: "June 19, 2023",
+            status: "Cancelled",
+          },
+          {
+            id: "VAC-006",
+            patient: "Noah Wilson",
+            date: "June 20, 2023",
+            status: "Pending",
+          },
+          {
+            id: "VAC-007",
+            patient: "Sophia Garcia",
+            date: "June 21, 2023",
+            status: "Completed",
+          },
+        ],
+      };
+
+      function calculateStats(data) {
+        const allAppointments = [
+          ...data.opd,
+          ...data.doctors,
+          ...data.pregnant,
+          ...data.vaccination,
+        ];
+
+        const stats = {
+          total: allAppointments.length,
+          Pending: 0,
+          Completed: 0,
+          Cancelled: 0,
+        };
+
+        allAppointments.forEach((appt) => {
+          const status = appt.status;
+          if (stats.hasOwnProperty(status)) {
+            stats[status]++;
+          }
+        });
+
+        return stats;
+      }
+
+      // Apply it to your existing data
+      appointmentData.stats = calculateStats(appointmentData);
+
+      console.log(appointmentData.stats);
+
+      // Function to setup filter event listeners
+      function setupFilterListeners() {
+        // Search input
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) {
+          searchInput.addEventListener("input", debounce(applyFilters, 300));
+        }
+
+        // Date filters
+        const fromDateInput = document.getElementById("fromDate");
+        const toDateInput = document.getElementById("toDate");
+        if (fromDateInput)
+          fromDateInput.addEventListener("change", applyFilters);
+        if (toDateInput) toDateInput.addEventListener("change", applyFilters);
+
+        // Status filter
+        const statusFilter = document.getElementById("statusFilter");
+        if (statusFilter) statusFilter.addEventListener("change", applyFilters);
+
+        // Clear filter button
+        const clearFilterBtn = document.getElementById("clearFilterBtn");
+        if (clearFilterBtn) {
+          clearFilterBtn.addEventListener("click", clearAllFilters);
+        }
+      }
+
+      // Function to clear all filters
+      function clearAllFilters() {
+        // Clear search input
+        const searchInput = document.getElementById("searchInput");
+        if (searchInput) searchInput.value = "";
+
+        // Clear date filters
+        const fromDateInput = document.getElementById("fromDate");
+        const toDateInput = document.getElementById("toDate");
+        if (fromDateInput) fromDateInput.value = "";
+        if (toDateInput) toDateInput.value = "";
+
+        // Clear status filter
+        const statusFilter = document.getElementById("statusFilter");
+        if (statusFilter) statusFilter.value = "";
+
+        // Reset filtered data to original data
+        filteredData = { ...appointmentData };
+
+        // Reset current page to 1 for all tabs
+        Object.keys(currentPage).forEach((key) => {
+          currentPage[key] = 1;
+        });
+
+        // Hide clear button immediately after clearing
+        const clearFilterBtn = document.getElementById("clearFilterBtn");
+        if (clearFilterBtn) {
+          clearFilterBtn.style.display = "none";
+        }
+
+        // Update display
+        displayAppointments();
+
+        // Show clear confirmation (optional visual feedback)
+        showClearConfirmation();
+      }
+
+      // Function to show clear confirmation (optional visual feedback)
+      function showClearConfirmation() {
+        // Create or update a temporary notification
+        let notification = document.getElementById("clearNotification");
+
+        if (!notification) {
+          notification = document.createElement("div");
+          notification.id = "clearNotification";
+          notification.className =
+            "fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-md shadow-lg z-50 transition-opacity duration-300";
+          notification.innerHTML =
+            '<i class="fas fa-check mr-2"></i>Filters cleared successfully';
+          document.body.appendChild(notification);
+        } else {
+          notification.style.opacity = "1";
+        }
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          if (notification) {
+            notification.style.opacity = "0";
+            setTimeout(() => {
+              if (notification && notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+              }
+            }, 300);
+          }
+        }, 3000);
+      }
+
+      // Function to check if any filters are active
+      function hasActiveFilters() {
+        const searchInput = document.getElementById("searchInput");
+        const fromDateInput = document.getElementById("fromDate");
+        const toDateInput = document.getElementById("toDate");
+        const statusFilter = document.getElementById("statusFilter");
+
+        return (
+          (searchInput && searchInput.value.trim() !== "") ||
+          (fromDateInput && fromDateInput.value !== "") ||
+          (toDateInput && toDateInput.value !== "") ||
+          (statusFilter && statusFilter.value !== "")
+        );
+      }
+
+      // Function to update clear button visibility
+      function updateClearButtonVisibility() {
+        const clearFilterBtn = document.getElementById("clearFilterBtn");
+        if (clearFilterBtn) {
+          if (hasActiveFilters()) {
+            clearFilterBtn.style.display = "inline-flex";
+            clearFilterBtn.classList.remove("opacity-50");
+          } else {
+            clearFilterBtn.style.display = "none";
+          }
+        }
+      }
+
+      // Debounce function for search
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
+      }
+
+      function normalizeDate(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      }
+
+      // Function to apply filters
+      function applyFilters() {
+        const searchTerm =
+          document.getElementById("searchInput")?.value.toLowerCase() || "";
+        const fromDate = document.getElementById("fromDate")?.value || "";
+        const toDate = document.getElementById("toDate")?.value || "";
+        const statusFilter =
+          document.getElementById("statusFilter")?.value || "";
+
+        // Filter each type of appointment
+        Object.keys(appointmentData).forEach((key) => {
+          if (key !== "stats") {
+            filteredData[key] = appointmentData[key].filter((appointment) => {
+              // Search filter
+              let searchMatch = true;
+              if (searchTerm) {
+                const searchableText = getSearchableText(appointment, key)
+                  .toLowerCase()
+                  .trim();
+                const normalizedSearchTerm = searchTerm.toLowerCase().trim();
+                searchMatch = searchableText.startsWith(normalizedSearchTerm);
+              }
+
+              // Date filter
+              let dateMatch = true;
+              if (fromDate || toDate) {
+                const [month, day, year] = appointment.date
+                  .replace(",", "")
+                  .split(" ");
+                const appointmentDate = new Date(`${month} ${day}, ${year}`);
+
+                const normalizedAppointmentDate =
+                  normalizeDate(appointmentDate);
+
+                if (fromDate) {
+                  const normalizedFrom = normalizeDate(new Date(fromDate));
+                  dateMatch =
+                    dateMatch && normalizedAppointmentDate >= normalizedFrom;
+                }
+
+                if (toDate) {
+                  const normalizedTo = normalizeDate(new Date(toDate));
+                  dateMatch =
+                    dateMatch && normalizedAppointmentDate <= normalizedTo;
+                }
+              }
+
+              // Status filter
+              let statusMatch = true;
+              if (statusFilter) {
+                statusMatch = appointment.status === statusFilter;
+              }
+
+              return searchMatch && dateMatch && statusMatch;
+            });
+          }
+        });
+
+        // Reset current page to 1 for all tabs when filters change
+        Object.keys(currentPage).forEach((key) => {
+          currentPage[key] = 1;
+        });
+
+        // Update clear button visibility
+        updateClearButtonVisibility();
+
+        // Update display
+        displayAppointments();
+      }
+
+      // Function to get searchable text based on appointment type
+      function getSearchableText(appointment, type) {
+        switch (type) {
+          case "opd":
+          case "doctors":
+          case "pregnant":
+          case "vaccination":
+            return appointment.patient;
+        }
+      }
+
+      // Function to load appointment data
+      function loadAppointmentData() {
+        // Update stats cards
+        document.getElementById("total-appointments").textContent =
+          appointmentData.stats.total;
+        document.getElementById("Pending-appointments").textContent =
+          appointmentData.stats.Pending;
+        document.getElementById("Completed-appointments").textContent =
+          appointmentData.stats.Completed;
+        document.getElementById("Cancelled-appointments").textContent =
+          appointmentData.stats.Cancelled;
+
+        // Initialize filtered data with all data
+        filteredData = { ...appointmentData };
+
+        // Update clear button visibility
+        updateClearButtonVisibility();
+
+        // Display appointments with pagination
+        displayAppointments();
+      }
+
+      // Function to display appointments with pagination
+      function displayAppointments() {
+        // Display each type of appointment
+        Object.keys(filteredData).forEach((key) => {
+          if (key !== "stats") {
+            const tableBody = document.getElementById(`${key}-appointments`);
+            if (tableBody) {
+              // Clear existing rows
+              tableBody.innerHTML = "";
+
+              // Calculate pagination
+              const startIndex = (currentPage[key] - 1) * itemsPerPage;
+              const endIndex = startIndex + itemsPerPage;
+              const pageData = filteredData[key].slice(startIndex, endIndex);
+
+              // Add rows
+              pageData.forEach((appointment) => {
+                const row = createAppointmentRow(appointment, key);
+                tableBody.appendChild(row);
+              });
+
+              // Update pagination
+              updatePagination(key);
+            }
+          }
+        });
+      }
+
+      // Function to update pagination buttons
+      // Function to update pagination buttons with sliding window
+      function updatePagination(type) {
+        const paginationContainer = document.getElementById(
+          `${type}-pagination`
+        );
+        if (!paginationContainer) return;
+
+        const totalItems = filteredData[type].length;
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const current = currentPage[type];
+
+        // Clear existing pagination
+        paginationContainer.innerHTML = "";
+
+        if (totalPages <= 1) return;
+
+        // Calculate sliding window of 3 pages
+        let startPage, endPage;
+
+        if (totalPages <= 3) {
+          // If total pages is 3 or less, show all pages
+          startPage = 1;
+          endPage = totalPages;
+        } else {
+          // Sliding window logic
+          if (current <= 2) {
+            // Show pages 1, 2, 3 when current is 1 or 2
+            startPage = 1;
+            endPage = 3;
+          } else if (current >= totalPages - 1) {
+            // Show last 3 pages when current is near the end
+            startPage = totalPages - 2;
+            endPage = totalPages;
+          } else {
+            // Show current page in the middle with one page on each side
+            startPage = current - 1;
+            endPage = current + 1;
+          }
+        }
+
+        // Add "First" button if we're not showing page 1
+        if (startPage > 1) {
+          const firstBtn = createPaginationButton("First", true, () => {
+            currentPage[type] = 1;
+            displayAppointments();
+          });
+          paginationContainer.appendChild(firstBtn);
+        }
+
+        // Add page number buttons
+        for (let i = startPage; i <= endPage; i++) {
+          const pageBtn = createPaginationButton(
+            i.toString(),
+            true,
+            () => {
+              currentPage[type] = i;
+              displayAppointments();
+            },
+            i === current
+          );
+          paginationContainer.appendChild(pageBtn);
+        }
+
+        // Add "Last" button if we're not showing the last page
+        if (endPage < totalPages) {
+          const lastBtn = createPaginationButton("Last", true, () => {
+            currentPage[type] = totalPages;
+            displayAppointments();
+          });
+          paginationContainer.appendChild(lastBtn);
+        }
+
+        // Page info
+        const pageInfo = document.createElement("span");
+        pageInfo.className = "text-sm text-gray-700 mx-4";
+        const startItem = Math.min(
+          (current - 1) * itemsPerPage + 1,
+          totalItems
+        );
+        const endItem = Math.min(current * itemsPerPage, totalItems);
+        pageInfo.textContent = `Showing ${startItem}-${endItem} of ${totalItems}`;
+        paginationContainer.appendChild(pageInfo);
+      }
+
+      // Function to create pagination button
+      function createPaginationButton(
+        text,
+        enabled,
+        clickHandler,
+        isActive = false
+      ) {
+        const button = document.createElement("button");
+        button.textContent = text;
+        button.className = `px-3 py-2 text-sm font-medium ${
+          isActive
+            ? "bg-[#16A34A] text-white"
+            : enabled
+            ? "text-gray-500 bg-white border border-gray-300 hover:bg-gray-50"
+            : "text-gray-300 bg-gray-100 cursor-not-allowed"
+        } rounded-md mx-1`;
+
+        if (enabled) {
+          button.addEventListener("click", clickHandler);
+        } else {
+          button.disabled = true;
+        }
+
+        return button;
+      }
+
+      // Function to create pagination ellipsis
+      function createPaginationEllipsis() {
+        const span = document.createElement("span");
+        span.textContent = "...";
+        span.className = "px-3 py-2 text-sm text-gray-500";
+        return span;
+      }
+
+      // Function to create appointment row
+      function createAppointmentRow(appointment, type) {
+        const row = document.createElement("tr");
+        row.className = "hover:bg-gray-50 cursor-pointer";
+        row.onclick = () => openPatientModal(appointment);
+
+        // Common columns
+        let rowContent = `
+                <td class="hidden px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${appointment.id}</td>
+            `;
+
+        // Type-specific columns
+        switch (type) {
+          case "opd":
+            rowContent += `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.patient}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.date}</td>  
+                    `;
+            break;
+          case "doctors":
+            rowContent += `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.patient}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.date}</td>
+                    `;
+            break;
+          case "pregnant":
+            rowContent += `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.patient}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.date}</td>
+                    `;
+            break;
+          case "vaccination":
+            rowContent += `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.patient}</td>          
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${appointment.date}</td>
+                    `;
+            break;
+        }
+
+        // Status column
+        let statusClass = "";
+        switch (appointment.status) {
+          case "Pending":
+            statusClass = "bg-yellow-100 text-yellow-800";
+            break;
+          case "Completed":
+            statusClass = "bg-green-100 text-green-800";
+            break;
+          case "Cancelled":
+            statusClass = "bg-red-100 text-red-800";
+            break;
+        }
+        rowContent += `
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+  <div class="flex justify-center">
+                    <span class="status-badge ${statusClass}">${
+          appointment.status.charAt(0).toUpperCase() +
+          appointment.status.slice(1)
+        }</span>
+        </div>
+                </td>
+            `;
+
+        // Actions column
+        rowContent += `
+             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+  <div class="flex justify-center">
+    <button class="text-blue-500 hover:text-blue-700">
+      <i class="fas fa-eye"></i>
+    </button>
+  </div>
+</td>
+            `;
+
+        row.innerHTML = rowContent;
+        return row;
+      }
+
+      function openPatientModal(data) {
+        document.getElementById("modalPatientName").textContent =
+          data.patient || "-";
+        document.getElementById("modalApptDate").textContent = data.date || "-";
+        const statusEl = document.getElementById("modalApptStatus");
+        const status = data.status || "-";
+        statusEl.textContent = status;
+
+        // Reset classes
+        statusEl.className =
+          "inline-block px-3 py-1 rounded-full text-sm font-semibold";
+
+        // Add color classes based on status
+        let statusClass = "bg-gray-100 text-gray-800"; // default
+        switch (status) {
+          case "Pending":
+            statusClass = "bg-yellow-100 text-yellow-800";
+            break;
+          case "Completed":
+            statusClass = "bg-green-100 text-green-800";
+            break;
+          case "Cancelled":
+            statusClass = "bg-red-100 text-red-800";
+            break;
+        }
+
+        statusEl.classList.add(...statusClass.split(" "));
+
+        const modalActions = document.getElementById("modalActions");
+        modalActions.innerHTML = ""; // Clear previous buttons
+
+        if (data.status === "Pending") {
+          // Show Complete and Cancel buttons
+          modalActions.innerHTML = `
+           <div class="mt-6 flex flex-col sm:flex-row gap-2">
+      <button 
+        onclick="showConfirmationDialog('Complete')" 
+        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md mr-2 transition-colors duration-200">
+        <i class="fas fa-check mr-2"></i>Complete
+      </button>
+      <button 
+        onclick="showConfirmationDialog('Cancel')" 
+        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md mr-2 transition-colors duration-200">
+        <i class="fas fa-times mr-2"></i>Cancel
+      </button></div>
+    `;
+        } else {
+          // Show only Close button
+          modalActions.innerHTML = `
+           <div class="mt-6 flex flex-col sm:flex-row gap-2">
+      <button 
+        onclick="closePatientModal()" 
+        class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition-colors duration-200">
+        Close
+      </button>
+      </div>
+      
+    `;
+        }
+
+        const modal = document.getElementById("patientModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closePatientModal() {
+        const modal = document.getElementById("patientModal");
+        if (modal) {
+          modal.classList.remove("flex");
+          modal.classList.add("hidden");
+        }
+      }
+
+      let pendingAction = null;
+
+      function showConfirmationDialog(actionType) {
+        pendingAction = actionType; // Save action type (e.g., "Complete" or "Cancel")
+
+        const msg =
+          actionType === "Complete"
+            ? "Do you want to mark this appointment as Completed?"
+            : "Do you want to Cancel this appointment?";
+
+        document.getElementById("confirmationMessage").textContent = msg;
+        document.getElementById("confirmationModal").classList.remove("hidden");
+        document.getElementById("confirmationModal").classList.add("flex");
+      }
+
+      function closeConfirmationDialog() {
+        const modal = document.getElementById("confirmationModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+        pendingAction = null;
+      }
+
+      function confirmAction() {
+        // Close confirmation popup
+        closeConfirmationDialog();
+
+        // Also close patient modal
+        closePatientModal();
+
+        // You can later perform real actions here based on `pendingAction`
+        pendingAction = null;
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        };
+        document.getElementById("realTimeClock").textContent =
+          now.toLocaleTimeString("en-US", options);
+      }
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+
+      const sidebar = document.getElementById("sidebar");
+      const openSidebar = document.getElementById("openSidebar");
+      const closeSidebar = document.getElementById("closeSidebar");
+
+      openSidebar?.addEventListener("click", () => {
+        sidebar.classList.remove("-translate-x-full");
+      });
+
+      closeSidebar?.addEventListener("click", () => {
+        sidebar.classList.add("-translate-x-full");
+      });
+
+      console.log(
+        "Admin dashboard reads:",
+        localStorage.getItem("CompletedAppointments")
+      );
+    </script>
+  </body>
+</html>

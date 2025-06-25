@@ -9,7 +9,6 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
-    <link rel="website icon" href="BMA.png" />
   </head>
 
   <body class="min-h-screen flex items-center justify-center p-4">
@@ -22,7 +21,11 @@
       <div
         class="bg-gradient-to-r from-[#6a7337] to-[#a8c66c] py-6 px-8 text-white flex flex-col items-center text-center"
       >
-        <img src="BMA.png" alt="Logo" class="h-20 w-20 mb-4 object-contain" />
+        <div
+          class="h-20 w-20 mb-4 bg-white rounded-full flex items-center justify-center"
+        >
+          <img src="BMA.png" alt="BMA.png" />
+        </div>
         <h1 class="text-3xl font-bold text-center">Barangay Market Area</h1>
         <p class="text-center text-white mt-2">
           Welcome to our community health portal. Please select your role to
@@ -110,24 +113,35 @@
 
     <!-- Terms and Conditions Modal -->
     <div
-      class="overlay fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none"
+      id="overlay"
+      class="overlay hidden fixed inset-0 bg-black/70 z-40"
+      onclick="hideTerms()"
     ></div>
     <div
       id="termsModal"
-      class="modal fixed inset-0 z-50 flex items-center justify-center p-4"
+      class="modal hidden fixed inset-0 z-50 items-center justify-center p-4"
     >
       <div
-        class="bg-white rounded-xl shadow-xl z-10 max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+        class="bg-white rounded-xl shadow-xl max-w-2xl w-full max-h-[90vh] flex flex-col overflow-hidden"
+        onclick="event.stopPropagation()"
       >
+        <!-- Header -->
+        <div
+          class="bg-gradient-to-r from-[#6a7337] to-[#a8c66c] px-8 py-4 flex justify-between items-center"
+        >
+          <h3 class="text-2xl font-bold text-white">Terms and Conditions</h3>
+          <button
+            onclick="hideTerms()"
+            class="text-white hover:text-gray-200 transition-colors duration-200"
+          >
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+
         <!-- Body -->
         <div
           class="overflow-y-auto px-8 py-6 flex-1 text-gray-700 text-[1rem] leading-relaxed space-y-6"
         >
-          <!-- Main Title -->
-          <h3 class="text-3xl font-extrabold text-[#6A7337] mb-7">
-            Terms and Conditions
-          </h3>
-
           <!-- Section -->
           <div>
             <h4
@@ -203,13 +217,21 @@
           </div>
         </div>
 
-        <!-- Footer Button Outside Scroll -->
-        <div class="bg-white p-6 border-t border-gray-200 flex justify-end">
+        <!-- Footer -->
+        <div
+          class="bg-gray-50 px-8 py-4 border-t border-gray-200 flex justify-end space-x-3"
+        >
           <button
             onclick="hideTerms()"
-            class="bg-[#8A9A5B] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#6A7337] transition duration-200"
+            class="px-6 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors duration-200"
           >
-            I Understand
+            Cancel
+          </button>
+          <button
+            onclick="acceptTerms()"
+            class="bg-[#6A7337] text-white font-semibold px-6 py-2 rounded-lg hover:bg-[#4B5320] transition-colors duration-200"
+          >
+            I Accept
           </button>
         </div>
       </div>
@@ -219,6 +241,8 @@
       let selectedRole = null;
       const termsCheckbox = document.getElementById("terms");
       const continueBtn = document.getElementById("continueBtn");
+      const modal = document.getElementById("termsModal");
+      const overlay = document.getElementById("overlay");
 
       function selectRole(event, role) {
         selectedRole = role;
@@ -267,8 +291,56 @@
 
       termsCheckbox.addEventListener("change", updateContinueButton);
 
+      function showTerms() {
+        modal.classList.remove("hidden");
+        overlay.classList.remove("hidden");
+
+        // Add enter animations
+        modal.classList.add("flex");
+        modal.classList.add("modal-enter");
+        overlay.classList.add("overlay-enter");
+
+        // Prevent body scroll
+        document.body.style.overflow = "hidden";
+      }
+
+      function hideTerms() {
+        // Add exit animations
+        modal.classList.add("modal-exit");
+        overlay.classList.add("overlay-exit");
+
+        // Hide after animation completes
+        setTimeout(() => {
+          modal.classList.add("hidden");
+          overlay.classList.add("hidden");
+          modal.classList.remove("modal-enter", "modal-exit", "flex");
+          overlay.classList.remove("overlay-enter", "overlay-exit");
+
+          // Restore body scroll
+          document.body.style.overflow = "";
+        }, 300);
+      }
+
+      function acceptTerms() {
+        termsCheckbox.checked = true;
+        updateContinueButton();
+        hideTerms();
+      }
+
+      // Close modal with Escape key
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+          hideTerms();
+        }
+      });
+
       function redirectToLogin() {
         if (!selectedRole || !termsCheckbox.checked) return;
+
+        // Show loading state
+        continueBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
+        continueBtn.disabled = true;
 
         // Define the target pages
         const targetPages = {
@@ -278,13 +350,11 @@
 
         const targetPage = targetPages[selectedRole];
 
-        // Check if the target page exists before redirecting
+        // Simulate redirect (replace with actual redirect in production)
         setTimeout(() => {
           try {
-            // First attempt: try to redirect directly
             window.location.href = targetPage;
           } catch (error) {
-            // If direct redirect fails, show an error or fallback
             console.error("Redirect failed:", error);
             alert(
               `Unable to redirect to ${targetPage}. Please ensure the file exists in the same directory.`
@@ -293,79 +363,10 @@
             // Reset button state
             continueBtn.innerHTML =
               'Continue <i class="fas fa-arrow-right ml-2"></i>';
-            continueBtn.disabled = false;
+            updateContinueButton();
           }
         }, 1000);
       }
-
-      // Alternative redirect function that checks if file exists first
-      function redirectToLoginWithCheck() {
-        if (!selectedRole || !termsCheckbox.checked) return;
-
-        // Show loading state
-        continueBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin mr-2"></i> Redirecting...';
-        continueBtn.disabled = true;
-
-        const targetPages = {
-          citizen: "CitizenLogin.html",
-          admin: "AdminLogin.html",
-        };
-
-        const targetPage = targetPages[selectedRole];
-
-        // Check if file exists using fetch
-        fetch(targetPage, { method: "HEAD" })
-          .then((response) => {
-            if (response.ok) {
-              // File exists, redirect
-              window.location.href = targetPage;
-            } else {
-              throw new Error(`File ${targetPage} not found`);
-            }
-          })
-          .catch((error) => {
-            console.error("File check failed:", error);
-
-            // Show user-friendly message
-            const roleText =
-              selectedRole === "citizen" ? "Citizen" : "Administrator";
-            alert(
-              `${roleText} login page (${targetPage}) not found. Please create the login page or update the file path.`
-            );
-
-            // Reset button state
-            continueBtn.innerHTML =
-              'Continue <i class="fas fa-arrow-right ml-2"></i>';
-            updateContinueButton();
-          });
-      }
-
-      function showTerms() {
-        const modal = document.getElementById("termsModal");
-        modal.classList.remove("hidden");
-        setTimeout(() => {
-          modal.classList.add("active");
-          document.querySelector(".overlay").classList.add("active");
-        }, 10);
-      }
-
-      function hideTerms() {
-        const modal = document.getElementById("termsModal");
-        modal.classList.remove("active");
-        document.querySelector(".overlay").classList.remove("active");
-        setTimeout(() => {
-          modal.classList.add("hidden");
-        }, 300);
-      }
-
-      window.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("termsModal").classList.add("active");
-        document.querySelector(".overlay").classList.add("active");
-      });
-
-      // Close modal when clicking outside
-      document.querySelector(".overlay").addEventListener("click", hideTerms);
 
       document.addEventListener("click", function (e) {
         const isRoleBtn = e.target.closest(".role-btn");
@@ -380,12 +381,7 @@
           selectedRole = null;
 
           document.querySelectorAll(".role-btn").forEach((btn) => {
-            btn.classList.remove(
-              "border-[#6A7337]",
-              "bg-[#DDE5B6]",
-              "text-[#4B5320]",
-              "hover:bg-[#DDE5B6]"
-            );
+            btn.classList.remove("selected-role");
             btn.classList.add("border-[#c1d682]");
           });
 

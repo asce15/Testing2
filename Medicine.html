@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Barangay Market Area Health Information Hub</title>
+    <link rel="stylesheet" href="./Medicinetailwind.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="website icon" href="BMA.png" />
+  </head>
+
+  <body class="bg-gray-100 text-sm sm:text-base">
+    <div
+      class="flex flex-col md:flex-row min-h-screen md:h-screen overflow-y-auto"
+    >
+      <!-- Sidebar -->
+      <div
+        id="sidebar"
+        class="fixed inset-y-0 left-0 w-60 bg-gray-800 text-white flex-shrink-0 flex-col transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 z-40"
+      >
+        <div
+          class="flex items-center justify-between p-4 border-b border-gray-700"
+        >
+          <div class="flex items-center">
+            <span class="ml-3.5 font-semibold text-xm sm:text-sl leading-tight"
+              >Brgy. Market Area<br />Health Information Hub</span
+            >
+          </div>
+          <button
+            id="mobile-menu-close"
+            class="md:hidden text-white hover:text-gray-300"
+          >
+            <i class="fas fa-times text-lg"></i>
+          </button>
+        </div>
+        <div class="px-3 py-6">
+          <h3 class="text-xs uppercase text-white tracking-wider mb-3">
+            Management
+          </h3>
+          <ul class="space-y-2">
+            <li>
+              <a
+                href="Dashboard.html"
+                class="flex items-center p-2 font-bold text-white hover:bg-green-900 rounded-lg"
+              >
+                <i class="fas fa-home text-xs"></i>
+                <span class="ml-2 text-sm">Dashboard</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="Appointment.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+              >
+                <i class="fas fa-calendar-alt text-xs"></i>
+                <span class="ml-2 text-sm">Appointments</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="Medicine.html"
+                class="flex items-center p-2 font-bold text-white bg-green-600 rounded-lg"
+              >
+                <i class="fas fa-pills text-xs"></i>
+                <span class="ml-2 text-sm">Medicine</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="Resident.html"
+                class="flex items-center p-2 font-bold text-white hover:bg-green-900 rounded-lg"
+              >
+                <i class="fas fa-user text-xs"></i>
+                <span class="ml-2 text-sm">Residents</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="Announcement.html"
+                class="flex items-center p-2 font-bold hover:bg-green-900 rounded-lg"
+              >
+                <i class="fas fa-bullhorn text-xs"></i
+                ><span class="ml-2 text-sm">Announcements </span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="Settings.html"
+                class="flex items-center p-2 font-bold text-white hover:bg-green-900 rounded-lg"
+              >
+                <i class="fas fa-gear text-xs"></i>
+                <span class="ml-2 text-sm">Settings</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="flex flex-col flex-1 bg-gray-100">
+        <!-- Top Bar -->
+        <div
+          class="bg-gradient-to-r from-gray-800 to-green-600 shadow p-3 sm:p-4 flex justify-between items-center"
+        >
+          <div class="flex items-center gap-2 sm:gap-3">
+            <button id="mobile-menu-toggle" class="md:hidden text-white">
+              <i class="fas fa-bars text-lg"></i>
+            </button>
+            <div
+              class="w-12 h-12 sm:w-10 sm:h-10 flex items-center justify-center"
+            >
+              <img
+                src="BMA.png"
+                alt="Logo"
+                class="w-full h-full object-contain rounded-full"
+              />
+            </div>
+            <h1 class="text-base sm:text-xl font-bold text-white">
+              Medicine Management
+            </h1>
+          </div>
+          <div class="text-white font-medium text-xs sm:text-base">
+            <span id="realTimeClock"></span>
+          </div>
+        </div>
+
+        <!-- Medicine Management Section -->
+        <div class="p-3 sm:p-4 overflow-y-auto flex-1">
+          <div
+            class="bg-gradient-to-r from-[#1F2937] to-[#16A34A] px-10 py-4 rounded-t-xl shadow-sm"
+          >
+            <div class="flex justify-between items-center">
+              <h2 class="text-xl font-semibold text-white flex items-center">
+                <i
+                  class="fa-solid fa-prescription-bottle-medical text-2xl mr-4"
+                ></i>
+                Medicines
+              </h2>
+            </div>
+          </div>
+          <div class="bg-white p-4 sm:p-6 rounded shadow">
+            <!-- Search Bar -->
+            <div class="mb-6 relative">
+              <i
+                class="fa-solid fa-magnifying-glass absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              ></i>
+              <input
+                type="text"
+                id="searchBar"
+                placeholder="Search medicine by name or status..."
+                class="w-full p-3 border border-gray-500 rounded-lg shadow-sm transition-all duration-200"
+              />
+            </div>
+
+            <!-- Statistics Grid -->
+            <div
+              class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+            >
+              <div
+                class="bg-white border-l-4 border-green-500 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <h4 class="text-gray-600 text-sm font-medium mb-1">
+                  Total Medicines
+                </h4>
+                <p id="totalMedicines" class="text-2xl font-bold text-gray-800">
+                  0
+                </p>
+              </div>
+              <div
+                class="bg-white border-l-4 border-blue-500 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <h4 class="text-gray-600 text-sm font-medium mb-1">In Stock</h4>
+                <p id="inStockCount" class="text-2xl font-bold text-gray-800">
+                  0
+                </p>
+              </div>
+              <div
+                class="bg-white border-l-4 border-yellow-500 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <h4 class="text-gray-600 text-sm font-medium mb-1">
+                  Low Stock
+                </h4>
+                <p id="lowStockCount" class="text-2xl font-bold text-gray-800">
+                  0
+                </p>
+              </div>
+              <div
+                class="bg-white border-l-4 border-gray-500 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <h4 class="text-gray-600 text-sm font-medium mb-1">
+                  Out of Stock
+                </h4>
+                <p id="outStockCount" class="text-2xl font-bold text-gray-800">
+                  0
+                </p>
+              </div>
+              <div
+                class="bg-white border-l-4 border-red-500 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200"
+              >
+                <h4 class="text-gray-600 text-sm font-medium mb-1">Archived</h4>
+                <p id="archivedCount" class="text-2xl font-bold text-gray-800">
+                  0
+                </p>
+              </div>
+            </div>
+
+            <!-- Medicine Inventory -->
+            <div class="bg-white rounded-lg shadow-md p-4 sm:p-6 mb-6">
+              <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3"
+              >
+                <h2
+                  class="text-lg sm:text-xl font-semibold text-gray-800 flex items-center gap-2"
+                >
+                  <i class="fa-solid fa-pills text-gray-600 text-2xl"></i>
+                  Medicine Inventory
+                </h2>
+                <button
+                  class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors duration-200 w-full sm:w-auto justify-center"
+                  onclick="openAddModal()"
+                >
+                  <i class="fas fa-plus text-sm"></i>
+                  <span>Add Medicine</span>
+                </button>
+              </div>
+
+              <!-- Inventory Table -->
+              <div class="overflow-x-auto max-h-96 overflow-y-auto rounded-lg">
+                <table class="w-full border-collapse min-w-full">
+                  <thead
+                    class="bg-white/90 backdrop-blur-md sticky top-0 z-20 shadow-lg border-b border-gray-300"
+                  >
+                    <tr>
+                      <th
+                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        ID
+                      </th>
+                      <th
+                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Medicine
+                      </th>
+                      <th
+                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Type
+                      </th>
+                      <th
+                        class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Manufacturer
+                      </th>
+                      <th
+                        class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Date
+                      </th>
+                      <th
+                        class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Quantity
+                      </th>
+                      <th
+                        class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Action
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="medicineTableBody"
+                    class="bg-white divide-y divide-gray-200"
+                  >
+                    <!-- Dynamic content -->
+                  </tbody>
+                </table>
+              </div>
+              <div
+                id="paginationContainer"
+                class="flex flex-wrap justify-center gap-2 mt-6 px-4 sm:gap-3 md:gap-4"
+              ></div>
+            </div>
+
+            <!-- Archive Section -->
+            <div class="bg-gray-50 rounded-lg shadow-md p-4 sm:p-6">
+              <div
+                class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3"
+              >
+                <h2
+                  class="text-lg sm:text-xl font-semibold text-gray-800 flex items-center gap-2"
+                >
+                  <i class="fas fa-archive text-gray-600"></i>
+                  Archived Medicines
+                </h2>
+                <button
+                  class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 w-full sm:w-auto"
+                  onclick="toggleArchive()"
+                >
+                  Archive
+                </button>
+              </div>
+
+              <div id="archiveContainer" class="hidden">
+                <div class="bg-white rounded-lg overflow-hidden">
+                  <div class="overflow-x-auto max-h-96 overflow-y-auto">
+                    <table class="w-full border-collapse min-w-full">
+                      <thead
+                        class="bg-white/90 backdrop-blur-md sticky top-0 z-20 shadow-lg border-b border-gray-300"
+                      >
+                        <tr>
+                          <th
+                            class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            ID
+                          </th>
+                          <th
+                            class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Medicine
+                          </th>
+                          <th
+                            class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Type
+                          </th>
+                          <th
+                            class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Manufacturer
+                          </th>
+                          <th
+                            class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Date
+                          </th>
+                          <th
+                            class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Quantity
+                          </th>
+                          <th
+                            class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Status
+                          </th>
+                          <th
+                            class="px-3 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            Action
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody
+                        id="archiveTableBody"
+                        class="bg-white divide-y divide-gray-200"
+                      >
+                        <!-- Dynamic content -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Medicine Modal -->
+      <div
+        class="modal fixed inset-0 bg-black/70 z-50 items-center justify-center p-4 hidden"
+        id="addMedicineModal"
+      >
+        <div
+          class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-semibold text-gray-800">
+                Add New Medicine
+              </h3>
+              <button
+                class="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                onclick="closeAddModal()"
+              >
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >ID:
+                  <span id="newMedicineID" class="font-bold text-green-600"
+                    >MED001</span
+                  ></label
+                >
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Medicine Name</label
+                >
+                <input
+                  type="text"
+                  id="medicineName"
+                  placeholder="Enter medicine name"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Type</label
+                >
+                <input
+                  type="text"
+                  id="medicineType"
+                  placeholder="Enter type (e.g. Antihistamine (10mg))"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Manufacturer</label
+                >
+                <input
+                  type="text"
+                  id="medicineManufacturer"
+                  placeholder="e.g. Unilab"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Quantity</label
+                >
+                <input
+                  type="number"
+                  id="medicineQty"
+                  placeholder="Enter quantity"
+                  min="0"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <button
+                class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200"
+                onclick="saveMedicine()"
+              >
+                Save Medicine
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View/Edit Modal -->
+      <div
+        class="modal fixed inset-0 bg-black/70 z-50 items-center justify-center p-4 hidden"
+        id="viewEditModal"
+      >
+        <div
+          class="bg-white rounded-lg shadow-xl w-full max-w-md max-h-screen overflow-y-auto"
+        >
+          <div class="p-6">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-lg font-semibold text-gray-800">
+                Medicine Details
+              </h3>
+              <button
+                class="text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                onclick="closeViewEditModal()"
+              >
+                <i class="fas fa-times text-xl"></i>
+              </button>
+            </div>
+
+            <div class="space-y-4">
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >ID</label
+                >
+                <input
+                  type="text"
+                  id="editId"
+                  class="w-full p-3 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed"
+                  disabled
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="editName"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Type</label
+                >
+                <input
+                  type="text"
+                  id="editType"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Manufacturer</label
+                >
+                <input
+                  type="text"
+                  id="editManufacturer"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1"
+                  >Quantity</label
+                >
+                <input
+                  type="number"
+                  id="editQty"
+                  min="0"
+                  class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500"
+                />
+              </div>
+
+              <div class="flex flex-col sm:flex-row gap-3">
+                <button
+                  class="flex-1 bg-green-600 hover:bg-green-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200"
+                  onclick="saveEditMedicine()"
+                >
+                  Save Changes
+                </button>
+                <button
+                  class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200"
+                  onclick="archiveMedicine()"
+                >
+                  Archive/Unarchive
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar Overlay for Mobile -->
+    <div
+      class="fixed inset-0 bg-black bg-opacity-50 z-5 md:hidden hidden"
+      id="sidebar-overlay"
+    ></div>
+
+    <script>
+      // Medicine data array
+      let medicines = [];
+      let currentPage = 1;
+      const itemsPerPage = 5;
+      let selectedMedicineId = null;
+
+      // Mobile menu functionality
+      document
+        .getElementById("mobile-menu-toggle")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          const overlay = document.getElementById("sidebar-overlay");
+          sidebar.classList.remove("-translate-x-full");
+          overlay.classList.remove("hidden");
+        });
+
+      document
+        .getElementById("mobile-menu-close")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          const overlay = document.getElementById("sidebar-overlay");
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.add("hidden");
+        });
+
+      document
+        .getElementById("sidebar-overlay")
+        .addEventListener("click", function () {
+          const sidebar = document.getElementById("sidebar");
+          const overlay = document.getElementById("sidebar-overlay");
+          sidebar.classList.add("-translate-x-full");
+          overlay.classList.add("hidden");
+        });
+
+      // Generate next ID
+      function generateNextID() {
+        const prefix = "MED";
+        const next = medicines.length + 1;
+        return prefix + next.toString().padStart(3, "0");
+      }
+
+      // Open Add Modal
+      function openAddModal() {
+        const modal = document.getElementById("addMedicineModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+        document.getElementById("newMedicineID").innerText = generateNextID();
+      }
+
+      // Close Add Modal
+      function closeAddModal() {
+        const modal = document.getElementById("addMedicineModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      // Save new medicine
+      function saveMedicine() {
+        const name = document.getElementById("medicineName").value;
+        const Type = document.getElementById("medicineType").value;
+        const manufacturer = document.getElementById(
+          "medicineManufacturer"
+        ).value;
+        const qty = parseInt(document.getElementById("medicineQty").value);
+        const now = new Date();
+
+        // Convert date to 12-hour format
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+
+        const date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${ampm}`;
+
+        if (!name || !Type || isNaN(qty)) {
+          alert("Fill out all fields correctly.");
+          return;
+        }
+
+        const newMed = {
+          id: generateNextID(),
+          name,
+          Type,
+          manufacturer,
+          date,
+          qty,
+          archived: false,
+        };
+
+        medicines.push(newMed);
+        closeAddModal();
+        clearForm();
+        renderTable();
+        updateStats();
+      }
+
+      // Clear input fields
+      function clearForm() {
+        document.getElementById("medicineName").value = "";
+        document.getElementById("medicineType").value = "";
+        document.getElementById("medicineManufacturer").value = "";
+        document.getElementById("medicineQty").value = "";
+      }
+
+      // Render table
+      function renderTable(filter = "") {
+        const inventoryTable = document.getElementById("medicineTableBody");
+        const archiveTable = document.getElementById("archiveTableBody");
+        inventoryTable.innerHTML = "";
+        archiveTable.innerHTML = "";
+
+        const filtered = medicines.filter((med) => {
+          const status =
+            med.qty === 0
+              ? "Archived"
+              : med.qty < 10
+              ? "Low Stock"
+              : "In Stock";
+          return (
+            med.name.toLowerCase().includes(filter) ||
+            status.toLowerCase().includes(filter)
+          );
+        });
+
+        const totalPages = Math.ceil(filtered.length / itemsPerPage);
+        currentPage = Math.min(currentPage, totalPages) || 1;
+        const start = (currentPage - 1) * itemsPerPage;
+        const currentItems = filtered.slice(start, start + itemsPerPage);
+
+        currentItems.forEach((med) => {
+          const status = med.archived
+            ? "Archived"
+            : med.qty === 0
+            ? "Out of Stock"
+            : med.qty < 10
+            ? "Low Stock"
+            : "In Stock";
+
+          const statusColor = med.archived
+            ? "text-red-600 bg-red-100"
+            : med.qty === 0
+            ? "text-gray-600 bg-gray-200"
+            : med.qty < 10
+            ? "text-yellow-600 bg-yellow-100"
+            : "text-green-600 bg-green-100";
+
+          const row = document.createElement("tr");
+          row.className = "hover:bg-gray-50 transition-colors duration-150";
+          row.innerHTML = `
+        <td class="px-3 py-4 text-sm text-gray-900">${med.id}</td>
+        <td class="px-3 py-4 text-sm font-medium text-gray-900">${med.name}</td>
+        <td class="px-3 py-4 text-sm text-gray-600">${med.Type}</td>
+        <td class="px-3 py-4 text-sm text-gray-600">${
+          med.manufacturer || "N/A"
+        }</td>
+        <td class="text-center px-3 py-4 text-sm text-gray-600">${
+          med.date || "N/A"
+        }</td>
+        <td class="text-center px-3 py-4 text-sm font-medium text-gray-900">${
+          med.qty
+        }</td>
+        <td class="text-center px-3 py-4">
+          <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusColor}">${status}</span>
+        </td>
+        <td class="text-center px-3 py-4">
+          <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors duration-200 view-btn"
+            data-id="${med.id}"
+            data-name="${med.name}"
+            data-Type="${med.Type}"
+            data-manufacturer="${med.manufacturer}"
+            data-date="${med.date}"
+            data-qty="${med.qty}">
+            View
+          </button>
+        </td>`;
+
+          (med.archived ? archiveTable : inventoryTable).appendChild(row);
+        });
+
+        renderPagination(filtered.length);
+      }
+
+      function renderPagination(totalItems) {
+        const totalPages = Math.ceil(totalItems / itemsPerPage);
+        const container = document.getElementById("paginationContainer");
+        container.innerHTML = "";
+
+        function createBtn(label, page) {
+          const btn = document.createElement("button");
+          btn.textContent = label;
+          btn.className =
+            "mx-1 px-3 py-1 text-sm rounded border border-gray-300";
+          if (page === currentPage)
+            btn.classList.add("bg-[#16A34A]", "text-white");
+          btn.addEventListener("click", () => {
+            currentPage = page;
+            renderTable(
+              document.getElementById("searchBar")?.value.toLowerCase()
+            );
+          });
+          return btn;
+        }
+
+        if (currentPage > 1) container.appendChild(createBtn("First", 1));
+
+        for (
+          let i = Math.max(1, currentPage - 1);
+          i <= Math.min(totalPages, currentPage + 1);
+          i++
+        ) {
+          container.appendChild(createBtn(i, i));
+        }
+
+        if (currentPage < totalPages)
+          container.appendChild(createBtn("Last", totalPages));
+      }
+
+      document.getElementById("searchBar")?.addEventListener("input", (e) => {
+        currentPage = 1;
+        renderTable(e.target.value.toLowerCase());
+      });
+
+      // Initialize
+      document.addEventListener("DOMContentLoaded", () => {
+        renderTable();
+        updateStats();
+      });
+
+      // Update stats
+      function updateStats() {
+        document.getElementById("totalMedicines").innerText = medicines.length;
+        document.getElementById("inStockCount").innerText = medicines.filter(
+          (m) => m.qty >= 10
+        ).length;
+        document.getElementById("lowStockCount").innerText = medicines.filter(
+          (m) => m.qty > 0 && m.qty < 10
+        ).length;
+        document.getElementById("archivedCount").innerText = medicines.filter(
+          (m) => m.archived
+        ).length;
+        document.getElementById("outStockCount").innerText = medicines.filter(
+          (m) => m.qty === 0 && !m.archived
+        ).length;
+      }
+
+      // Search
+      document.getElementById("searchBar").addEventListener("input", (e) => {
+        renderTable(e.target.value.toLowerCase());
+      });
+
+      // Global click event to handle all "View" buttons
+      document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("view-btn")) {
+          const med = {
+            id: e.target.getAttribute("data-id"),
+            name: e.target.getAttribute("data-name"),
+            Type: e.target.getAttribute("data-Type"),
+            manufacturer: e.target.getAttribute("data-manufacturer"),
+            date: e.target.getAttribute("data-date"),
+            qty: parseInt(e.target.getAttribute("data-qty")),
+          };
+          openViewEditModal(med);
+        }
+      });
+
+      // Initial
+      renderTable();
+      updateStats();
+
+      function openViewEditModal(med) {
+        selectedMedicineId = med.id;
+
+        const modal = document.getElementById("viewEditModal");
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+
+        document.getElementById("editId").value = med.id;
+        document.getElementById("editName").value = med.name;
+        document.getElementById("editType").value = med.Type;
+        document.getElementById("editManufacturer").value =
+          med.manufacturer || "";
+        document.getElementById("editDate").value = med.date || "";
+        document.getElementById("editQty").value = med.qty;
+      }
+
+      function closeViewEditModal() {
+        const modal = document.getElementById("viewEditModal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+      function saveEditMedicine() {
+        const name = document.getElementById("editName").value;
+        const Type = document.getElementById("editType").value;
+        const manufacturer = document.getElementById("editManufacturer").value;
+        const qty = parseInt(document.getElementById("editQty").value);
+        const now = new Date();
+
+        // Convert date to 12-hour format
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, "0");
+        const day = String(now.getDate()).padStart(2, "0");
+        let hours = now.getHours();
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        const seconds = String(now.getSeconds()).padStart(2, "0");
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+
+        const date = `${year}-${month}-${day} ${hours}:${minutes}:${seconds} ${ampm}`;
+
+        if (!name || !Type || !manufacturer || isNaN(qty)) {
+          alert("Please fill out all fields correctly.");
+          return;
+        }
+
+        const index = medicines.findIndex(
+          (med) => med.id === selectedMedicineId
+        );
+        if (index !== -1) {
+          medicines[index].name = name;
+          medicines[index].Type = Type;
+          medicines[index].manufacturer = manufacturer;
+          medicines[index].date = date;
+          medicines[index].qty = qty;
+
+          renderTable();
+          updateStats();
+          closeViewEditModal();
+        } else {
+          alert("Medicine not found.");
+        }
+      }
+
+      function archiveMedicine() {
+        const index = medicines.findIndex(
+          (med) => med.id === selectedMedicineId
+        );
+        if (index !== -1) {
+          medicines[index].archived = !medicines[index].archived;
+          renderTable();
+          updateStats();
+          closeViewEditModal();
+        } else {
+          alert("Medicine not found.");
+        }
+      }
+
+      function toggleArchive() {
+        const archive = document.getElementById("archiveContainer");
+        archive.classList.toggle("hidden");
+      }
+
+      document
+        .getElementById("mobile-menu-toggle")
+        .addEventListener("click", function () {
+          document.body.classList.add("mobile-menu-open");
+        });
+      document
+        .getElementById("mobile-menu-close")
+        .addEventListener("click", function () {
+          document.body.classList.remove("mobile-menu-open");
+        });
+      document
+        .getElementById("sidebar-overlay")
+        .addEventListener("click", function () {
+          document.body.classList.remove("mobile-menu-open");
+        });
+
+      function openMobileDateModal() {
+        document.getElementById("mobileDateModal").classList.remove("hidden");
+      }
+
+      function closeMobileDateModal() {
+        document.getElementById("mobileDateModal").classList.add("hidden");
+      }
+
+      function saveMobileDate() {
+        const selected = document.getElementById("mobileDateInput").value;
+        if (selected) {
+          document.getElementById("medicineDate").value = selected;
+        }
+        closeMobileDateModal();
+      }
+
+      function updateDateTime() {
+        const now = new Date();
+        const options = {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: true,
+        };
+        document.getElementById("realTimeClock").textContent =
+          now.toLocaleTimeString("en-US", options);
+      }
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
+    </script>
+  </body>
+</html>
