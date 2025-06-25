@@ -11,7 +11,13 @@
     "appointform": "npx @tailwindcss/cli -i ./AppointmentForm.css -o ./AppointFormtailwind.css --watch",
     "appointhistory": "npx @tailwindcss/cli -i ./AppointmentHistory.css -o ./AppointHistorytaildwind.css --watch",
     "moreannouncement": "npx @tailwindcss/cli -i ./MoreAnnouncement.css -o ./MoreAnnouncementtailwind.css --watch",
-    "adminlogin": "npx @tailwindcss/cli -i ./AdminLogin.css -o ./AdminLogintailwind.css --watch"
+    "adminlogin": "npx @tailwindcss/cli -i ./AdminLogin.css -o ./AdminLogintailwind.css --watch",
+    "dashboard": "npx @tailwindcss/cli -i ./Dashboard.css -o ./Dashboardtailwind.css --watch",
+    "appointment": "npx @tailwindcss/cli -i ./Appointment.css -o ./Appointmenttailwind.css --watch",
+    "medicine": "npx @tailwindcss/cli -i ./Medicine.css -o ./Medicinetailwind.css --watch",
+    "resident": "npx @tailwindcss/cli -i ./Resident.css -o ./Residenttailwind.css --watch",
+    "announcement": "npx @tailwindcss/cli -i ./Announcement.css -o ./Announcementtailwind.css --watch",
+    "settings": "npx @tailwindcss/cli -i ./Settings.css -o ./Settingstailwind.css --watch"
   },
   "author": "",
   "license": "ISC",
