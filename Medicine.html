@@ -552,10 +552,11 @@
                   Save Changes
                 </button>
                 <button
+                  id="archiveButton"
                   class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200"
                   onclick="archiveMedicine()"
                 >
-                  Archive/Unarchive
+                  Archive
                 </button>
               </div>
             </div>
@@ -723,32 +724,33 @@
           const row = document.createElement("tr");
           row.className = "hover:bg-gray-50 transition-colors duration-150";
           row.innerHTML = `
-        <td class="px-3 py-4 text-sm text-gray-900">${med.id}</td>
-        <td class="px-3 py-4 text-sm font-medium text-gray-900">${med.name}</td>
-        <td class="px-3 py-4 text-sm text-gray-600">${med.Type}</td>
-        <td class="px-3 py-4 text-sm text-gray-600">${
-          med.manufacturer || "N/A"
-        }</td>
-        <td class="text-center px-3 py-4 text-sm text-gray-600">${
-          med.date || "N/A"
-        }</td>
-        <td class="text-center px-3 py-4 text-sm font-medium text-gray-900">${
-          med.qty
-        }</td>
-        <td class="text-center px-3 py-4">
-          <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusColor}">${status}</span>
-        </td>
-        <td class="text-center px-3 py-4">
-          <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors duration-200 view-btn"
-            data-id="${med.id}"
-            data-name="${med.name}"
-            data-Type="${med.Type}"
-            data-manufacturer="${med.manufacturer}"
-            data-date="${med.date}"
-            data-qty="${med.qty}">
-            View
-          </button>
-        </td>`;
+    <td class="px-3 py-4 text-sm text-gray-900">${med.id}</td>
+    <td class="px-3 py-4 text-sm font-medium text-gray-900">${med.name}</td>
+    <td class="px-3 py-4 text-sm text-gray-600">${med.Type}</td>
+    <td class="px-3 py-4 text-sm text-gray-600">${
+      med.manufacturer || "N/A"
+    }</td>
+    <td class="text-center px-3 py-4 text-sm text-gray-600">${
+      med.date || "N/A"
+    }</td>
+    <td class="text-center px-3 py-4 text-sm font-medium text-gray-900">${
+      med.qty
+    }</td>
+    <td class="text-center px-3 py-4">
+      <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full ${statusColor}">${status}</span>
+    </td>
+    <td class="text-center px-3 py-4">
+      <button class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-xs font-medium transition-colors duration-200 view-btn"
+        data-id="${med.id}"
+        data-name="${med.name}"
+        data-Type="${med.Type}"
+        data-manufacturer="${med.manufacturer}"
+        data-date="${med.date}"
+        data-qty="${med.qty}"
+        data-archived="${med.archived}">
+        View
+      </button>
+    </td>`;
 
           (med.archived ? archiveTable : inventoryTable).appendChild(row);
         });
@@ -834,6 +836,7 @@
             manufacturer: e.target.getAttribute("data-manufacturer"),
             date: e.target.getAttribute("data-date"),
             qty: parseInt(e.target.getAttribute("data-qty")),
+            archived: e.target.getAttribute("data-archived") === "true",
           };
           openViewEditModal(med);
         }
@@ -857,6 +860,16 @@
           med.manufacturer || "";
         document.getElementById("editDate").value = med.date || "";
         document.getElementById("editQty").value = med.qty;
+
+        // Update the archive button text and styling
+        const archiveBtn = document.getElementById("archiveButton");
+
+        if (archiveBtn) {
+          archiveBtn.textContent = med.archived ? "Unarchive" : "Archive";
+          // Keep the same gray color for both states
+          archiveBtn.className =
+            "flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200";
+        }
       }
 
       function closeViewEditModal() {
@@ -864,6 +877,7 @@
         modal.classList.add("hidden");
         modal.classList.remove("flex");
       }
+
       function saveEditMedicine() {
         const name = document.getElementById("editName").value;
         const Type = document.getElementById("editType").value;
@@ -912,6 +926,24 @@
         );
         if (index !== -1) {
           medicines[index].archived = !medicines[index].archived;
+
+          // Update button text and styling immediately after toggling
+          const archiveBtn = document.getElementById("archiveButton");
+          if (archiveBtn) {
+            archiveBtn.textContent = medicines[index].archived
+              ? "Unarchive"
+              : "Archive";
+            // Update button styling
+            if (archiveBtn) {
+              archiveBtn.textContent = medicines[index].archived
+                ? "Unarchive"
+                : "Archive";
+              // Keep the same gray color for both states
+              archiveBtn.className =
+                "flex-1 bg-gray-600 hover:bg-gray-700 text-white py-3 px-4 rounded-lg font-medium transition-colors duration-200";
+            }
+          }
+
           renderTable();
           updateStats();
           closeViewEditModal();
