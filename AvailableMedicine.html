@@ -23,10 +23,10 @@
       <nav>
         <ul class="nav-list">
           <li><a href="Home.html">Home</a></li>
-          <li><a href="AvailableMedicine.html">Available Medicine</a></li>
+          <li><a href="#top">Available Medicine</a></li>
           <li><a href="AppointmentForm.html">Appointment Booking</a></li>
           <li><a href="AppointmentHistory.html">Appointment History</a></li>
-          <li><a href="index.html">Log Out</a></li>
+          <li><a href="CitizenSettings.html">Settings</a></li>
         </ul>
       </nav>
       <div id="hamburger-icon" onclick="toggleMobileMenu(this)">
@@ -36,10 +36,10 @@
       </div>
       <ul class="mobile-menu">
         <li><a href="Home.html">Home</a></li>
-        <li><a href="AvailableMedicine.html">Available Medicine</a></li>
+        <li><a href="#top">Available Medicine</a></li>
         <li><a href="AppointmentForm.html">Appointment Booking</a></li>
         <li><a href="AppointmentHistory.html">Appointment History</a></li>
-        <li><a href="index.html">Logout</a></li>
+        <li><a href="CitizenSettings.html">Settings</a></li>
       </ul>
     </header>
 
@@ -506,6 +506,24 @@
         }, 3000);
       }
 
+      document.querySelectorAll('a[href="#top"]').forEach((link) => {
+        link.addEventListener("click", function (e) {
+          const href = this.getAttribute("href");
+
+          // Only handle links with an actual destination
+          if (href && href !== "#") {
+            e.preventDefault(); // stop default navigation
+
+            // Smooth scroll to top
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+            // Then navigate after a slight delay (wait for scroll animation)
+            setTimeout(() => {
+              window.location.href = href;
+            }, 600); // adjust this delay to match scroll speed
+          }
+        });
+      });
       // Initialize the application
       init();
     </script>

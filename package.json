@@ -11,6 +11,7 @@
     "appointform": "npx @tailwindcss/cli -i ./AppointmentForm.css -o ./AppointFormtailwind.css --watch",
     "appointhistory": "npx @tailwindcss/cli -i ./AppointmentHistory.css -o ./AppointHistorytaildwind.css --watch",
     "moreannouncement": "npx @tailwindcss/cli -i ./MoreAnnouncement.css -o ./MoreAnnouncementtailwind.css --watch",
+    "citizensettings": "npx @tailwindcss/cli -i ./CitizenSettings.css -o ./CitizenSettingstailwind.css --watch",
     "adminlogin": "npx @tailwindcss/cli -i ./AdminLogin.css -o ./AdminLogintailwind.css --watch",
     "dashboard": "npx @tailwindcss/cli -i ./Dashboard.css -o ./Dashboardtailwind.css --watch",
     "appointment": "npx @tailwindcss/cli -i ./Appointment.css -o ./Appointmenttailwind.css --watch",
