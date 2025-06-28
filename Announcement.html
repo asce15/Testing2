@@ -173,7 +173,10 @@
 
                 <label
                   for="imageInput"
-                  class="cursor-pointer bg-blue-600 text-white px-4 py-2 rounded inline-block hover:bg-blue-700 transition"
+                  style="background-color: #bd8f42"
+                  class="cursor-pointer text-white px-4 py-2 rounded inline-block transition"
+                  onmouseover="this.style.backgroundColor='#a87735'"
+                  onmouseout="this.style.backgroundColor='#BD8F42'"
                 >
                   Choose File
                 </label>
@@ -187,12 +190,14 @@
               </div>
 
               <!-- Submit Button -->
-              <button
-                onclick="submitAnnouncement()"
-                class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
-              >
-                Post Announcement
-              </button>
+              <div class="flex justify-end">
+                <button
+                  onclick="submitAnnouncement()"
+                  class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700"
+                >
+                  Post Announcement
+                </button>
+              </div>
             </div>
           </div>
 

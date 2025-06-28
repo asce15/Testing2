@@ -340,6 +340,11 @@
                         <th
                           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
+                          ID
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
                           Patient
                         </th>
                         <th
@@ -385,6 +390,11 @@
                   <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                       <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          ID
+                        </th>
                         <th
                           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
@@ -436,6 +446,11 @@
                         <th
                           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
+                          ID
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
                           Patient
                         </th>
                         <th
@@ -481,6 +496,11 @@
                   <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                       <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          ID
+                        </th>
                         <th
                           class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                         >
@@ -724,176 +744,176 @@
         setupFilterListeners();
       });
 
-      // Enhanced sample data for appointments
+      // Enhanced sample data for appointments with updated IDs
       const appointmentData = {
         stats: {},
         opd: [
           {
-            id: "OPD-001",
+            id: "O-001",
             patient: "John Doe",
             date: "June 15, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-002",
+            id: "O-002",
             patient: "Jane Smith",
             date: "June 15, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-003",
+            id: "O-003",
             patient: "Robert Johnson",
             date: "June 16, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-004",
+            id: "O-004",
             patient: "Emily Davis",
             date: "June 16, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-005",
+            id: "O-005",
             patient: "Michael Wilson",
             date: "June 17, 2023",
             status: "Cancelled",
           },
           {
-            id: "OPD-006",
+            id: "O-006",
             patient: "Sarah Miller",
             date: "June 17, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-007",
+            id: "O-007",
             patient: "David Brown",
             date: "June 18, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-008",
+            id: "O-008",
             patient: "Lisa Anderson",
             date: "June 19, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-009",
+            id: "O-009",
             patient: "Mark Thompson",
             date: "June 20, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-010",
+            id: "O-010",
             patient: "Anna Garcia",
             date: "June 21, 2023",
             status: "Cancelled",
           },
           {
-            id: "OPD-001",
-            patient: "John Doe",
+            id: "O-011",
+            patient: "John Doe Jr.",
             date: "June 15, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-002",
-            patient: "Jane Smith",
+            id: "O-012",
+            patient: "Jane Smith Jr.",
             date: "June 15, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-003",
-            patient: "Robert Johnson",
+            id: "O-013",
+            patient: "Robert Johnson Jr.",
             date: "June 16, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-004",
-            patient: "Emily Davis",
+            id: "O-014",
+            patient: "Emily Davis Jr.",
             date: "June 16, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-005",
-            patient: "Michael Wilson",
+            id: "O-015",
+            patient: "Michael Wilson Jr.",
             date: "June 17, 2023",
             status: "Cancelled",
           },
           {
-            id: "OPD-006",
-            patient: "Sarah Miller",
+            id: "O-016",
+            patient: "Sarah Miller Jr.",
             date: "June 17, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-007",
-            patient: "David Brown",
+            id: "O-017",
+            patient: "David Brown Jr.",
             date: "June 18, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-008",
-            patient: "Lisa Anderson",
+            id: "O-018",
+            patient: "Lisa Anderson Jr.",
             date: "June 19, 2023",
             status: "Pending",
           },
           {
-            id: "OPD-009",
-            patient: "Mark Thompson",
+            id: "O-019",
+            patient: "Mark Thompson Jr.",
             date: "June 20, 2023",
             status: "Completed",
           },
           {
-            id: "OPD-010",
-            patient: "Anna Garcia",
+            id: "O-020",
+            patient: "Anna Garcia Jr.",
             date: "June 21, 2023",
             status: "Cancelled",
           },
         ],
         doctors: [
           {
-            id: "DOC-001",
+            id: "D-001",
             patient: "Alice Johnson",
             doctor: "Dr. Smith",
             date: "June 15, 2023",
             status: "Completed",
           },
           {
-            id: "DOC-002",
+            id: "D-002",
             patient: "Bob Wilson",
             doctor: "Dr. Brown",
             date: "June 16, 2023",
             status: "Pending",
           },
           {
-            id: "DOC-003",
+            id: "D-003",
             patient: "Carol Davis",
             doctor: "Dr. Jones",
             date: "June 17, 2023",
             status: "Pending",
           },
           {
-            id: "DOC-004",
+            id: "D-004",
             patient: "Daniel Miller",
             doctor: "Dr. Smith",
             date: "June 18, 2023",
             status: "Completed",
           },
           {
-            id: "DOC-005",
+            id: "D-005",
             patient: "Eva Martinez",
             doctor: "Dr. Brown",
             date: "June 19, 2023",
             status: "Cancelled",
           },
           {
-            id: "DOC-006",
+            id: "D-006",
             patient: "Frank Taylor",
             doctor: "Dr. Jones",
             date: "June 20, 2023",
             status: "Pending",
           },
           {
-            id: "DOC-007",
+            id: "D-007",
             patient: "Grace Lee",
             doctor: "Dr. Smith",
             date: "June 21, 2023",
@@ -902,43 +922,43 @@
         ],
         pregnant: [
           {
-            id: "PREG-001",
+            id: "P-001",
             patient: "Maria Rodriguez",
             date: "June 15, 2023",
             status: "Completed",
           },
           {
-            id: "PREG-002",
+            id: "P-002",
             patient: "Jennifer White",
             date: "June 16, 2023",
             status: "Pending",
           },
           {
-            id: "PREG-003",
+            id: "P-003",
             patient: "Amanda Clark",
             date: "June 17, 2023",
             status: "Pending",
           },
           {
-            id: "PREG-004",
+            id: "P-004",
             patient: "Nicole Turner",
             date: "June 18, 2023",
             status: "Completed",
           },
           {
-            id: "PREG-005",
+            id: "P-005",
             patient: "Rebecca Hall",
             date: "June 19, 2023",
             status: "Cancelled",
           },
           {
-            id: "PREG-006",
+            id: "P-006",
             patient: "Laura Adams",
             date: "June 20, 2023",
             status: "Pending",
           },
           {
-            id: "PREG-007",
+            id: "P-007",
             patient: "Michelle Scott",
             date: "June 21, 2023",
             status: "Completed",
@@ -946,43 +966,43 @@
         ],
         vaccination: [
           {
-            id: "VAC-001",
+            id: "V-001",
             patient: "Emma Johnson",
             date: "June 15, 2023",
             status: "Completed",
           },
           {
-            id: "VAC-002",
+            id: "V-002",
             patient: "Lucas Smith",
             date: "June 16, 2023",
             status: "Pending",
           },
           {
-            id: "VAC-003",
+            id: "V-003",
             patient: "Olivia Williams",
             date: "June 17, 2023",
             status: "Pending",
           },
           {
-            id: "VAC-004",
+            id: "V-004",
             patient: "Liam Brown",
             date: "June 18, 2023",
             status: "Completed",
           },
           {
-            id: "VAC-005",
+            id: "V-005",
             patient: "Ava Davis",
             date: "June 19, 2023",
             status: "Cancelled",
           },
           {
-            id: "VAC-006",
+            id: "V-006",
             patient: "Noah Wilson",
             date: "June 20, 2023",
             status: "Pending",
           },
           {
-            id: "VAC-007",
+            id: "V-007",
             patient: "Sophia Garcia",
             date: "June 21, 2023",
             status: "Completed",
@@ -1414,9 +1434,9 @@
         row.className = "hover:bg-gray-50 cursor-pointer";
         row.onclick = () => openPatientModal(appointment);
 
-        // Common columns
+        // ID column (now visible)
         let rowContent = `
-                <td class="hidden px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${appointment.id}</td>
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${appointment.id}</td>
             `;
 
         // Type-specific columns
