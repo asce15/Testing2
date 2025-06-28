@@ -26,13 +26,14 @@
           id="login-username"
           required
         />
-
+        <p id="username-error" class="text-xs mt-1 text-left hidden"></p>
         <input
           type="password"
           placeholder="Password"
           id="login-password"
           required
         />
+        <p id="password-error" class="text-xs text-left mt-1 hidden"></p>
         <button type="submit" id="login-submit">Login</button>
         <div class="signup-link">
           Don't have an account? <a href="#" id="link-to-signup">Sign up</a>
@@ -496,25 +497,40 @@
         const username = document.getElementById("login-username").value.trim();
         const password = document.getElementById("login-password").value.trim();
 
+        const usernameError = document.getElementById("username-error");
+        const passwordError = document.getElementById("password-error");
+
         const usernameRegex = /^(?=.*[A-Z])(?=.*\d).+$/;
         const passwordRegex =
           /^(?=.*[0-9])(?=.*[!@#$%^&*()_\+\-=\{\}\[\]:;"'<>,\.?/\\|]).{8,}$/;
 
+        let valid = true;
+
+        // Reset errors
+        usernameError.classList.add("hidden");
+        passwordError.classList.add("hidden");
+        usernameError.textContent = "";
+        passwordError.textContent = "";
+
         if (!usernameRegex.test(username)) {
-          alert(
-            "Username must contain at least one uppercase letter and one number."
-          );
-          return false;
+          usernameError.innerHTML =
+            "* Must include at least 1 capital letter<br>* Must include at least 1 number";
+          usernameError.classList.remove("hidden");
+          usernameError.style.color = "red";
+          usernameError.style.fontStyle = "italic";
+          valid = false;
         }
 
         if (!passwordRegex.test(password)) {
-          alert(
-            "Password must be at least 8 characters long, include one number and one special character."
-          );
-          return false;
+          passwordError.innerHTML =
+            "* Password must be at least 8 characters long<br> * Must include one number <br>  * Must include at least 1 special character (e.g., .,?!{})";
+          passwordError.classList.remove("hidden");
+          passwordError.style.color = "red";
+          passwordError.style.fontStyle = "italic";
+          valid = false;
         }
 
-        return true;
+        return valid;
       }
 
       loginForm.addEventListener("submit", function (e) {
