@@ -140,7 +140,7 @@
                       class="text-xl font-semibold text-white flex items-center"
                     >
                       <i class="fa-solid fa-user text-2xl mr-4"></i>
-                      Registered Accounts
+                      Accounts
                     </h2>
                   </div>
                 </div>
@@ -170,7 +170,7 @@
                   <!-- Registered Accounts Archive Section (inside container) -->
                   <div id="showRecord" class="mt-4 hidden">
                     <!-- Search Bar -->
-                    <div>
+                    <div class="mb-6">
                       <input
                         type="text"
                         id="searchInput"
@@ -180,41 +180,208 @@
                       />
                     </div>
                     <!-- End Search Bar -->
-                    <div class="bg-white rounded-xl shadow-md p-6 space-y-6">
-                      <h3 class="text-lg font-semibold text-gray-700">
-                        Registered Accounts Records
-                      </h3>
 
-                      <!-- Registered Accounts Table -->
-                      <div class="overflow-x-auto">
-                        <table
-                          id="registeredTable"
-                          class="min-w-full border border-gray-200 rounded"
+                    <!-- Tab Navigation -->
+                    <div class="mb-6">
+                      <div
+                        class="flex flex-wrap gap-2 border-b border-gray-200"
+                      >
+                        <button
+                          id="tab-pending"
+                          class="px-4 py-2 text-sm font-medium text-yellow-600 border-b-2 border-yellow-600 bg-yellow-50 rounded-t-lg"
+                          onclick="switchTab('pending')"
                         >
-                          <thead class="bg-gray-100">
-                            <tr
-                              class="text-left text-sm font-medium text-gray-600"
-                            >
-                              <th class="py-2 px-4 border-b">Full Name</th>
-                              <th class="py-2 px-4 border-b">Email</th>
-                              <th class="py-2 px-4 border-b">Username</th>
-                            </tr>
-                          </thead>
-                          <tbody id="registeredTableBody">
-                            <!-- Data will be populated by JavaScript -->
-                          </tbody>
-                        </table>
+                          <i class="fas fa-clock mr-2"></i>
+                          Pending Accounts
+                          <span
+                            id="pendingCount"
+                            class="ml-2 text-xs px-2 py-1 rounded-full"
+                            >0</span
+                          >
+                        </button>
+                        <button
+                          id="tab-registered"
+                          class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-green-600 hover:bg-green-50 rounded-t-lg"
+                          onclick="switchTab('registered')"
+                        >
+                          <i class="fas fa-check-circle mr-2"></i>
+                          Registered Accounts
+                          <span
+                            id="registeredTabCount"
+                            class="ml-2 text-xs px-2 py-1 rounded-full"
+                            >0</span
+                          >
+                        </button>
+                        <button
+                          id="tab-cancelled"
+                          class="px-4 py-2 text-sm font-medium text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-t-lg"
+                          onclick="switchTab('cancelled')"
+                        >
+                          <i class="fas fa-times-circle mr-2"></i>
+                          Cancelled Accounts
+                          <span
+                            id="cancelledCount"
+                            class="ml-2 text-xs px-2 py-1 rounded-full"
+                            >0</span
+                          >
+                        </button>
                       </div>
-                      <!-- End Registered Accounts Table -->
                     </div>
-                    <!-- End bg-white rounded-xl shadow-md -->
-                    <!-- Pagination Controls -->
-                    <div
-                      id="paginationControls"
-                      class="flex justify-center mt-4 gap-2 text-sm font-medium"
-                    >
-                      <!-- Buttons will be injected here by JavaScript -->
+                    <!-- End Tab Navigation -->
+
+                    <!-- Tab Content -->
+                    <div id="tabContent">
+                      <!-- PENDING ACCOUNTS TAB -->
+                      <div id="content-pending" class="tab-content">
+                        <div
+                          class="bg-white rounded-xl shadow-md p-6 space-y-6"
+                        >
+                          <div
+                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0"
+                          >
+                            <h3
+                              class="text-lg font-semibold text-yellow-600 flex items-center"
+                            >
+                              <i class="fas fa-clock mr-2"></i>
+                              Pending Accounts
+                            </h3>
+                            <div class="text-sm text-gray-600">
+                              Awaiting approval:
+                              <span id="pendingCountDisplay">0</span>
+                            </div>
+                          </div>
+                          <div class="overflow-x-auto">
+                            <table
+                              class="min-w-full border border-gray-200 rounded"
+                            >
+                              <thead class="bg-yellow-100">
+                                <tr
+                                  class="text-left text-sm font-medium text-gray-600"
+                                >
+                                  <th class="py-3 px-4 border-b">Full Name</th>
+                                  <th class="py-3 px-4 border-b">Email</th>
+                                  <th class="py-3 px-4 border-b">Username</th>
+                                  <th class="py-3 px-4 border-b">Status</th>
+                                  <th class="py-3 px-4 border-b text-center">
+                                    Action
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody id="pendingTableBody">
+                                <!-- Filled by JS -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- REGISTERED ACCOUNTS TAB -->
+                      <div id="content-registered" class="tab-content hidden">
+                        <div
+                          class="bg-white rounded-xl shadow-md p-6 space-y-6"
+                        >
+                          <div
+                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0"
+                          >
+                            <h3
+                              class="text-lg font-semibold text-green-600 flex items-center"
+                            >
+                              <i class="fas fa-check-circle mr-2"></i>
+                              Registered Accounts
+                            </h3>
+                            <div class="text-sm text-gray-600">
+                              Total approved:
+                              <span id="registeredCountDisplay">0</span>
+                            </div>
+                          </div>
+
+                          <!-- Registered Accounts Table -->
+                          <div class="overflow-x-auto">
+                            <table
+                              id="registeredTable"
+                              class="min-w-full border border-gray-200 rounded"
+                            >
+                              <thead class="bg-green-100">
+                                <tr
+                                  class="text-left text-sm font-medium text-gray-600"
+                                >
+                                  <th class="py-3 px-4 border-b">Full Name</th>
+                                  <th class="py-3 px-4 border-b">Email</th>
+                                  <th class="py-3 px-4 border-b">Username</th>
+                                  <th class="py-3 px-4 border-b">Status</th>
+                                  <th class="py-3 px-4 border-b">
+                                    Date Registered
+                                  </th>
+                                  <th class="py-3 px-4 border-b text-center">
+                                    Action
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody id="registeredTableBody">
+                                <!-- Data will be populated by JavaScript -->
+                              </tbody>
+                            </table>
+                          </div>
+                          <!-- End Registered Accounts Table -->
+
+                          <!-- Pagination Controls -->
+                          <div
+                            id="paginationControls"
+                            class="flex justify-center mt-4 gap-2 text-sm font-medium"
+                          >
+                            <!-- Buttons will be injected here by JavaScript -->
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- CANCELLED ACCOUNTS TAB -->
+                      <div id="content-cancelled" class="tab-content hidden">
+                        <div
+                          class="bg-white rounded-xl shadow-md p-6 space-y-6"
+                        >
+                          <div
+                            class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0"
+                          >
+                            <h3
+                              class="text-lg font-semibold text-red-600 flex items-center"
+                            >
+                              <i class="fas fa-times-circle mr-2"></i>
+                              Cancelled Accounts
+                            </h3>
+                            <div class="text-sm text-gray-600">
+                              Total cancelled:
+                              <span id="cancelledCountDisplay">0</span>
+                            </div>
+                          </div>
+                          <div class="overflow-x-auto">
+                            <table
+                              class="min-w-full border border-gray-200 rounded"
+                            >
+                              <thead class="bg-red-100">
+                                <tr
+                                  class="text-left text-sm font-medium text-gray-600"
+                                >
+                                  <th class="py-3 px-4 border-b">Full Name</th>
+                                  <th class="py-3 px-4 border-b">Email</th>
+                                  <th class="py-3 px-4 border-b">Username</th>
+                                  <th class="py-3 px-4 border-b">Status</th>
+                                  <th class="py-3 px-4 border-b">
+                                    Date Cancelled
+                                  </th>
+                                  <th class="py-3 px-4 border-b text-center">
+                                    Action
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody id="cancelledTableBody">
+                                <!-- Filled by JS -->
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+                    <!-- End Tab Content -->
                   </div>
                   <!-- End Section -->
                 </div>
@@ -276,6 +443,46 @@
                 class="w-full sm:w-auto px-4 py-2 text-sm bg-green-600 text-white rounded hover:bg-green-700"
               >
                 Confirm
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div
+          id="confirmationModal"
+          class="fixed inset-0 z-50 hidden bg-black/70 justify-center items-center px-4 sm:px-6"
+        >
+          <div
+            class="bg-white rounded-2xl p-6 sm:p-8 shadow-lg w-full max-w-md text-center animate-fade-in"
+          >
+            <!-- Icon and Title -->
+            <div class="text-yellow-500 text-4xl sm:text-5xl mb-4">
+              <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold mb-2">Are you sure?</h2>
+            <p
+              id="confirmationMessage"
+              class="text-gray-600 mb-6 text-sm sm:text-base"
+            >
+              Do you really want to perform this action?
+            </p>
+
+            <!-- Buttons -->
+            <div
+              class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4"
+            >
+              <button
+                id="confirmActionBtn"
+                class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-md flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
+              >
+                <i class="fas fa-check-circle"></i> Continue
+              </button>
+              <button
+                id="cancelActionBtn"
+                class="bg-gray-400 hover:bg-gray-500 text-white px-5 py-2.5 rounded-md flex items-center justify-center gap-2 transition-colors w-full sm:w-auto"
+              >
+                <i class="fas fa-times-circle"></i> Cancel
               </button>
             </div>
           </div>
@@ -356,7 +563,79 @@
                   <span class="font-medium">Username:</span>
                   <span id="modalUsername"></span>
                 </p>
+
+                <!-- Attachment Section -->
+                <div class="mt-4 space-y-4" id="residentAttachments">
+                  <h4 class="text-sm font-semibold text-gray-700">
+                    Attachments
+                  </h4>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label class="text-xs text-gray-500 block mb-1"
+                        >Valid ID</label
+                      >
+                      <img
+                        id="validIdPreview"
+                        src=""
+                        alt="Valid ID"
+                        class="w-full h-40 object-cover border rounded shadow mb-2"
+                      />
+                      <a
+                        id="validIdLink"
+                        href="#"
+                        target="_blank"
+                        class="text-green-500 text-xs hover:underline"
+                        >View Full Image</a
+                      >
+                    </div>
+
+                    <div>
+                      <label class="text-xs text-gray-500 block mb-1"
+                        >Proof of Residency</label
+                      >
+                      <img
+                        id="residencyProofPreview"
+                        src=""
+                        alt="Proof of Residency"
+                        class="w-full h-40 object-cover border rounded shadow mb-2"
+                      />
+                      <a
+                        id="residencyProofLink"
+                        href="#"
+                        target="_blank"
+                        class="text-green -500 text-xs hover:underline"
+                        >View Full Image</a
+                      >
+                    </div>
+                  </div>
+                </div>
                 <!-- You can add more fields here as needed -->
+              </div>
+              <!-- Action buttons section (add this before the close button) -->
+              <div
+                id="modalActionButtons"
+                class="mt-6 pt-4 border-t border-gray-200 hidden"
+              >
+                <div class="flex gap-3 justify-end">
+                  <button
+                    id="modalApproveBtn"
+                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors hidden"
+                  >
+                    Approve
+                  </button>
+                  <button
+                    id="modalRejectBtn"
+                    class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors hidden"
+                  >
+                    Reject
+                  </button>
+                  <button
+                    id="modalRemoveBtn"
+                    class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors hidden"
+                  >
+                    Remove
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -368,413 +647,878 @@
     <!-- End flex min-h-screen -->
 
     <script>
-      // Resident data stored in JavaScript
-      const residentsData = [
+      // Global variables
+      let currentTab = "pending";
+      let currentPage = 1;
+      const itemsPerPage = 10;
+      let allResidents = [];
+      let filteredResidents = [];
+      let selectedAction = null;
+      let currentResidentId = null;
+
+      // Sample data for demonstration
+      const sampleResidents = [
         {
-          fullname: "France Justine Evangelista",
-          age: "26",
-          birthday: "1998-04-20",
+          id: 1,
+          fullName: "Juan Dela Cruz",
+          age: 35,
+          birthday: "1988-05-15",
           sex: "Male",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Christian",
-          address: "Brgy. Market Area",
-          contact: "09170111222",
-          email: "france.evangelista@example.com",
-          username: "fevangelista",
-        },
-        {
-          fullname: "Ronald Allan Evasco",
-          age: "34",
-          birthday: "1990-09-12",
-          sex: "Male",
-          civilstatus: "Married",
+          civilStatus: "Married",
           nationality: "Filipino",
           religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170222333",
-          email: "ronald.evasco@example.com",
-          username: "revasco",
+          address: "123 Main St, Barangay Market Area",
+          contact: "09123456789",
+          email: "juan.delacruz@email.com",
+          username: "juandc",
+          validIdUrl: "BHALL.jpg",
+          residencyProofUrl: "BHALL.jpg",
+          status: "pending",
+          dateRegistered: "2024-01-15",
+          dateCancelled: null,
         },
         {
-          fullname: "Kert Daryl Macalinao",
-          age: "22",
-          birthday: "2002-06-21",
-          sex: "Male",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170333444",
-          email: "kert.macalinao@example.com",
-          username: "kdmacalinao",
-        },
-        {
-          fullname: "Nash Dave Mendo",
-          age: "25",
-          birthday: "1999-11-05",
-          sex: "Male",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Christian",
-          address: "Brgy. Market Area",
-          contact: "09170444555",
-          email: "nash.mendo@example.com",
-          username: "nmendo",
-        },
-        {
-          fullname: "Matt Clyde Cabral",
-          age: "28",
-          birthday: "1996-02-18",
-          sex: "Male",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170555666",
-          email: "matt.cabral@example.com",
-          username: "mcabral",
-        },
-        {
-          fullname: "John Errold Satsatin",
-          age: "30",
-          birthday: "1994-01-07",
-          sex: "Male",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170666777",
-          email: "john.satsatin@example.com",
-          username: "jsatsatin",
-        },
-        {
-          fullname: "Maria Elena Cruz",
-          age: "29",
-          birthday: "1995-03-15",
+          id: 2,
+          fullName: "Maria Santos",
+          age: 28,
+          birthday: "1995-08-22",
           sex: "Female",
-          civilstatus: "Married",
+          civilStatus: "Single",
           nationality: "Filipino",
           religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170777888",
-          email: "maria.cruz@example.com",
-          username: "mcruz",
+          address: "456 Second St, Barangay Market Area",
+          contact: "09234567890",
+          email: "maria.santos@email.com",
+          username: "mariasantos",
+          status: "registered",
+          validIdUrl: "assets/ids/juan-id.jpg",
+          residencyProofUrl: "assets/proofs/juan-proof.jpg",
+          dateRegistered: "2024-01-10",
+          dateCancelled: null,
         },
         {
-          fullname: "Ana Rose Santos",
-          age: "24",
-          birthday: "2000-08-12",
-          sex: "Female",
-          civilstatus: "Single",
-          nationality: "Filipino",
-          religion: "Christian",
-          address: "Brgy. Market Area",
-          contact: "09170888999",
-          email: "ana.santos@example.com",
-          username: "asantos",
-        },
-        {
-          fullname: "Jose Miguel Torres",
-          age: "35",
-          birthday: "1989-12-03",
+          id: 3,
+          fullName: "Pedro Rodriguez",
+          age: 42,
+          birthday: "1981-12-03",
           sex: "Male",
-          civilstatus: "Married",
+          civilStatus: "Married",
           nationality: "Filipino",
-          religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170999000",
-          email: "jose.torres@example.com",
-          username: "jtorres",
+          religion: "Protestant",
+          address: "789 Third Ave, Barangay Market Area",
+          contact: "09345678901",
+          email: "pedro.rodriguez@email.com",
+          username: "pedrorod",
+          status: "cancelled",
+          validIdUrl: "assets/ids/juan-id.jpg",
+          residencyProofUrl: "assets/proofs/juan-proof.jpg",
+          dateRegistered: "2024-01-05",
+          dateCancelled: "2024-01-20",
         },
         {
-          fullname: "Carmen Isabel Reyes",
-          age: "27",
-          birthday: "1997-07-08",
+          id: 4,
+          fullName: "Ana Reyes",
+          age: 31,
+          birthday: "1992-03-18",
           sex: "Female",
-          civilstatus: "Single",
+          civilStatus: "Widowed",
           nationality: "Filipino",
           religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170000111",
-          email: "carmen.reyes@example.com",
-          username: "creyes",
+          address: "321 Fourth St, Barangay Market Area",
+          contact: "09456789012",
+          email: "ana.reyes@email.com",
+          username: "anareyes",
+          status: "pending",
+          validIdUrl: "assets/ids/juan-id.jpg",
+          residencyProofUrl: "assets/proofs/juan-proof.jpg",
+          dateRegistered: "2024-01-18",
+          dateCancelled: null,
         },
         {
-          fullname: "Carmen Isabel Reyes",
-          age: "27",
-          birthday: "1997-07-08",
-          sex: "Female",
-          civilstatus: "Single",
+          id: 5,
+          fullName: "Carlos Mendoza",
+          age: 38,
+          birthday: "1985-07-11",
+          sex: "Male",
+          civilStatus: "Single",
           nationality: "Filipino",
           religion: "Catholic",
-          address: "Brgy. Market Area",
-          contact: "09170000111",
-          email: "carmen.reyes@example.com",
-          username: "creyes",
+          address: "654 Fifth Ave, Barangay Market Area",
+          contact: "09567890123",
+          email: "carlos.mendoza@email.com",
+          username: "carlosmendoza",
+          status: "registered",
+          validIdUrl: "assets/ids/juan-id.jpg",
+          residencyProofUrl: "assets/proofs/juan-proof.jpg",
+          dateRegistered: "2024-01-12",
+          dateCancelled: null,
         },
       ];
 
-      let filteredResidents = [...residentsData];
-      let showingRecords = false;
-      let selectedResidentRow = null;
+      // Initialize the application
+      document.addEventListener("DOMContentLoaded", function () {
+        initializeApp();
+      });
 
-      // Function to populate table with resident data
-      function populateTable() {
-        const tbody = document.getElementById("registeredTableBody");
-        tbody.innerHTML = "";
+      function initializeApp() {
+        // Load sample data
+        allResidents = [...sampleResidents];
+        filteredResidents = [...allResidents];
 
-        filteredResidents.forEach((resident, index) => {
-          const row = document.createElement("tr");
-          row.className = "cursor-pointer hover:bg-gray-100";
-          row.onclick = function () {
-            openModal(resident);
-          };
+        // Initialize UI elements
+        initializeSidebar();
+        initializeRealTimeClock();
+        updateCounts();
 
-          row.innerHTML = `
-            <td class="py-2 px-4 ">${resident.fullname}</td>
-            <td class="py-2 px-4 ">${resident.email}</td>
-            <td class="py-2 px-4 ">${resident.username}</td>
-          `;
-
-          tbody.appendChild(row);
-        });
-
-        updateRegisteredCount();
-        paginateTable();
+        // Set default tab
+        switchTab("pending");
       }
 
-      // Improved search function that respects letter order, spaces, and special characters
-      function searchResidents() {
-        const searchTerm = document.getElementById("searchInput").value.trim();
+      // Sidebar functionality
+      function initializeSidebar() {
+        const openSidebarBtn = document.getElementById("openSidebar");
+        const closeSidebarBtn = document.getElementById("closeSidebar");
+        const sidebar = document.getElementById("sidebar");
 
-        if (searchTerm === "") {
-          filteredResidents = [...residentsData];
-        } else {
-          filteredResidents = residentsData.filter((resident) => {
-            return matchesSearch(resident.fullname, searchTerm);
+        if (openSidebarBtn && sidebar) {
+          openSidebarBtn.addEventListener("click", function () {
+            sidebar.classList.remove("-translate-x-full");
           });
         }
 
-        currentPage = 1; // Reset to first page
-        populateTable();
-      }
-
-      // Advanced search matching function
-      function matchesSearch(fullName, searchTerm) {
-        // Convert both to lowercase for case-insensitive comparison
-        const name = fullName.toLowerCase();
-        const search = searchTerm.toLowerCase();
-
-        // Simple contains check (existing functionality)
-        if (name.includes(search)) {
-          return true;
+        if (closeSidebarBtn && sidebar) {
+          closeSidebarBtn.addEventListener("click", function () {
+            sidebar.classList.add("-translate-x-full");
+          });
         }
 
-        // Check if search term matches the beginning of any word
-        const nameWords = name.split(/\s+/);
-        for (let word of nameWords) {
-          if (word.startsWith(search)) {
-            return true;
+        // Close sidebar when clicking outside on mobile
+        if (sidebar) {
+          document.addEventListener("click", function (event) {
+            if (window.innerWidth < 768) {
+              if (
+                !sidebar.contains(event.target) &&
+                openSidebarBtn &&
+                !openSidebarBtn.contains(event.target)
+              ) {
+                sidebar.classList.add("-translate-x-full");
+              }
+            }
+          });
+        }
+      }
+
+      // Real-time clock
+      function initializeRealTimeClock() {
+        function updateClock() {
+          const now = new Date();
+          const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: true,
+          };
+          const timeString = now.toLocaleDateString("en-US", options);
+          const clockElement = document.getElementById("realTimeClock");
+          if (clockElement) {
+            clockElement.textContent = timeString;
           }
         }
 
-        // Check for sequential character matching (respecting order)
-        let searchIndex = 0;
-        for (let i = 0; i < name.length && searchIndex < search.length; i++) {
-          if (name[i] === search[searchIndex]) {
-            searchIndex++;
-          }
-        }
-
-        // If we've matched all characters in order, it's a match
-        if (searchIndex === search.length) {
-          return true;
-        }
-
-        // Check for initials matching (e.g., "fje" matches "France Justine Evangelista")
-        const initials = nameWords.map((word) => word[0]).join("");
-        if (initials.includes(search)) {
-          return true;
-        }
-
-        return false;
+        updateClock();
+        setInterval(updateClock, 1000);
       }
 
+      // Show/Hide record functionality
       function handleRecordButtonClick() {
-        if (!showingRecords) {
-          // Ask for password only when trying to show
-          openPasswordModal();
-        } else {
-          // Hide without password
-          showingRecords = false;
-          toggleRecord(false);
+        const showRecord = document.getElementById("showRecord");
+
+        // If records are already visible, hide them without password
+        if (!showRecord.classList.contains("hidden")) {
+          showRecord.classList.add("hidden");
+          const btn = document.getElementById("showRecordBtn");
+          btn.textContent = "Show Record";
+          btn.classList.remove("bg-red-500", "hover:bg-red-600");
+          btn.classList.add("bg-green-600", "hover:bg-green-700");
+          return;
+        }
+
+        // Otherwise, prompt for password first
+        currentResidentId = null; // ensure not viewing a resident
+        const modal = document.getElementById("passwordModal");
+        if (modal) {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+
+          const passwordInput = document.getElementById("adminPasswordInput");
+          const passwordError = document.getElementById("passwordError");
+
+          if (passwordInput) passwordInput.value = "";
+          if (passwordError) passwordError.classList.add("hidden");
         }
       }
 
-      function openPasswordModal() {
-        document.getElementById("adminPasswordInput").value = "";
-        document.getElementById("passwordError").classList.add("hidden");
+      // Tab switching functionality
+      function switchTab(tabName) {
+        currentTab = tabName;
+        currentPage = 1;
 
-        const modal = document.getElementById("passwordModal");
-        modal.classList.remove("hidden");
-        modal.classList.add("flex"); // Only add flex when showing
-      }
+        // Update tab buttons
+        const tabs = ["pending", "registered", "cancelled"];
+        tabs.forEach((tab) => {
+          const tabButton = document.getElementById(`tab-${tab}`);
+          const tabContent = document.getElementById(`content-${tab}`);
 
-      function openModal(resident) {
-        selectedResidentRow = resident;
-        document.getElementById("adminPasswordInput").value = "";
-        document.getElementById("passwordError").classList.add("hidden");
-        document.getElementById("passwordModal").classList.remove("hidden");
-      }
-      function closePasswordModal() {
-        const modal = document.getElementById("passwordModal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex"); // Remove flex when hiding
+          // Reset count badge styles
+          const countSpan = document.getElementById(
+            tab === "registered" ? "registeredTabCount" : `${tab}Count`
+          );
 
-        selectedResidentRow = null;
-      }
-
-      function verifyPassword() {
-        const password = document
-          .getElementById("adminPasswordInput")
-          .value.trim();
-
-        if (password !== "") {
-          // Proceed even if any password is entered (for now)
-          document.getElementById("passwordModal").classList.add("hidden");
-
-          if (selectedResidentRow) {
-            // If this came from clicking a resident row
-            showResidentModal(selectedResidentRow);
-            selectedResidentRow = null;
-          } else {
-            // If this came from clicking the "Show Record" button
-            showingRecords = true;
-            toggleRecord(true);
+          if (countSpan) {
+            if (tab === tabName) {
+              // Active tab: apply original colored styles
+              if (tab === "pending") {
+                countSpan.className =
+                  "ml-2 bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full";
+              } else if (tab === "registered") {
+                countSpan.className =
+                  "ml-2 bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full";
+              } else if (tab === "cancelled") {
+                countSpan.className =
+                  "ml-2 bg-red-100 text-red-800 text-xs px-2 py-1 rounded-full";
+              }
+            } else {
+              // Inactive tab: remove background/text color
+              countSpan.className =
+                " bg-gray-200 ml-2 text-xs px-2 py-1 rounded-full"; // No bg or color
+            }
           }
-        } else {
-          document.getElementById("passwordError").classList.remove("hidden");
+
+          if (tabButton && tabContent) {
+            if (tab === tabName) {
+              // Active tab styling
+              tabButton.classList.remove(
+                "text-gray-600",
+                "hover:text-green-600",
+                "hover:bg-green-50",
+                "hover:text-red-600",
+                "hover:bg-red-50"
+              );
+              tabContent.classList.remove("hidden");
+
+              if (tab === "pending") {
+                tabButton.classList.add(
+                  "text-yellow-600",
+                  "border-b-2",
+                  "border-yellow-600",
+                  "bg-yellow-50"
+                );
+              } else if (tab === "registered") {
+                tabButton.classList.add(
+                  "text-green-600",
+                  "border-b-2",
+                  "border-green-600",
+                  "bg-green-50"
+                );
+              } else if (tab === "cancelled") {
+                tabButton.classList.add(
+                  "text-red-600",
+                  "border-b-2",
+                  "border-red-600",
+                  "bg-red-50"
+                );
+              }
+            } else {
+              // Inactive tab styling
+              tabButton.classList.remove(
+                "text-yellow-600",
+                "border-b-2",
+                "border-yellow-600",
+                "bg-yellow-50",
+                "text-green-600",
+                "border-green-600",
+                "bg-green-50",
+                "text-red-600",
+                "border-red-600",
+                "bg-red-50"
+              );
+              tabButton.classList.add("text-gray-600");
+              tabContent.classList.add("hidden");
+
+              if (tab === "registered") {
+                tabButton.classList.add(
+                  "hover:text-green-600",
+                  "hover:bg-green-50"
+                );
+              } else if (tab === "cancelled") {
+                tabButton.classList.add(
+                  "hover:text-red-600",
+                  "hover:bg-red-50"
+                );
+              }
+            }
+          }
+        });
+
+        // Load data for the selected tab
+        loadTabData();
+      }
+
+      // Load data for current tab
+      function loadTabData() {
+        const searchInput = document.getElementById("searchInput");
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
+
+        // Filter residents based on current tab and search term
+        filteredResidents = allResidents.filter((resident) => {
+          const matchesTab = resident.status === currentTab;
+          const matchesSearch =
+            resident.fullName.toLowerCase().includes(searchTerm) ||
+            resident.email.toLowerCase().includes(searchTerm) ||
+            resident.username.toLowerCase().includes(searchTerm);
+          return matchesTab && matchesSearch;
+        });
+
+        if (currentTab === "pending") {
+          loadPendingAccounts();
+        } else if (currentTab === "registered") {
+          loadRegisteredAccounts();
+        } else if (currentTab === "cancelled") {
+          loadCancelledAccounts();
+        }
+
+        updateCounts();
+      }
+
+      // Load pending accounts
+      function loadPendingAccounts() {
+        const tbody = document.getElementById("pendingTableBody");
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        filteredResidents.forEach((resident) => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-yellow-50 border-b cursor-pointer";
+          row.onclick = () => showResidentModal(resident.id);
+          row.innerHTML = `
+      <td class="py-3 px-4 font-medium">${resident.fullName}</td>
+      <td class="py-3 px-4">${resident.email}</td>
+      <td class="py-3 px-4">${resident.username}</td>
+      <td class="py-3 px-4">
+          <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
+              Pending
+          </span>
+      </td>
+       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+    <div class="flex justify-center">
+      <button class="text-blue-500 hover:text-blue-700" onclick="showResidentModal(${resident.id})">
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </td>
+  `;
+          tbody.appendChild(row);
+        });
+      }
+
+      // Load registered accounts with pagination
+      function loadRegisteredAccounts() {
+        const tbody = document.getElementById("registeredTableBody");
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const paginatedResidents = filteredResidents.slice(
+          startIndex,
+          endIndex
+        );
+
+        paginatedResidents.forEach((resident) => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-green-50 border-b cursor-pointer";
+          row.onclick = () => showResidentModal(resident.id);
+          row.innerHTML = `
+<td class="py-3 px-4 font-medium">${resident.fullName}</td>
+<td class="py-3 px-4">${resident.email}</td>
+<td class="py-3 px-4">${resident.username}</td>
+<td class="py-3 px-4">
+    <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
+        Registered
+    </span>
+</td>
+<td class="py-3 px-4">${resident.dateRegistered}</td>
+ <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+    <div class="flex justify-center">
+      <button class="text-blue-500 hover:text-blue-700" onclick="showResidentModal(${resident.id})">
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </td>
+`;
+          tbody.appendChild(row);
+        });
+
+        updatePaginationControls();
+      }
+
+      // Load cancelled accounts
+      function loadCancelledAccounts() {
+        const tbody = document.getElementById("cancelledTableBody");
+        if (!tbody) return;
+
+        tbody.innerHTML = "";
+
+        filteredResidents.forEach((resident) => {
+          const row = document.createElement("tr");
+          row.className = "hover:bg-red-50 border-b cursor-pointer";
+          row.onclick = () => showResidentModal(resident.id);
+          row.innerHTML = `
+      <td class="py-3 px-4 font-medium">${resident.fullName}</td>
+      <td class="py-3 px-4">${resident.email}</td>
+      <td class="py-3 px-4">${resident.username}</td>
+      <td class="py-3 px-4">
+          <span class="px-2 py-1 text-xs rounded-full bg-red-100 text-red-800">
+              Cancelled
+          </span>
+      </td>
+      <td class="py-3 px-4">${resident.dateCancelled || "N/A"}</td>
+       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center">
+    <div class="flex justify-center">
+      <button class="text-blue-500 hover:text-blue-700" onclick="showResidentModal(${
+        resident.id
+      })">
+        <i class="fas fa-eye"></i>
+      </button>
+    </div>
+  </td>
+  `;
+          tbody.appendChild(row);
+        });
+      }
+
+      // Update pagination controls
+      function updatePaginationControls() {
+        const totalPages = Math.ceil(filteredResidents.length / itemsPerPage);
+        const paginationControls =
+          document.getElementById("paginationControls");
+
+        if (!paginationControls) return;
+
+        paginationControls.innerHTML = "";
+
+        if (totalPages <= 1) return;
+
+        // Previous button
+        const prevBtn = document.createElement("button");
+        prevBtn.className = `px-3 py-1 rounded ${
+          currentPage === 1
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+        }`;
+        prevBtn.textContent = "Previous";
+        prevBtn.disabled = currentPage === 1;
+        prevBtn.onclick = () => {
+          if (currentPage > 1) {
+            currentPage--;
+            loadTabData();
+          }
+        };
+        paginationControls.appendChild(prevBtn);
+
+        // Page numbers
+        for (let i = 1; i <= totalPages; i++) {
+          const pageBtn = document.createElement("button");
+          pageBtn.className = `px-3 py-1 rounded ${
+            i === currentPage
+              ? "bg-green-600 text-white"
+              : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+          }`;
+          pageBtn.textContent = i;
+          pageBtn.onclick = () => {
+            currentPage = i;
+            loadTabData();
+          };
+          paginationControls.appendChild(pageBtn);
+        }
+
+        // Next button
+        const nextBtn = document.createElement("button");
+        nextBtn.className = `px-3 py-1 rounded ${
+          currentPage === totalPages
+            ? "bg-gray-200 text-gray-400 cursor-not-allowed"
+            : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-50"
+        }`;
+        nextBtn.textContent = "Next";
+        nextBtn.disabled = currentPage === totalPages;
+        nextBtn.onclick = () => {
+          if (currentPage < totalPages) {
+            currentPage++;
+            loadTabData();
+          }
+        };
+        paginationControls.appendChild(nextBtn);
+      }
+
+      // Update counts
+      function updateCounts() {
+        const pendingCount = allResidents.filter(
+          (r) => r.status === "pending"
+        ).length;
+        const registeredCount = allResidents.filter(
+          (r) => r.status === "registered"
+        ).length;
+        const cancelledCount = allResidents.filter(
+          (r) => r.status === "cancelled"
+        ).length;
+
+        // Update count displays
+        const elements = [
+          { id: "registeredCount", count: registeredCount },
+          { id: "pendingCount", count: pendingCount },
+          { id: "registeredTabCount", count: registeredCount },
+          { id: "cancelledCount", count: cancelledCount },
+          { id: "pendingCountDisplay", count: pendingCount },
+          { id: "registeredCountDisplay", count: registeredCount },
+          { id: "cancelledCountDisplay", count: cancelledCount },
+        ];
+
+        elements.forEach(({ id, count }) => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.textContent = count;
+          }
+        });
+      }
+
+      // Search functionality
+      function searchResidents() {
+        loadTabData();
+      }
+
+      // Show password modal first when clicking on a resident
+      function showResidentModal(id) {
+        currentResidentId = id;
+        const modal = document.getElementById("passwordModal");
+        if (modal) {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+
+          const passwordInput = document.getElementById("adminPasswordInput");
+          const passwordError = document.getElementById("passwordError");
+
+          if (passwordInput) passwordInput.value = "";
+          if (passwordError) passwordError.classList.add("hidden");
         }
       }
 
-      function showResidentModal(resident) {
-        document.getElementById("modalFullName").textContent =
-          resident.fullname;
-        document.getElementById("modalAge").textContent = resident.age;
-        document.getElementById("modalBirthday").textContent =
-          resident.birthday;
-        document.getElementById("modalSex").textContent = resident.sex;
-        document.getElementById("modalCivilStatus").textContent =
-          resident.civilstatus;
-        document.getElementById("modalNationality").textContent =
-          resident.nationality;
-        document.getElementById("modalReligion").textContent =
-          resident.religion;
-        document.getElementById("modalAddress").textContent = resident.address;
-        document.getElementById("modalContact").textContent = resident.contact;
-        document.getElementById("modalEmail").textContent = resident.email;
-        document.getElementById("modalUsername").textContent =
-          resident.username;
+      // Modified to show resident details after password verification
+      function verifyPassword() {
+        // For now, no password is required - proceed directly
+        closePasswordModal();
+        if (currentResidentId !== null) {
+          viewResident(currentResidentId);
+        } else {
+          // Show the record section after password entry
+          const showRecord = document.getElementById("showRecord");
+          const showRecordBtn = document.getElementById("showRecordBtn");
+          if (showRecord && showRecordBtn) {
+            showRecord.classList.remove("hidden");
+            showRecordBtn.textContent = "Hide Record";
+            showRecordBtn.classList.remove(
+              "bg-green-600",
+              "hover:bg-green-700"
+            );
+            showRecordBtn.classList.add("bg-red-500", "hover:bg-red-600");
+            loadTabData(); // populate the tabs
+          }
+        }
+      }
 
+      // Enhanced viewResident function with action buttons in modal
+      function viewResident(id) {
+        const resident = allResidents.find((r) => r.id === id);
+        if (!resident) return;
+
+        // Populate modal with resident data - check if elements exist
+        const modalElements = [
+          { id: "modalFullName", value: resident.fullName },
+          { id: "modalAge", value: resident.age },
+          { id: "modalBirthday", value: resident.birthday },
+          { id: "modalSex", value: resident.sex },
+          { id: "modalCivilStatus", value: resident.civilStatus },
+          { id: "modalNationality", value: resident.nationality },
+          { id: "modalReligion", value: resident.religion },
+          { id: "modalAddress", value: resident.address },
+          { id: "modalContact", value: resident.contact },
+          { id: "modalEmail", value: resident.email },
+          { id: "modalUsername", value: resident.username },
+        ];
+
+        modalElements.forEach(({ id, value }) => {
+          const element = document.getElementById(id);
+          if (element) {
+            element.textContent = value;
+          }
+        });
+
+        // Show attached images (Valid ID and Proof of Residency)
+        const validIdImg = document.getElementById("validIdPreview");
+        const residencyProofImg = document.getElementById(
+          "residencyProofPreview"
+        );
+        const validIdLink = document.getElementById("validIdLink");
+        const residencyProofLink =
+          document.getElementById("residencyProofLink");
+
+        if (validIdImg && validIdLink) {
+          const validUrl = resident.validIdUrl || "assets/default-id.png";
+          validIdImg.src = validUrl;
+          validIdLink.href = validUrl;
+        }
+
+        if (residencyProofImg && residencyProofLink) {
+          const proofUrl =
+            resident.residencyProofUrl || "assets/default-proof.png";
+          residencyProofImg.src = proofUrl;
+          residencyProofLink.href = proofUrl;
+        }
+
+        // Show/hide action buttons based on resident status
+        const modalActionButtons =
+          document.getElementById("modalActionButtons");
+        const approveBtn = document.getElementById("modalApproveBtn");
+        const rejectBtn = document.getElementById("modalRejectBtn");
+        const removeBtn = document.getElementById("modalRemoveBtn");
+
+        if (modalActionButtons && approveBtn && rejectBtn && removeBtn) {
+          if (resident.status === "pending") {
+            // Show approve and reject buttons for pending residents
+            modalActionButtons.classList.remove("hidden");
+            approveBtn.classList.remove("hidden");
+            rejectBtn.classList.remove("hidden");
+            removeBtn.classList.add("hidden");
+
+            // Set onclick handlers - show confirmation modal
+            approveBtn.onclick = () => {
+              closeModal();
+              showConfirmationModal("approve", id, resident.fullName);
+            };
+            rejectBtn.onclick = () => {
+              closeModal();
+              showConfirmationModal("reject", id, resident.fullName);
+            };
+          } else {
+            // Hide all action buttons for registered and cancelled residents
+            modalActionButtons.classList.add("hidden");
+          }
+        }
+
+        // Show modal
         const modal = document.getElementById("residentModal");
+        if (modal) {
+          modal.classList.remove("hidden");
+          modal.classList.add("flex");
+        }
+      }
+
+      // Direct action functions without password confirmation
+      function approveResident(id) {
+        const residentIndex = allResidents.findIndex((r) => r.id === id);
+        if (residentIndex === -1) return;
+
+        allResidents[residentIndex].status = "registered";
+        showNotification("Resident approved successfully!", "success");
+        loadTabData();
+      }
+
+      function rejectResident(id) {
+        const residentIndex = allResidents.findIndex((r) => r.id === id);
+        if (residentIndex === -1) return;
+
+        allResidents[residentIndex].status = "cancelled";
+        allResidents[residentIndex].dateCancelled = new Date()
+          .toISOString()
+          .split("T")[0];
+        showNotification("Resident rejected successfully!", "success");
+        loadTabData();
+      }
+
+      function removeResident(id) {
+        const residentIndex = allResidents.findIndex((r) => r.id === id);
+        if (residentIndex === -1) return;
+
+        allResidents[residentIndex].status = "cancelled";
+        allResidents[residentIndex].dateCancelled = new Date()
+          .toISOString()
+          .split("T")[0];
+        showNotification("Resident removed successfully!", "success");
+        loadTabData();
+      }
+
+      // Show confirmation modal for approve/reject actions
+      function showConfirmationModal(action, id, fullName) {
+        const modal = document.getElementById("confirmationModal");
+        if (!modal) return;
+
+        const actionText = action === "approve" ? "approve" : "reject";
+
+        // Update modal content
+        const confirmationMessage = document.getElementById(
+          "confirmationMessage"
+        );
+        const confirmButton = document.getElementById("confirmActionBtn");
+        const cancelButton = document.getElementById("cancelActionBtn");
+
+        if (confirmationMessage) {
+          confirmationMessage.textContent = `Are you sure you want to ${actionText} ${fullName}?`;
+        }
+
+        if (confirmButton) {
+          confirmButton.innerHTML = `${
+            action === "approve"
+              ? '<i class="fas fa-check-circle mr-2"></i> Approve'
+              : '<i class="fas fa-times-circle mr-2"></i> Reject'
+          }`;
+
+          confirmButton.className = `px-4 py-2 rounded-lg text-white font-medium ${
+            action === "approve"
+              ? "bg-green-600 hover:bg-green-700"
+              : "bg-red-500 hover:bg-red-600"
+          }`;
+
+          // Set onclick handler
+          confirmButton.onclick = () => {
+            closeConfirmationModal();
+            if (action === "approve") {
+              approveResident(id);
+            } else {
+              rejectResident(id);
+            }
+          };
+        }
+
+        if (cancelButton) {
+          cancelButton.onclick = () => {
+            closeConfirmationModal();
+            viewResident(id);
+          };
+        }
+
+        // Show modal
         modal.classList.remove("hidden");
         modal.classList.add("flex");
       }
 
+      // Close confirmation modal
+      function closeConfirmationModal() {
+        const modal = document.getElementById("confirmationModal");
+        if (modal) {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }
+      }
+
+      // Close resident modal
       function closeModal() {
         const modal = document.getElementById("residentModal");
-        modal.classList.add("hidden");
-        modal.classList.remove("flex");
+        if (modal) {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
+        }
+        currentResidentId = null;
       }
 
-      function toggleRecord(forceShow = false) {
-        const archive = document.getElementById("showRecord");
-        const btn = document.getElementById("showRecordBtn");
-
-        if (forceShow) {
-          archive.classList.remove("hidden");
-          if (btn) btn.textContent = "Hide Record";
-          populateTable(); // Populate table when showing
-        } else {
-          archive.classList.add("hidden");
-          if (btn) btn.textContent = "Show Record";
+      function closePasswordModal() {
+        const modal = document.getElementById("passwordModal");
+        if (modal) {
+          modal.classList.add("hidden");
+          modal.classList.remove("flex");
         }
       }
 
-      const rowsPerPage = 10;
-      let currentPage = 1;
+      // Notification system
+      function showNotification(message, type = "info") {
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
 
-      function paginateTable() {
-        const table = document.getElementById("registeredTable");
-        const rows = table.querySelectorAll("tbody tr");
-        const totalRows = rows.length;
-        const totalPages = Math.ceil(totalRows / rowsPerPage);
-
-        rows.forEach((row, index) => {
-          row.style.display =
-            index >= (currentPage - 1) * rowsPerPage &&
-            index < currentPage * rowsPerPage
-              ? ""
-              : "none";
-        });
-
-        renderPaginationButtons(totalPages);
-      }
-
-      function renderPaginationButtons(totalPages) {
-        const pagination = document.getElementById("paginationControls");
-        pagination.innerHTML = "";
-
-        if (totalPages <= 1) return;
-
-        // First button
-        const firstBtn = document.createElement("button");
-        firstBtn.textContent = "First";
-        firstBtn.className = buttonClass();
-        firstBtn.onclick = () => {
-          currentPage = 1;
-          paginateTable();
-        };
-        pagination.appendChild(firstBtn);
-
-        // Numbered page buttons
-        const maxVisible = 3;
-        let start = Math.max(1, currentPage - 1);
-        let end = Math.min(totalPages, start + maxVisible - 1);
-        if (end - start < maxVisible - 1) {
-          start = Math.max(1, end - maxVisible + 1);
+        // Set notification style based on type
+        switch (type) {
+          case "success":
+            notification.classList.add("bg-green-500", "text-white");
+            break;
+          case "error":
+            notification.classList.add("bg-red-500", "text-white");
+            break;
+          case "warning":
+            notification.classList.add("bg-yellow-500", "text-white");
+            break;
+          default:
+            notification.classList.add("bg-blue-500", "text-white");
         }
 
-        for (let i = start; i <= end; i++) {
-          const btn = document.createElement("button");
-          btn.textContent = i;
-          btn.className = i === currentPage ? buttonClass(true) : buttonClass();
-          btn.onclick = () => {
-            currentPage = i;
-            paginateTable();
-          };
-          pagination.appendChild(btn);
+        notification.innerHTML = `
+  <div class="flex items-center justify-between">
+      <span>${message}</span>
+  </div>
+`;
+
+        document.body.appendChild(notification);
+
+        // Get timer element
+        const timerElement = notification.querySelector('[id^="timer-"]');
+        let countdown = 3;
+
+        // Update timer every second
+        const timerInterval = setInterval(() => {
+          countdown--;
+          if (timerElement && countdown > 0) {
+            timerElement.textContent = countdown;
+          }
+        }, 1000);
+
+        // Animate in
+        setTimeout(() => {
+          notification.classList.remove("translate-x-full");
+        }, 100);
+
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+          clearInterval(timerInterval);
+          notification.classList.add("translate-x-full");
+          setTimeout(() => {
+            if (notification.parentElement) {
+              notification.remove();
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      // Keyboard event listeners
+      document.addEventListener("keydown", function (event) {
+        // Close modals with Escape key
+        if (event.key === "Escape") {
+          closeModal();
+          closePasswordModal();
+          closeConfirmationModal();
         }
 
-        // Last button
-        const lastBtn = document.createElement("button");
-        lastBtn.textContent = "Last";
-        lastBtn.className = buttonClass();
-        lastBtn.onclick = () => {
-          currentPage = totalPages;
-          paginateTable();
-        };
-        pagination.appendChild(lastBtn);
-      }
-
-      function buttonClass(active = false) {
-        return `px-4 py-2 rounded ${
-          active
-            ? "bg-green-600 text-white"
-            : "bg-gray-200 text-gray-700 hover:bg-green-500 hover:text-white"
-        }`;
-      }
+        // Submit password with Enter key
+        const passwordModal = document.getElementById("passwordModal");
+        if (
+          event.key === "Enter" &&
+          passwordModal &&
+          passwordModal.classList.contains("flex")
+        ) {
+          verifyPassword();
+        }
+      });
 
       function updateDateTime() {
         const now = new Date();
@@ -786,31 +1530,6 @@
         };
         document.getElementById("realTimeClock").textContent =
           now.toLocaleTimeString("en-US", options);
-      }
-
-      function updateRegisteredCount() {
-        const count = filteredResidents.length;
-
-        // Update the local display
-        const countDisplay = document.getElementById("registeredCount");
-        if (countDisplay) {
-          countDisplay.textContent = count;
-        }
-
-        // Update the admin dashboard count with total residents (not filtered)
-        const totalCount = residentsData.length;
-        // Note: localStorage is not available in Claude artifacts, but keeping for reference
-        try {
-          if (typeof Storage !== "undefined") {
-            localStorage.setItem("registeredAccountsCount", totalCount);
-            console.log(
-              "Registered accounts updated in localStorage:",
-              totalCount
-            );
-          }
-        } catch (e) {
-          console.log("LocalStorage not available:", e.message);
-        }
       }
 
       // Sidebar functionality

@@ -129,6 +129,51 @@
                 required
               />
             </div>
+            <div class="form-group">
+              <label for="valid-id-upload" class="required"
+                >Upload Valid ID</label
+              >
+              <label
+                for="valid-id-upload"
+                class="cursor-pointer inline-block bg-[#8A9A5B] hover:bg-[#6A7337] text-white text-sm px-4 py-2 rounded shadow"
+              >
+                Choose Valid ID
+              </label>
+              <span id="valid-id-filename" class="text-sm ml-2 text-gray-600"
+                >No file chosen</span
+              >
+              <input
+                type="file"
+                id="valid-id-upload"
+                accept="image/*"
+                required
+                class="hidden"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="residency-proof-upload" class="required"
+                >Upload Proof of Residency</label
+              >
+              <label
+                for="residency-proof-upload"
+                class="cursor-pointer inline-block bg-[#8A9A5B] hover:bg-[#6A7337] text-white text-sm px-4 py-2 rounded shadow"
+              >
+                Choose Proof
+              </label>
+              <span
+                id="residency-proof-filename"
+                class="text-sm ml-2 text-gray-600"
+                >No file chosen</span
+              >
+              <input
+                type="file"
+                id="residency-proof-upload"
+                accept="image/*"
+                required
+                class="hidden"
+              />
+            </div>
           </div>
           <div class="button-group">
             <button type="button" id="back-2" class="back-button">Back</button>
@@ -211,6 +256,14 @@
             <p>
               <strong>Username:</strong> <span id="confirm-username"></span>
             </p>
+            <p>
+              <strong>Valid ID:</strong>
+              <span id="confirm-valid-id">Attached</span>
+            </p>
+            <p>
+              <strong>Proof of Residency:</strong>
+              <span id="confirm-residency-proof">Attached</span>
+            </p>
           </div>
           <div class="button-group" style="margin-top: 25px">
             <button type="button" id="back-4" class="back-button">Back</button>
@@ -231,7 +284,8 @@
           <img src="check.png" alt="Success Check" class="success-check" />
           <h3 style="text-align: center">Signup Successful!</h3>
           <p style="text-align: center">
-            Your account has been created. You can now log in.
+            Your account is pending admin approval. Please check your email for
+            confirmation once it's approved.
           </p>
         </div>
       </div>
@@ -307,30 +361,6 @@
         stepperEl.style.setProperty("--progress", fraction);
       }
 
-      function isValidBirthdayAndAge() {
-        const age = parseInt(document.getElementById("age").value, 10);
-        const birthday = new Date(document.getElementById("birthday").value);
-        const today = new Date();
-
-        let calculatedAge = today.getFullYear() - birthday.getFullYear();
-        const m = today.getMonth() - birthday.getMonth();
-        if (m < 0 || (m === 0 && today.getDate() < birthday.getDate())) {
-          calculatedAge--;
-        }
-
-        if (age < 18) {
-          alert("Age must be 18 or older.");
-          return false;
-        }
-
-        if (age !== calculatedAge) {
-          alert("Birthday does not match the given age.");
-          return false;
-        }
-
-        return true;
-      }
-
       function isValidContactNumber() {
         const contact = document.getElementById("contact").value.trim();
         const contactRegex = /^[0-9]{11}$/;
@@ -379,18 +409,58 @@
           document.getElementById("sex").value &&
           document.getElementById("civil-status").value;
 
-        return basicValid && isValidBirthdayAndAge();
+        return basicValid;
       }
 
       function validateStep2() {
-        const basicValid =
-          document.getElementById("nationality").value.trim() &&
-          document.getElementById("religion").value.trim() &&
-          document.getElementById("address").value.trim() &&
-          document.getElementById("contact").value.trim();
+        const nationality = document.getElementById("nationality").value.trim();
+        const religion = document.getElementById("religion").value.trim();
+        const address = document.getElementById("address").value.trim();
+        const contact = document.getElementById("contact").value.trim();
 
+        const validIdInput = document.getElementById("valid-id-upload");
+        const residencyInput = document.getElementById(
+          "residency-proof-upload"
+        );
+
+        const basicValid =
+          nationality &&
+          religion &&
+          address &&
+          contact &&
+          validIdInput.files.length &&
+          residencyInput.files.length;
         return basicValid && isValidContactNumber();
+
+        if (!validIdInput.files.length) {
+          alert("Please upload a Valid ID.");
+          return false;
+        }
+
+        if (!residencyInput.files.length) {
+          alert("Please upload Proof of Residency.");
+          return false;
+        }
       }
+
+      document
+        .getElementById("valid-id-upload")
+        .addEventListener("change", function () {
+          const fileName = this.files.length
+            ? this.files[0].name
+            : "No file chosen";
+          document.getElementById("valid-id-filename").textContent = fileName;
+        });
+
+      document
+        .getElementById("residency-proof-upload")
+        .addEventListener("change", function () {
+          const fileName = this.files.length
+            ? this.files[0].name
+            : "No file chosen";
+          document.getElementById("residency-proof-filename").textContent =
+            fileName;
+        });
 
       function validateStep3() {
         const username = document.getElementById("username").value.trim();
@@ -426,6 +496,15 @@
           document.getElementById("address").value;
         document.getElementById("confirm-contact").textContent =
           document.getElementById("contact").value;
+        const validIdFile = document.getElementById("valid-id-upload").files[0];
+        const residencyFile = document.getElementById("residency-proof-upload")
+          .files[0];
+        document.getElementById("confirm-valid-id").textContent = validIdFile
+          ? validIdFile.name
+          : "(None)";
+
+        document.getElementById("confirm-residency-proof").textContent =
+          residencyFile ? residencyFile.name : "(None)";
         const email = document.getElementById("email").value.trim();
         document.getElementById("confirm-email").innerHTML = email
           ? email
@@ -484,13 +563,8 @@
         successModal.style.display = "block";
         closeSuccess.addEventListener("click", () => {
           successModal.style.display = "none";
-          redirectToLogin();
+          location.reload();
         });
-
-        setTimeout(() => {
-          successModal.style.display = "none";
-          redirectToLogin();
-        }, 2500);
       });
 
       function validateLoginForm() {
